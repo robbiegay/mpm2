@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateSynthUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('synth_users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->rememberToken();
+            $table->unsignedBigInteger('param_id');
+            $table->unsignedBigInteger('queue_id');
             $table->timestamps();
+
+            $table->foreign('queue_id')->references('id')->on('queues');
+            $table->foreign('param_id')->references('id')->on('synth_params');
         });
     }
 
@@ -27,6 +31,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('synth_users');
     }
 }

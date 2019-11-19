@@ -23,5 +23,10 @@
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.15.2",
         "sass-loader": "^7.1.0"
+    },
+    "dependencies": {
+        "pts": "^0.8.11",
+        "react-pts-canvas": "^0.2.4",
+        "tone": "^13.8.25"
     }
 }
