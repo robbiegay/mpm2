@@ -51585,6 +51585,512 @@ __export(__webpack_require__(/*! ./UI */ "./src/UI.ts"));
 
 /***/ }),
 
+/***/ "./node_modules/react-circular-input/dist/CircularInput.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/react-circular-input/dist/CircularInput.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
+            t[p[i]] = s[p[i]];
+    return t;
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var utils_1 = __webpack_require__(/*! ./utils */ "./node_modules/react-circular-input/dist/utils.js");
+var CircularInputContext_1 = __webpack_require__(/*! ./CircularInputContext */ "./node_modules/react-circular-input/dist/CircularInputContext.js");
+var CircularTrack_1 = __webpack_require__(/*! ./CircularTrack */ "./node_modules/react-circular-input/dist/CircularTrack.js");
+var CircularProgress_1 = __webpack_require__(/*! ./CircularProgress */ "./node_modules/react-circular-input/dist/CircularProgress.js");
+var CircularThumb_1 = __webpack_require__(/*! ./CircularThumb */ "./node_modules/react-circular-input/dist/CircularThumb.js");
+function CircularInput(_a) {
+    var _b = _a.value, value = _b === void 0 ? 0.25 : _b, _c = _a.radius, radius = _c === void 0 ? 100 : _c, onChange = _a.onChange, children = _a.children, props = __rest(_a, ["value", "radius", "onChange", "children"]);
+    var containerRef = react_1.useRef(null);
+    var size = radius * 2;
+    var center = { x: radius, y: radius };
+    // Accessibility
+    var _d = react_1.useState(false), isFocused = _d[0], setFocused = _d[1];
+    var isReadonly = !onChange;
+    var handleFocus = react_1.useCallback(function () {
+        setFocused(true);
+    }, []);
+    var handleBlur = react_1.useCallback(function () {
+        setFocused(false);
+    }, []);
+    var handleKeyDown = react_1.useCallback(function (e) {
+        if (!isFocused)
+            return;
+        var keyCode = e.keyCode;
+        // arrow up, arrow right, page up, space
+        var isIncrement = keyCode === 38 || keyCode === 39 || keyCode === 33 || keyCode === 32;
+        // arrow down, arrow left, page down
+        var isDecrement = keyCode === 40 || keyCode === 37 || keyCode === 34;
+        if (isIncrement) {
+            onChange(Math.min(1, value + 0.1));
+        }
+        if (isDecrement) {
+            onChange(Math.max(0, value - 0.1));
+        }
+        if (isIncrement || isDecrement) {
+            e.preventDefault();
+        }
+    }, [isFocused, onChange, value]);
+    var accessibilityProps = {
+        tabIndex: 0,
+        role: 'slider',
+        onFocus: handleFocus,
+        onBlur: handleBlur,
+        onKeyDown: handleKeyDown,
+    };
+    // Geometry utilities
+    var getPointFromValue = react_1.useCallback(function (v) {
+        return utils_1.polarToCartesian({
+            center: center,
+            angle: utils_1.valueToAngle(v || value),
+            radius: radius,
+        });
+    }, [value, center, radius]);
+    var getValueFromPointerEvent = react_1.useCallback(function (e) {
+        return utils_1.calculateNearestValueToPoint({
+            point: utils_1.absPos(e),
+            container: utils_1.getElementPosition(containerRef.current),
+            value: value,
+            center: center,
+            radius: radius,
+        });
+    }, [containerRef.current, value, center, radius]);
+    // Context
+    var context = react_1.useMemo(function () { return ({
+        value: value,
+        radius: radius,
+        center: center,
+        isFocused: isFocused,
+        setFocused: setFocused,
+        onChange: onChange,
+        getPointFromValue: getPointFromValue,
+        getValueFromPointerEvent: getValueFromPointerEvent,
+    }); }, [value, radius, center, onChange, isFocused, setFocused]);
+    var handleClick = react_1.useCallback(function (e) {
+        if (isReadonly)
+            return;
+        var nearestValue = getValueFromPointerEvent(e);
+        onChange(nearestValue);
+    }, [onChange, getValueFromPointerEvent, isReadonly]);
+    var style = __assign({ overflow: 'visible', outline: 'none' }, (props.style || {}), { touchAction: 'manipulation', WebkitTapHighlightColor: 'rgba(0,0,0,0)' });
+    return (react_1.default.createElement(CircularInputContext_1.CircularInputProvider, { value: context },
+        react_1.default.createElement("svg", __assign({}, props, { ref: containerRef, width: size, height: size, viewBox: "0 0 " + size + " " + size, style: style, onClick: handleClick }, (!isReadonly ? accessibilityProps : {})), children ? (typeof children === 'function' ? (children(context)) : (children)) : (react_1.default.createElement(react_1.default.Fragment, null,
+            react_1.default.createElement(CircularTrack_1.CircularTrack, null),
+            react_1.default.createElement(CircularProgress_1.CircularProgress, null),
+            react_1.default.createElement(CircularThumb_1.CircularThumb, null))))));
+}
+exports.CircularInput = CircularInput;
+//# sourceMappingURL=CircularInput.js.map
+
+/***/ }),
+
+/***/ "./node_modules/react-circular-input/dist/CircularInputContext.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/react-circular-input/dist/CircularInputContext.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var Context = react_1.createContext({});
+exports.CircularInputProvider = Context.Provider;
+function useCircularInputContext() {
+    var context = react_1.useContext(Context);
+    if (!context) {
+        throw new Error("CircularInput components cannot be rendered outside the CircularInput component");
+    }
+    return context;
+}
+exports.useCircularInputContext = useCircularInputContext;
+//# sourceMappingURL=CircularInputContext.js.map
+
+/***/ }),
+
+/***/ "./node_modules/react-circular-input/dist/CircularProgress.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/react-circular-input/dist/CircularProgress.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var _1 = __webpack_require__(/*! . */ "./node_modules/react-circular-input/dist/index.js");
+var utils_1 = __webpack_require__(/*! ./utils */ "./node_modules/react-circular-input/dist/utils.js");
+var defaultProps = {
+    stroke: '#3D99FF',
+};
+exports.CircularProgress = function (props) {
+    var _a = _1.useCircularInputContext(), value = _a.value, radius = _a.radius, center = _a.center;
+    var innerCircumference = utils_1.DEG_360_IN_RAD * radius;
+    return (react_1.default.createElement(_1.CircularTrack, __assign({}, props, { strokeDasharray: innerCircumference, strokeDashoffset: innerCircumference * (1 - value), transform: "rotate(-90 " + center.x + " " + center.y + ")" })));
+};
+exports.CircularProgress.defaultProps = defaultProps;
+//# sourceMappingURL=CircularProgress.js.map
+
+/***/ }),
+
+/***/ "./node_modules/react-circular-input/dist/CircularThumb.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/react-circular-input/dist/CircularThumb.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var _1 = __webpack_require__(/*! ./ */ "./node_modules/react-circular-input/dist/index.js");
+exports.CircularThumb = function (props) {
+    var _a = _1.useCircularInputContext(), getPointFromValue = _a.getPointFromValue, isFocused = _a.isFocused, setFocused = _a.setFocused;
+    var point = getPointFromValue();
+    if (!point)
+        return null;
+    var x = point.x, y = point.y;
+    var ref = react_1.useRef(null);
+    var isDragging = _1.useCircularDrag(ref).isDragging;
+    var style = __assign({ transition: 'r 150ms cubic-bezier(0.215, 0.61, 0.355, 1)' }, (props.style || {}));
+    return (react_1.default.createElement("circle", __assign({ r: isFocused || isDragging ? 23 : 20, fill: "#0045e5" }, props, { style: style, ref: ref, cx: x, cy: y })));
+};
+//# sourceMappingURL=CircularThumb.js.map
+
+/***/ }),
+
+/***/ "./node_modules/react-circular-input/dist/CircularTrack.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/react-circular-input/dist/CircularTrack.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
+            t[p[i]] = s[p[i]];
+    return t;
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var _1 = __webpack_require__(/*! ./ */ "./node_modules/react-circular-input/dist/index.js");
+var useCircularDrag_1 = __webpack_require__(/*! ./useCircularDrag */ "./node_modules/react-circular-input/dist/useCircularDrag.js");
+exports.defaultProps = {
+    stroke: '#CEE0F5',
+    fill: 'none',
+    strokeWidth: 20,
+    strokeLinecap: 'round',
+};
+exports.CircularTrack = function (_a) {
+    var strokeWidth = _a.strokeWidth, props = __rest(_a, ["strokeWidth"]);
+    var _b = _1.useCircularInputContext(), radius = _b.radius, center = _b.center;
+    var ref = react_1.useRef(null);
+    useCircularDrag_1.useCircularDrag(ref);
+    return (react_1.default.createElement("circle", __assign({ strokeWidth: strokeWidth }, props, { ref: ref, cx: center.x, cy: center.y, r: radius })));
+};
+exports.CircularTrack.defaultProps = exports.defaultProps;
+//# sourceMappingURL=CircularTrack.js.map
+
+/***/ }),
+
+/***/ "./node_modules/react-circular-input/dist/index.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/react-circular-input/dist/index.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var CircularInput_1 = __webpack_require__(/*! ./CircularInput */ "./node_modules/react-circular-input/dist/CircularInput.js");
+exports.CircularInput = CircularInput_1.CircularInput;
+var CircularInputContext_1 = __webpack_require__(/*! ./CircularInputContext */ "./node_modules/react-circular-input/dist/CircularInputContext.js");
+exports.useCircularInputContext = CircularInputContext_1.useCircularInputContext;
+exports.CircularInputProvider = CircularInputContext_1.CircularInputProvider;
+var useCircularDrag_1 = __webpack_require__(/*! ./useCircularDrag */ "./node_modules/react-circular-input/dist/useCircularDrag.js");
+exports.useCircularDrag = useCircularDrag_1.useCircularDrag;
+var CircularProgress_1 = __webpack_require__(/*! ./CircularProgress */ "./node_modules/react-circular-input/dist/CircularProgress.js");
+exports.CircularProgress = CircularProgress_1.CircularProgress;
+var CircularThumb_1 = __webpack_require__(/*! ./CircularThumb */ "./node_modules/react-circular-input/dist/CircularThumb.js");
+exports.CircularThumb = CircularThumb_1.CircularThumb;
+var CircularTrack_1 = __webpack_require__(/*! ./CircularTrack */ "./node_modules/react-circular-input/dist/CircularTrack.js");
+exports.CircularTrack = CircularTrack_1.CircularTrack;
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/react-circular-input/dist/useCircularDrag.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/react-circular-input/dist/useCircularDrag.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var _1 = __webpack_require__(/*! ./ */ "./node_modules/react-circular-input/dist/index.js");
+function useCircularDrag(ref) {
+    var _a = _1.useCircularInputContext(), onChange = _a.onChange, getValueFromPointerEvent = _a.getValueFromPointerEvent;
+    var _b = react_1.useState(false), isDragging = _b[0], setDragging = _b[1];
+    var handleStart = react_1.useCallback(function (e) {
+        if (!onChange)
+            return;
+        stopEvent(e);
+        setDragging(true);
+        var nearestValue = getValueFromPointerEvent(e);
+        onChange(nearestValue);
+    }, [onChange, stopEvent, setDragging, getValueFromPointerEvent]);
+    var handleMove = react_1.useCallback(function (e) {
+        stopEvent(e);
+        var nearestValue = getValueFromPointerEvent(e);
+        onChange(nearestValue);
+    }, [onChange, stopEvent, getValueFromPointerEvent]);
+    var handleEnd = function (e) {
+        stopEvent(e);
+        setDragging(false);
+    };
+    // we can't just use React for this due to needing { passive: false } to prevent touch devices scrolling
+    react_1.useEffect(function () {
+        if (!ref.current)
+            return;
+        addStartListeners(ref.current, handleStart);
+        return function () {
+            if (!ref.current)
+                return;
+            removeStartListeners(ref.current, handleStart);
+        };
+    }, [ref, handleStart]);
+    react_1.useEffect(function () {
+        if (!isDragging)
+            return;
+        addListeners(handleMove, handleEnd);
+        return function () {
+            removeListeners(handleMove, handleEnd);
+        };
+    }, [isDragging, handleMove]);
+    return { isDragging: isDragging };
+}
+exports.useCircularDrag = useCircularDrag;
+function addStartListeners(element, onStart) {
+    element.addEventListener('mousedown', onStart, { passive: false });
+    element.addEventListener('touchstart', onStart, { passive: false });
+}
+function removeStartListeners(element, onStart) {
+    element.removeEventListener('mousedown', onStart);
+    element.removeEventListener('touchstart', onStart);
+}
+function addListeners(onMove, onEnd) {
+    document.addEventListener('mousemove', onMove, { passive: false });
+    document.addEventListener('touchmove', onMove, { passive: false });
+    document.addEventListener('mouseup', onEnd, { passive: false });
+    document.addEventListener('touchend', onEnd, { passive: false });
+}
+function removeListeners(onMove, onEnd) {
+    document.removeEventListener('mousemove', onMove);
+    document.removeEventListener('touchmove', onMove);
+    document.removeEventListener('mouseup', onEnd);
+    document.removeEventListener('touchend', onEnd);
+}
+function stopEvent(e) {
+    e.stopPropagation();
+    if (e.cancelable) {
+        e.preventDefault();
+    }
+}
+//# sourceMappingURL=useCircularDrag.js.map
+
+/***/ }),
+
+/***/ "./node_modules/react-circular-input/dist/utils.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/react-circular-input/dist/utils.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DEG_360_IN_RAD = radians(360);
+exports.ANGLE_OFFSET = Math.PI;
+function polarToCartesian(_a) {
+    var center = _a.center, angle = _a.angle, radius = _a.radius;
+    return {
+        x: center.x + Math.sin(angle) * radius,
+        y: center.y + Math.cos(angle) * radius,
+    };
+}
+exports.polarToCartesian = polarToCartesian;
+function radians(deg) {
+    return (deg * Math.PI) / 180;
+}
+exports.radians = radians;
+function degrees(rad) {
+    return (rad * 180) / Math.PI;
+}
+exports.degrees = degrees;
+function matrixScale(scale, x, y) {
+    return "matrix(" + scale + ", 0, 0, " + scale + ", " + (x - scale * x) + ", " + (y - scale * y) + ")";
+}
+exports.matrixScale = matrixScale;
+function clamp(min, max, value) {
+    return Math.min(Math.max(value, min), max);
+}
+exports.clamp = clamp;
+function calculateNearestValueToPoint(_a) {
+    var _b = _a.center, centerX = _b.x, centerY = _b.y, _c = _a.container, containerX = _c.x, containerY = _c.y, _d = _a.point, pointX = _d.x, pointY = _d.y, radius = _a.radius, value = _a.value;
+    var radialPosition = {
+        x: pointX - containerX - centerX,
+        y: -(pointY - containerY - centerY),
+    };
+    var valuePosition = polarToCartesian({
+        center: { x: 0, y: 0 },
+        angle: valueToAngle(value),
+        radius: radius,
+    });
+    var deltaTheta = calcAngleDiff(radialPosition.x, radialPosition.y, valuePosition.x, -valuePosition.y);
+    var deltaValue = value + deltaTheta / 360;
+    var nearestValue = deltaValue > 1 ? deltaValue - 1 : deltaValue;
+    return nearestValue;
+}
+exports.calculateNearestValueToPoint = calculateNearestValueToPoint;
+function calcAngleDiff(x1, y1, x2, y2) {
+    var arcTangent = Math.atan2(x1 * y2 - y1 * x2, x1 * x2 + y1 * y2);
+    if (arcTangent < 0) {
+        arcTangent += 2 * Math.PI;
+    }
+    return (arcTangent * 180) / Math.PI;
+}
+exports.calcAngleDiff = calcAngleDiff;
+function valueToAngle(value) {
+    return -value * exports.DEG_360_IN_RAD + exports.ANGLE_OFFSET;
+}
+exports.valueToAngle = valueToAngle;
+function absPos(e) {
+    var touchEvent = e.touches && e;
+    if (touchEvent) {
+        return {
+            x: touchEvent.touches[0].pageX - (window.scrollX || window.pageXOffset),
+            y: touchEvent.touches[0].pageY - (window.scrollY || window.pageYOffset),
+        };
+    }
+    var mouseEvent = e.pageX && e;
+    if (mouseEvent) {
+        return {
+            x: mouseEvent.pageX - (window.scrollX || window.pageXOffset),
+            y: mouseEvent.pageY - (window.scrollY || window.pageYOffset),
+        };
+    }
+    throw new Error('Unknown event type received (expected: MouseEvent | TouchEvent)');
+}
+exports.absPos = absPos;
+function stopEvent(e) {
+    e.stopPropagation();
+    e.preventDefault();
+}
+exports.stopEvent = stopEvent;
+function getElementPosition(el) {
+    if (!el)
+        return;
+    var _a = el.getBoundingClientRect(), x = _a.left, y = _a.top;
+    return { x: x, y: y };
+}
+exports.getElementPosition = getElementPosition;
+//# sourceMappingURL=utils.js.map
+
+/***/ }),
+
 /***/ "./node_modules/react-dom/cjs/react-dom.development.js":
 /*!*************************************************************!*\
   !*** ./node_modules/react-dom/cjs/react-dom.development.js ***!
@@ -83563,6 +84069,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _PtsTest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PtsTest */ "./resources/js/components/PtsTest.js");
 /* harmony import */ var _Synth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Synth */ "./resources/js/components/Synth.js");
+/* harmony import */ var _Knob__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Knob */ "./resources/js/components/Knob.js");
+
 
 
 
@@ -83577,12 +84085,53 @@ function Example() {
     className: "col-md-8"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PtsTest__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Synth__WEBPACK_IMPORTED_MODULE_3__["default"], null)))));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PtsTest__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Synth__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Knob__WEBPACK_IMPORTED_MODULE_4__["default"], null)))));
 }
 
 if (document.getElementById('example')) {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Example, null), document.getElementById('example'));
 }
+
+/***/ }),
+
+/***/ "./resources/js/components/Knob.js":
+/*!*****************************************!*\
+  !*** ./resources/js/components/Knob.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_circular_input__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-circular-input */ "./node_modules/react-circular-input/dist/index.js");
+/* harmony import */ var react_circular_input__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_circular_input__WEBPACK_IMPORTED_MODULE_1__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+function Knob() {
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(0.5),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      value = _React$useState2[0],
+      setValue = _React$useState2[1];
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_circular_input__WEBPACK_IMPORTED_MODULE_1__["CircularInput"], {
+    value: value,
+    radius: 75,
+    onChange: setValue
+  });
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Knob);
 
 /***/ }),
 
@@ -83727,7 +84276,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Synth).call(this, props));
     _this.state = {
-      pitch: 700,
+      pitch: 400,
       trigger: false,
       pingPongDelayFbk: 0.25,
       reverbDryWet: 0.5

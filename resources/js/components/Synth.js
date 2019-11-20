@@ -5,7 +5,7 @@ class Synth extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            pitch: 700,
+            pitch: 400,
             trigger: false,
             pingPongDelayFbk: 0.25,
             reverbDryWet: 0.5,

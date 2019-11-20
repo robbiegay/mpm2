@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "pts": "^0.8.11",
+        "react-circular-input": "^0.1.6",
         "react-pts-canvas": "^0.2.4",
         "tone": "^13.8.25"
     }

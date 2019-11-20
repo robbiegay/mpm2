@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PtsTest from './PtsTest';
 import Synth from './Synth';
+import Knob from './Knob';
+
 
 function Example() {
     return (
@@ -11,6 +13,7 @@ function Example() {
                     <div className="card">
                         <PtsTest />
                         <Synth />
+                        <Knob />
                     </div>
                 </div>
             </div>
