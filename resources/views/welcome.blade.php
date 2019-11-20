@@ -10,7 +10,7 @@
 
 <body>
     <div id="example"></div>
-    <p>test</p>
+    <!-- <p>test</p> -->
 
     <!-- <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script> -->
     <script type="text/javascript" src="js/app.js"></script>

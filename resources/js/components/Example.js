@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PtsTest from './PtsTest';
+import Synth from './Synth';
 
 function Example() {
     return (
@@ -8,9 +9,8 @@ function Example() {
             <div className="row justify-content-center">
                 <div className="col-md-8">
                     <div className="card">
-                        <div className="card-header">Example Component</div>
-                            <PtsTest />
-                        <div className="card-body">I'm an example component!</div>
+                        <PtsTest />
+                        <Synth />
                     </div>
                 </div>
             </div>
