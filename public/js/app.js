@@ -84005,7 +84005,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  */
 
 
-__webpack_require__(/*! ./components/Example */ "./resources/js/components/Example.js");
+__webpack_require__(/*! ./components/Layout */ "./resources/js/components/Layout.js");
 
 /***/ }),
 
@@ -84054,46 +84054,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/components/Example.js":
-/*!********************************************!*\
-  !*** ./resources/js/components/Example.js ***!
-  \********************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _PtsTest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PtsTest */ "./resources/js/components/PtsTest.js");
-/* harmony import */ var _Synth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Synth */ "./resources/js/components/Synth.js");
-/* harmony import */ var _Knob__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Knob */ "./resources/js/components/Knob.js");
-
-
-
-
-
-
-function Example() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row justify-content-center"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-8"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PtsTest__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Synth__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Knob__WEBPACK_IMPORTED_MODULE_4__["default"], null)))));
-}
-
-if (document.getElementById('example')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Example, null), document.getElementById('example'));
-}
-
-/***/ }),
-
 /***/ "./resources/js/components/Knob.js":
 /*!*****************************************!*\
   !*** ./resources/js/components/Knob.js ***!
@@ -84107,38 +84067,188 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_circular_input__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-circular-input */ "./node_modules/react-circular-input/dist/index.js");
 /* harmony import */ var react_circular_input__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_circular_input__WEBPACK_IMPORTED_MODULE_1__);
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-function Knob() {
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(0.5),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      value = _React$useState2[0],
-      setValue = _React$useState2[1];
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_circular_input__WEBPACK_IMPORTED_MODULE_1__["CircularInput"], {
-    value: value,
-    radius: 75,
-    onChange: setValue
-  });
-}
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-/* harmony default export */ __webpack_exports__["default"] = (Knob);
+ // useContext
+
+ // import { AppContext } from './Layout';
+// function Knob() {
+//     // let context = useContext(AppContext);
+//     const [value, setValue] = useState(0);
+//     // console.log(context.value);
+//     // useEffect(() => {
+//     //     // document.title = 'Hi';
+//     //     // layout.props.changePitch();
+//     // });
+//     return (
+//         <CircularInput value={ value } radius={75} onChange={ setValue } />
+//     );
+// }
+// export default Knob;
+
+var Button =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Button, _React$Component);
+
+  function Button(props) {
+    var _this;
+
+    _classCallCheck(this, Button);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Button).call(this, props));
+    _this.state = {
+      value: 0
+    };
+    return _this;
+  }
+
+  _createClass(Button, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this2.props.propVal(800);
+        }
+      }, "UP OCTAVE");
+    }
+  }]);
+
+  return Button;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Button);
 
 /***/ }),
 
-/***/ "./resources/js/components/PtsTest.js":
-/*!********************************************!*\
-  !*** ./resources/js/components/PtsTest.js ***!
-  \********************************************/
+/***/ "./resources/js/components/Layout.js":
+/*!*******************************************!*\
+  !*** ./resources/js/components/Layout.js ***!
+  \*******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Visuals__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Visuals */ "./resources/js/components/Visuals.js");
+/* harmony import */ var _Synth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Synth */ "./resources/js/components/Synth.js");
+/* harmony import */ var _Knob__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Knob */ "./resources/js/components/Knob.js");
+/* harmony import */ var _ReverbDryWet__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ReverbDryWet */ "./resources/js/components/ReverbDryWet.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+ //createContext
+
+
+
+
+
+
+ // export const AppContext = createContext({ value: 0.5 });
+
+var Layout =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Layout, _React$Component);
+
+  function Layout(props) {
+    var _this;
+
+    _classCallCheck(this, Layout);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Layout).call(this, props));
+    _this.state = {
+      value: 400,
+      reverbDryWet: 0.5
+    };
+    _this.setValue = _this.setValue.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Layout, [{
+    key: "setValue",
+    value: function setValue(val) {
+      this.setState({
+        value: val
+      });
+    }
+  }, {
+    key: "setReverb",
+    value: function setReverb(val) {
+      this.setState({
+        reverbDryWet: val
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-8"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Synth__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        freq: this.state.value
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Knob__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        propVal: this.setValue,
+        reverbDryWet: this.setReverb
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ReverbDryWet__WEBPACK_IMPORTED_MODULE_5__["default"], null)))));
+    }
+  }]);
+
+  return Layout;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+if (document.getElementById('layout')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Layout, null), document.getElementById('layout'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/ReverbDryWet.js":
+/*!*************************************************!*\
+  !*** ./resources/js/components/ReverbDryWet.js ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -84146,8 +84256,6 @@ function Knob() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var pts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pts */ "./node_modules/pts/dist/es2015/_module.js");
-/* harmony import */ var react_pts_canvas__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-pts-canvas */ "./node_modules/react-pts-canvas/dist/index.es.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -84168,65 +84276,41 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
-
-var PtsTest =
+var ReverbDryWet =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(PtsTest, _React$Component);
+  _inherits(ReverbDryWet, _React$Component);
 
-  function PtsTest(props) {
+  function ReverbDryWet(props) {
     var _this;
 
-    _classCallCheck(this, PtsTest);
+    _classCallCheck(this, ReverbDryWet);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(PtsTest).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ReverbDryWet).call(this, props));
     _this.state = {
-      location: [200, 300]
+      dryWet: 0
     };
     return _this;
   }
 
-  _createClass(PtsTest, [{
-    key: "handleClick",
-    value: function handleClick() {
-      this.setState({
-        location: [500, 100]
-      });
-    }
-  }, {
+  _createClass(ReverbDryWet, [{
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_pts_canvas__WEBPACK_IMPORTED_MODULE_2__["QuickStartCanvas"], {
-        style: {
-          height: '100vh',
-          width: '100vw'
-        } // onClick={
-        //     this.handleClick()
-        // }
-        ,
-        onAnimate: function onAnimate(space, form, time, ftime) {
-          var rect = pts__WEBPACK_IMPORTED_MODULE_1__["Rectangle"].fromCenter(space.center, space.size.$divide(10));
-          var poly = pts__WEBPACK_IMPORTED_MODULE_1__["Rectangle"].corners(rect);
-          poly.rotate2D(pts__WEBPACK_IMPORTED_MODULE_1__["Num"].cycle(time % 20000 / 20000) - 0.5, space.center);
-          poly.shear2D(pts__WEBPACK_IMPORTED_MODULE_1__["Num"].cycle(time % 200000 / 200000) - 0.5, space.center);
-          var clone = poly.clone();
-          poly.rotate2D(-pts__WEBPACK_IMPORTED_MODULE_1__["Num"].cycle(time % 20000 / 20000) + 0.5, space.center);
-          poly.shear2D(-pts__WEBPACK_IMPORTED_MODULE_1__["Num"].cycle(time % 200000 / 200000) + 0.5, _this2.state.location); // drawing
-
-          form.point("#123").polygon(poly);
-          form.point("#123").polygon(clone);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        onChange: function onChange(e) {
+          return _this2.props.reverbDryWet(e.target.value);
         }
       });
     }
   }]);
 
-  return PtsTest;
+  return ReverbDryWet;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (PtsTest);
+/* harmony default export */ __webpack_exports__["default"] = (ReverbDryWet);
 
 /***/ }),
 
@@ -84276,10 +84360,10 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Synth).call(this, props));
     _this.state = {
-      pitch: 400,
+      // pitch: 400,
       trigger: false,
-      pingPongDelayFbk: 0.25,
-      reverbDryWet: 0.5
+      pingPongDelayFbk: 0.25 // reverbDryWet: 0.5,
+
     };
     return _this;
   }
@@ -84289,17 +84373,17 @@ function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var reverb = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.Freeverb(this.state.reverbDryWet).toMaster();
+      var reverb = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.Freeverb(this.props.reverbDryWet).toMaster();
       var crush = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.PingPongDelay(0.25, this.state.pingPongDelayFbk).connect(reverb);
       var synth = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.DuoSynth().connect(crush);
-      this.state.trigger ? synth.triggerAttackRelease(this.state.pitch, "1n") : synth.triggerRelease();
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      this.state.trigger ? synth.triggerAttackRelease(this.props.freq, "1n") : synth.triggerRelease();
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           _this2.setState({
             trigger: !_this2.state.trigger
           });
         }
-      }, "click here");
+      }, "PLAY TONE"));
     }
   }]);
 
@@ -84338,6 +84422,101 @@ function (_React$Component) {
 // var crush = new Tone.BitCrusher(4).connect(reverb);
 // var synth = new Tone.DuoSynth().connect(crush);
 // synth.triggerAttackRelease("B2", "1n");
+
+/***/ }),
+
+/***/ "./resources/js/components/Visuals.js":
+/*!********************************************!*\
+  !*** ./resources/js/components/Visuals.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var pts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pts */ "./node_modules/pts/dist/es2015/_module.js");
+/* harmony import */ var react_pts_canvas__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-pts-canvas */ "./node_modules/react-pts-canvas/dist/index.es.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var Visuals =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Visuals, _React$Component);
+
+  function Visuals(props) {
+    var _this;
+
+    _classCallCheck(this, Visuals);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Visuals).call(this, props));
+    _this.state = {
+      location: [200, 300]
+    };
+    return _this;
+  }
+
+  _createClass(Visuals, [{
+    key: "handleClick",
+    value: function handleClick() {
+      this.setState({
+        location: [500, 100]
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_pts_canvas__WEBPACK_IMPORTED_MODULE_2__["QuickStartCanvas"], {
+        style: {
+          height: '100vh',
+          width: '100vw'
+        } // onClick={
+        //     this.handleClick()
+        // }
+        ,
+        onAnimate: function onAnimate(space, form, time, ftime) {
+          var rect = pts__WEBPACK_IMPORTED_MODULE_1__["Rectangle"].fromCenter(space.center, space.size.$divide(10));
+          var poly = pts__WEBPACK_IMPORTED_MODULE_1__["Rectangle"].corners(rect);
+          poly.rotate2D(pts__WEBPACK_IMPORTED_MODULE_1__["Num"].cycle(time % 20000 / 20000) - 0.5, space.center);
+          poly.shear2D(pts__WEBPACK_IMPORTED_MODULE_1__["Num"].cycle(time % 200000 / 200000) - 0.5, space.center);
+          var clone = poly.clone();
+          poly.rotate2D(-pts__WEBPACK_IMPORTED_MODULE_1__["Num"].cycle(time % 20000 / 20000) + 0.5, space.center);
+          poly.shear2D(-pts__WEBPACK_IMPORTED_MODULE_1__["Num"].cycle(time % 200000 / 200000) + 0.5, _this2.state.location); // drawing
+
+          form.point("#123").polygon(poly);
+          form.point("#123").polygon(clone);
+        }
+      });
+    }
+  }]);
+
+  return Visuals;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Visuals);
 
 /***/ }),
 

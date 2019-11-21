@@ -2,7 +2,7 @@ import React from 'react';
 import { Line, Util, Pt, Num, Rectangle, Sound } from 'pts';
 import { QuickStartCanvas } from 'react-pts-canvas';
 
-class PtsTest extends React.Component {
+class Visuals extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -43,4 +43,4 @@ class PtsTest extends React.Component {
     }
 }
 
-export default PtsTest;
+export default Visuals;

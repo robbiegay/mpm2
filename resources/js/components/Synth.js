@@ -5,23 +5,25 @@ class Synth extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            pitch: 400,
+            // pitch: 400,
             trigger: false,
             pingPongDelayFbk: 0.25,
-            reverbDryWet: 0.5,
+            // reverbDryWet: 0.5,
         };
     }
 
     render() {
-        var reverb = new Tone.Freeverb(this.state.reverbDryWet).toMaster();
+        var reverb = new Tone.Freeverb(this.props.reverbDryWet).toMaster();
         var crush = new Tone.PingPongDelay(0.25, this.state.pingPongDelayFbk).connect(reverb);
         var synth = new Tone.DuoSynth().connect(crush);
-        this.state.trigger ? synth.triggerAttackRelease(this.state.pitch, "1n") : synth.triggerRelease();
+        this.state.trigger ? synth.triggerAttackRelease(this.props.freq, "1n") : synth.triggerRelease();
 
         return (
-            <button 
-            onClick={()=>{this.setState({trigger: !this.state.trigger})}}
-            >click here</button>
+            <>
+                <button 
+                onClick={()=>{this.setState({trigger: !this.state.trigger})}}
+                >PLAY TONE</button>
+            </>
         )
     }
 }

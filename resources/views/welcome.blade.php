@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div id="example"></div>
+    <div id="layout"></div>
     <!-- <p>test</p> -->
 
     <!-- <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script> -->
