@@ -37,6 +37,7 @@ class Layout extends React.Component {
                             {/* <Knob /> */}
                             {/* <Button propVal={this.setValue} reverbDryWet={this.setReverb} /> */}
                             {/* <ReverbDryWet /> */}
+                            {/* {this.props.myfavoriteprop} */}
                         </div>
                     </div>
                 </div>

@@ -84324,6 +84324,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var tone__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tone */ "./node_modules/tone/build/Tone.js");
 /* harmony import */ var tone__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(tone__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -84345,6 +84347,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var Synth =
 /*#__PURE__*/
 function (_React$Component) {
@@ -84357,11 +84360,16 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Synth).call(this, props));
     _this.state = {
-      pitch: 400,
-      trigger: false,
-      pingPongDelayFbk: 0,
-      chebWet: 0,
-      reverbDryWet: 0,
+      pitch: null,
+      // 400
+      trigger: null,
+      // false
+      pingPongDelayFbk: null,
+      // 0
+      chebWet: null,
+      // 0
+      reverbDryWet: null,
+      // 0
       synth: null,
       pong: null,
       cheb: null,
@@ -84378,7 +84386,6 @@ function (_React$Component) {
       pong.feedback.value = this.state.pingPongDelayFbk;
       cheb.wet.value = this.state.chebWet;
       reverb.wet.value = this.state.reverbDryWet;
-      console.log(reverb.wet.value); // reverb.feedback.value = this.state.pingPongDelayFbk;
     }
   }, {
     key: "componentDidMount",
@@ -84397,84 +84404,95 @@ function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("http://127.0.0.1:8000/api/synthparams").then(function (response) {
+        var data = response.data;
+        console.log(data['reverb']);
+
+        _this2.setState({
+          pitch: data['pitch'],
+          trigger: data['trigger'],
+          pingPongDelayFbk: data['pingPongDelayFbk'],
+          chebWet: data['chebWet'],
+          reverbDryWet: data['reverbDryWet']
+        });
+      });
+      console.log(this.state.pitch);
       this.synthTrigger(this.state.synth, this.state.pitch, this.state.pong, this.state.cheb, this.state.reverb);
     }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
-          _this2.setState({
-            trigger: !_this2.state.trigger
+          _this3.setState({
+            trigger: !_this3.state.trigger
           });
         }
       }, "PLAY TONE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "class": "form-group"
+        className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        "for": "formControlRange"
+        htmlFor: "formControlRange"
       }, "Pitch"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "range",
         defaultValue: this.state.pitch,
-        onChange: function onChange(e) {
-          _this2.setState({
+        onMouseUp: function onMouseUp(e) {
+          axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://127.0.0.1:8000/api/synthparams/pitch', {
             pitch: e.target.value
           });
         },
-        className: "form-control-range" // id="formControlRange"
-        ,
+        className: "form-control-range",
         min: "100",
         max: "1000",
         step: "1"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "class": "form-group"
+        className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        "for": "formControlRange"
+        htmlFor: "formControlRange"
       }, "Ping Pong Delay Fbk"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "range",
         defaultValue: this.state.pingPongDelayFbk,
         onChange: function onChange(e) {
-          _this2.setState({
+          _this3.setState({
             pingPongDelayFbk: e.target.value
           });
         },
-        className: "form-control-range" // id="formControlRange"
-        ,
+        className: "form-control-range",
         min: "0",
         max: "1.5",
         step: "0.01"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "class": "form-group"
+        className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        "for": "formControlRange"
+        htmlFor: "formControlRange"
       }, "Cheb Dry/Wet"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "range",
         defaultValue: this.state.chebWet,
         onChange: function onChange(e) {
-          _this2.setState({
+          _this3.setState({
             chebWet: e.target.value
           });
         },
-        className: "form-control-range" // id="formControlRange"
-        ,
+        className: "form-control-range",
         min: "0",
         max: "1",
         step: "0.01"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        "class": "form-group"
+        className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        "for": "formControlRange"
+        htmlFor: "formControlRange"
       }, "Reverb Dry/Wet"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "range",
         defaultValue: this.state.reverbDryWet,
         onChange: function onChange(e) {
-          _this2.setState({
+          _this3.setState({
             reverbDryWet: e.target.value
           });
         },
-        className: "form-control-range" // id="formControlRange"
-        ,
+        className: "form-control-range",
         min: "0",
         max: "0.5",
         step: "0.01"
@@ -84485,38 +84503,7 @@ function (_React$Component) {
   return Synth;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (Synth); // <div className="App">
-//       <header className="App-header" id='hello'>
-//         {/* var synth = new Tone.Synth().toMaster();
-//         synth.triggerAttackRelease("C4", "8n"); */}
-//         <input type="text" value="75" className="dial" />
-//         <script>
-//           $(function() {
-//             // $(".dial").knob();
-//           });
-//         </script> 
-//       </header>
-//     </div>
-//   );
-// }
-// var space = new CanvasSpace("#hello");
-// space.setup({ bgcolor: "#fff" });
-// SOUND
-// var reverb = new Tone.Reverb(10);
-// var synth = new Tone.DuoSynth().connect('reverb');
-// synth.triggerAttackRelease("B2", "1n").toMaster();
-// reverb.connect(synth.triggerAttackRelease("B2", "1n"));
-// synth.toMaster();
-// Nice sounding: DuoSynth, MonoSynth, NoiseSynth, PolySynth
-// var freeverb = new Tone.Freeverb().toMaster();
-// freeverb.dampening.value = 1000;
-// //routing synth through the reverb
-// var synth1 = new Tone.AMSynth().connect(freeverb);
-// synth1.triggerAttackRelease("B2", "1n");
-// var reverb = new Tone.Freeverb(1).toMaster(); 
-// var crush = new Tone.BitCrusher(4).connect(reverb);
-// var synth = new Tone.DuoSynth().connect(crush);
-// synth.triggerAttackRelease("B2", "1n");
+/* harmony default export */ __webpack_exports__["default"] = (Synth);
 
 /***/ }),
 

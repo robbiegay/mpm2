@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSynthParamsTable extends Migration
+class CreateCacheTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateSynthParamsTable extends Migration
      */
     public function up()
     {
-        Schema::create('synth_params', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('param_val');
-            $table->timestamps();
+        Schema::create('cache', function (Blueprint $table) {
+            $table->string('key')->unique();
+            $table->mediumText('value');
+            $table->integer('expiration');
         });
     }
 
@@ -27,6 +27,6 @@ class CreateSynthParamsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('synth_params');
+        Schema::dropIfExists('cache');
     }
 }
