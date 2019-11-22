@@ -35,8 +35,8 @@ class Layout extends React.Component {
                             {/* <Visuals /> */}
                             <Synth freq={this.state.value} />
                             {/* <Knob /> */}
-                            <Button propVal={this.setValue} reverbDryWet={this.setReverb} />
-                            <ReverbDryWet />
+                            {/* <Button propVal={this.setValue} reverbDryWet={this.setReverb} /> */}
+                            {/* <ReverbDryWet /> */}
                         </div>
                     </div>
                 </div>

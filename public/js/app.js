@@ -84229,10 +84229,7 @@ function (_React$Component) {
         className: "card"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Synth__WEBPACK_IMPORTED_MODULE_3__["default"], {
         freq: this.state.value
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Knob__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        propVal: this.setValue,
-        reverbDryWet: this.setReverb
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ReverbDryWet__WEBPACK_IMPORTED_MODULE_5__["default"], null)))));
+      })))));
     }
   }]);
 
@@ -84337,9 +84334,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -84360,30 +84357,128 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Synth).call(this, props));
     _this.state = {
-      // pitch: 400,
+      pitch: 400,
       trigger: false,
-      pingPongDelayFbk: 0.25 // reverbDryWet: 0.5,
-
+      pingPongDelayFbk: 0,
+      chebWet: 0,
+      reverbDryWet: 0,
+      synth: null,
+      pong: null,
+      cheb: null,
+      reverb: null
     };
+    _this.synthTrigger = _this.synthTrigger.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Synth, [{
+    key: "synthTrigger",
+    value: function synthTrigger(synth, pitch, pong, cheb, reverb) {
+      this.state.trigger ? synth.triggerAttack(pitch) : synth.triggerRelease();
+      pong.feedback.value = this.state.pingPongDelayFbk;
+      cheb.wet.value = this.state.chebWet;
+      reverb.wet.value = this.state.reverbDryWet;
+      console.log(reverb.wet.value); // reverb.feedback.value = this.state.pingPongDelayFbk;
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var reverb = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.JCReverb().toMaster();
+      var cheb = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.Chebyshev(30).connect(reverb);
+      var pong = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.PingPongDelay(0.25, this.state.pingPongDelayFbk).connect(cheb);
+      var synth = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.DuoSynth().connect(pong);
+      this.setState({
+        synth: synth,
+        pong: pong,
+        cheb: cheb,
+        reverb: reverb
+      });
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      this.synthTrigger(this.state.synth, this.state.pitch, this.state.pong, this.state.cheb, this.state.reverb);
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      var reverb = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.Freeverb(this.props.reverbDryWet).toMaster();
-      var crush = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.PingPongDelay(0.25, this.state.pingPongDelayFbk).connect(reverb);
-      var synth = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.DuoSynth().connect(crush);
-      this.state.trigger ? synth.triggerAttackRelease(this.props.freq, "1n") : synth.triggerRelease();
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           _this2.setState({
             trigger: !_this2.state.trigger
           });
         }
-      }, "PLAY TONE"));
+      }, "PLAY TONE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        "class": "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        "for": "formControlRange"
+      }, "Pitch"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "range",
+        defaultValue: this.state.pitch,
+        onChange: function onChange(e) {
+          _this2.setState({
+            pitch: e.target.value
+          });
+        },
+        className: "form-control-range" // id="formControlRange"
+        ,
+        min: "100",
+        max: "1000",
+        step: "1"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        "class": "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        "for": "formControlRange"
+      }, "Ping Pong Delay Fbk"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "range",
+        defaultValue: this.state.pingPongDelayFbk,
+        onChange: function onChange(e) {
+          _this2.setState({
+            pingPongDelayFbk: e.target.value
+          });
+        },
+        className: "form-control-range" // id="formControlRange"
+        ,
+        min: "0",
+        max: "1.5",
+        step: "0.01"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        "class": "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        "for": "formControlRange"
+      }, "Cheb Dry/Wet"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "range",
+        defaultValue: this.state.chebWet,
+        onChange: function onChange(e) {
+          _this2.setState({
+            chebWet: e.target.value
+          });
+        },
+        className: "form-control-range" // id="formControlRange"
+        ,
+        min: "0",
+        max: "1",
+        step: "0.01"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        "class": "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        "for": "formControlRange"
+      }, "Reverb Dry/Wet"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "range",
+        defaultValue: this.state.reverbDryWet,
+        onChange: function onChange(e) {
+          _this2.setState({
+            reverbDryWet: e.target.value
+          });
+        },
+        className: "form-control-range" // id="formControlRange"
+        ,
+        min: "0",
+        max: "0.5",
+        step: "0.01"
+      }))));
     }
   }]);
 
