@@ -16,7 +16,7 @@ class CreateSynthParamsTable extends Migration
         Schema::create('synthparams', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('param_name');
-            $table->unsignedBigInteger('param_val');
+            $table->float('param_val');
             $table->timestamps();
         });
     }
