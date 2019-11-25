@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 
 use App\SynthParam;
+use SebastianBergmann\Environment\Console;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,7 @@ Route::post('/synthparams/reverbDryWet', function(Request $request) {
     SynthParam::where('param_name', 'reverbDryWet')->update(array('param_val' => $request->reverbDryWet));
 });
 
-Route::post('/synthparams/trigger', function(Request $request) {
-    SynthParam::where('param_name', 'trigger')->update(array('param_val' => $request->trigger));
+Route::post('/synthparams/trigger', function() {
+    $data = SynthParam::where('param_name', 'trigger')->get('param_val');
+    SynthParam::where('param_name', 'trigger')->update(array('param_val' => $data === 0.00 ? 1.00 : 0.00));
 });

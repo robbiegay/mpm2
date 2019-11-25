@@ -1,31 +1,9 @@
-import React, { useState } from 'react'; //createContext
+import React from 'react';
 import ReactDOM from 'react-dom';
 import Visuals from './Visuals';
 import Synth from './Synth';
-import Knob from './Knob';
-import Button from './Knob';
-import ReverbDryWet from './ReverbDryWet';
-
-// export const AppContext = createContext({ value: 0.5 });
 
 class Layout extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: 400,
-            reverbDryWet: 0.5,
-        };
-        this.setValue = this.setValue.bind(this);
-    }
-
-    setValue(val) {
-        this.setState({ value: val });
-    }
-
-    setReverb(val) {
-        this.setState({ reverbDryWet: val });
-    }
-
     render() {
         return (
             <div className="container">
@@ -33,11 +11,7 @@ class Layout extends React.Component {
                     <div className="col-md-8">
                         <div className="card">
                             {/* <Visuals /> */}
-                            <Synth freq={this.state.value} />
-                            {/* <Knob /> */}
-                            {/* <Button propVal={this.setValue} reverbDryWet={this.setReverb} /> */}
-                            {/* <ReverbDryWet /> */}
-                            {/* {this.props.myfavoriteprop} */}
+                            <Synth />
                         </div>
                     </div>
                 </div>

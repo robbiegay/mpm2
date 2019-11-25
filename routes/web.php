@@ -11,6 +11,12 @@
 |
 */
 
+// Visuals and Sound
 Route::get('/', function () {
-    return view('welcome');
+    return view('display');
+});
+
+// User controllers
+Route::get('/user', function () {
+    return view('controller');
 });

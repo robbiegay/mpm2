@@ -83548,43 +83548,163 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/components/Knob.js":
-/*!*****************************************!*\
-  !*** ./resources/js/components/Knob.js ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ "./resources/js/components/Controller.js":
+/*!***********************************************!*\
+  !*** ./resources/js/components/Controller.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-// import React, { useState, useEffect } from 'react'; // useContext
-// import { CircularInput } from 'react-circular-input';
-// // import { AppContext } from './Layout';
-// // function Knob() {
-// //     // let context = useContext(AppContext);
-// //     const [value, setValue] = useState(0);
-// //     // console.log(context.value);
-// //     // useEffect(() => {
-// //     //     // document.title = 'Hi';
-// //     //     // layout.props.changePitch();
-// //     // });
-// //     return (
-// //         <CircularInput value={ value } radius={75} onChange={ setValue } />
-// //     );
-// // }
-// // export default Knob;
-// class Button extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//            value: 0,
-//         };
-//     }
-//     render() {
-//         return(
-//             <button onClick={()=> this.props.propVal(800) }>UP OCTAVE</button>
-//         );
-//     }
-// }
-// export default Button;
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _TriggerContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TriggerContext */ "./resources/js/components/TriggerContext.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+ // import { state } from './Synth';
+
+var Controller =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Controller, _React$Component);
+
+  function Controller(props) {
+    var _this;
+
+    _classCallCheck(this, Controller);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Controller).call(this, props)); // trigger = this.trigger;
+
+    _this.state = {
+      trigger: 0
+    };
+    return _this;
+  } //     this.getTrigger = this.getTrigger.bind(this);
+  //     this.postTrigger = this.postTrigger.bind(this);
+  // }
+  // async getTrigger() {
+  //     await axios.get(`http://127.0.0.1:8000/api/synthparams`)
+  //         .then(response => {
+  //             this.setState({
+  //                 trigger: response.data['trigger'],
+  //             });
+  //         });
+  // }
+  // async postTrigger() {
+  //     await axios.post('http://127.0.0.1:8000/api/synthparams/trigger', {
+  //         trigger: !this.state.trigger,
+  //     });
+  // }
+
+
+  _createClass(Controller, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TriggerContext__WEBPACK_IMPORTED_MODULE_2__["TriggerConsumer"], null, function (props) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, props.trigger); // return this.setState({ trigger: props.trigger });
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/trigger', {
+            trigger: _this2.state.trigger
+          }); // e.preventDefault();
+          // this.getTrigger();
+          // setTimeout(this.postTrigger(), 1000);
+        }
+      }, "PLAY TONE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "formControlRange"
+      }, "Pitch"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "range",
+        defaultValue: "400",
+        onMouseUp: function onMouseUp(e) {
+          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/pitch', {
+            pitch: e.target.value
+          });
+        },
+        className: "form-control-range",
+        min: "100",
+        max: "1000",
+        step: "1"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "formControlRange"
+      }, "Ping Pong Delay Fbk"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "range",
+        defaultValue: "0",
+        onMouseUp: function onMouseUp(e) {
+          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/pingPongDelayFbk', {
+            pingPongDelayFbk: e.target.value
+          });
+        },
+        className: "form-control-range",
+        min: "0",
+        max: "1.5",
+        step: "0.01"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "formControlRange"
+      }, "Cheb Dry/Wet"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "range",
+        defaultValue: "0",
+        onChange: function onChange(e) {
+          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/chebWet', {
+            chebWet: e.target.value
+          });
+        },
+        className: "form-control-range",
+        min: "0",
+        max: "1",
+        step: "0.01"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "formControlRange"
+      }, "Reverb Dry/Wet"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "range",
+        defaultValue: "0",
+        onChange: function onChange(e) {
+          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/reverbDryWet', {
+            reverbDryWet: e.target.value
+          });
+        },
+        className: "form-control-range",
+        min: "0",
+        max: "0.5",
+        step: "0.01"
+      }))));
+    }
+  }]);
+
+  return Controller;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Controller);
 
 /***/ }),
 
@@ -83603,9 +83723,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Visuals__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Visuals */ "./resources/js/components/Visuals.js");
 /* harmony import */ var _Synth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Synth */ "./resources/js/components/Synth.js");
-/* harmony import */ var _Knob__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Knob */ "./resources/js/components/Knob.js");
-/* harmony import */ var _Knob__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_Knob__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _ReverbDryWet__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ReverbDryWet */ "./resources/js/components/ReverbDryWet.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -83616,57 +83733,31 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
- //createContext
 
 
 
 
-
-
- // export const AppContext = createContext({ value: 0.5 });
 
 var Layout =
 /*#__PURE__*/
 function (_React$Component) {
   _inherits(Layout, _React$Component);
 
-  function Layout(props) {
-    var _this;
-
+  function Layout() {
     _classCallCheck(this, Layout);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Layout).call(this, props));
-    _this.state = {
-      value: 400,
-      reverbDryWet: 0.5
-    };
-    _this.setValue = _this.setValue.bind(_assertThisInitialized(_this));
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(Layout).apply(this, arguments));
   }
 
   _createClass(Layout, [{
-    key: "setValue",
-    value: function setValue(val) {
-      this.setState({
-        value: val
-      });
-    }
-  }, {
-    key: "setReverb",
-    value: function setReverb(val) {
-      this.setState({
-        reverbDryWet: val
-      });
-    }
-  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -83677,9 +83768,7 @@ function (_React$Component) {
         className: "col-md-8"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Synth__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        freq: this.state.value
-      })))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Synth__WEBPACK_IMPORTED_MODULE_3__["default"], null)))));
     }
   }]);
 
@@ -83689,75 +83778,6 @@ function (_React$Component) {
 if (document.getElementById('layout')) {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Layout, null), document.getElementById('layout'));
 }
-
-/***/ }),
-
-/***/ "./resources/js/components/ReverbDryWet.js":
-/*!*************************************************!*\
-  !*** ./resources/js/components/ReverbDryWet.js ***!
-  \*************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-var ReverbDryWet =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(ReverbDryWet, _React$Component);
-
-  function ReverbDryWet(props) {
-    var _this;
-
-    _classCallCheck(this, ReverbDryWet);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(ReverbDryWet).call(this, props));
-    _this.state = {
-      dryWet: 0
-    };
-    return _this;
-  }
-
-  _createClass(ReverbDryWet, [{
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        onChange: function onChange(e) {
-          return _this2.props.reverbDryWet(e.target.value);
-        }
-      });
-    }
-  }]);
-
-  return ReverbDryWet;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = (ReverbDryWet);
 
 /***/ }),
 
@@ -83776,6 +83796,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tone__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(tone__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Controller */ "./resources/js/components/Controller.js");
+/* harmony import */ var _TriggerContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TriggerContext */ "./resources/js/components/TriggerContext.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -83798,6 +83820,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
 var Synth =
 /*#__PURE__*/
 function (_React$Component) {
@@ -83810,16 +83834,13 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Synth).call(this, props));
     _this.state = {
+      // Synth/param values
       pitch: 400,
-      // 400
       trigger: false,
-      // false
       pingPongDelayFbk: 0,
-      // 0
       chebWet: 0,
-      // 0
       reverbDryWet: 0,
-      // 0
+      // Stores the synth and params in state
       synth: null,
       pong: null,
       cheb: null,
@@ -83831,6 +83852,52 @@ function (_React$Component) {
   }
 
   _createClass(Synth, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      // Resets the synth on load
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://127.0.0.1:8000/api/synthparams/reset'); // Polling from DB
+
+      this.useInterval(); // Create the Synth and Effects
+
+      var reverb = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.JCReverb().toMaster();
+      var cheb = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.Chebyshev(30).connect(reverb);
+      var pong = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.PingPongDelay(0.25, this.state.pingPongDelayFbk).connect(cheb);
+      var synth = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.DuoSynth().connect(pong); // Stores the synth and effects in state
+
+      this.setState({
+        synth: synth,
+        pong: pong,
+        cheb: cheb,
+        reverb: reverb
+      });
+    } // Polling — updates every 1 second
+
+  }, {
+    key: "useInterval",
+    value: function useInterval() {
+      var _this2 = this;
+
+      setInterval(function () {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("http://127.0.0.1:8000/api/synthparams").then(function (response) {
+          var data = response.data;
+
+          _this2.setState({
+            pitch: data['pitch'],
+            trigger: data['trigger'],
+            pingPongDelayFbk: data['pingPongDelayFbk'],
+            chebWet: data['chebWet'],
+            reverbDryWet: data['reverbDryWet']
+          });
+        });
+      }, 1000);
+    } // When state is set, update the synth parameters
+
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      this.synthTrigger(this.state.synth, this.state.pitch, this.state.pong, this.state.cheb, this.state.reverb);
+    }
+  }, {
     key: "synthTrigger",
     value: function synthTrigger(synth, pitch, pong, cheb, reverb) {
       this.state.trigger ? synth.triggerAttack(pitch) : synth.triggerRelease();
@@ -83839,137 +83906,13 @@ function (_React$Component) {
       reverb.wet.value = this.state.reverbDryWet;
     }
   }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      // Resets the synth on load
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://127.0.0.1:8000/api/synthparams/reset'); // this.setState({
-      //     pitch: 400,
-      //     trigger: 0,
-      //     pingPongDelayFbk: 0,
-      //     chebWet: 0,
-      //     reverbDryWet: 0,
-      // })
-
-      this.useInterval();
-      var reverb = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.JCReverb().toMaster();
-      var cheb = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.Chebyshev(30).connect(reverb);
-      var pong = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.PingPongDelay(0.25, this.state.pingPongDelayFbk).connect(cheb);
-      var synth = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.DuoSynth().connect(pong);
-      this.setState({
-        synth: synth,
-        pong: pong,
-        cheb: cheb,
-        reverb: reverb
-      });
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      this.synthTrigger(this.state.synth, this.state.pitch, this.state.pong, this.state.cheb, this.state.reverb);
-    }
-  }, {
-    key: "useInterval",
-    value: function useInterval() {
-      var _this2 = this;
-
-      setInterval(function () {
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("http://127.0.0.1:8000/api/synthparams").then(function (response) {
-          var data = response.data; // console.log(data['pingPongDelayFbk']);
-          // if (data['pitch'] !== this.state.pitch) {
-
-          _this2.setState({
-            pitch: data['pitch'],
-            trigger: data['trigger'],
-            pingPongDelayFbk: data['pingPongDelayFbk'],
-            chebWet: data['chebWet'],
-            reverbDryWet: data['reverbDryWet']
-          }); // }
-
-        }); // console.log(`Trigger: ${this.state.trigger}`);
-        // console.log(`Pitch: ${this.state.pitch}`);
-        // console.log(`Pong: ${this.state.pingPongDelayFbk}`);
-        // console.log(`Cheb: ${this.state.chebWet}`);
-        // console.log(`Reverb: ${this.state.reverbDryWet}`);
-      }, 1000);
-    }
-  }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
-
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          // this.setState({ trigger: !this.state.trigger });
-          axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://127.0.0.1:8000/api/synthparams/trigger', {
-            trigger: !_this3.state.trigger //  === 0 ? 1 : 0
-
-          });
-        }
-      }, "PLAY TONE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "formControlRange"
-      }, "Pitch"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "range",
-        defaultValue: this.state.pitch,
-        onMouseUp: function onMouseUp(e) {
-          axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://127.0.0.1:8000/api/synthparams/pitch', {
-            pitch: e.target.value
-          });
-        },
-        className: "form-control-range",
-        min: "100",
-        max: "1000",
-        step: "1"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "formControlRange"
-      }, "Ping Pong Delay Fbk"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "range",
-        defaultValue: this.state.pingPongDelayFbk,
-        onMouseUp: function onMouseUp(e) {
-          axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://127.0.0.1:8000/api/synthparams/pingPongDelayFbk', {
-            pingPongDelayFbk: e.target.value
-          });
-        },
-        className: "form-control-range",
-        min: "0",
-        max: "1.5",
-        step: "0.01"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "formControlRange"
-      }, "Cheb Dry/Wet"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "range",
-        defaultValue: this.state.chebWet,
-        onChange: function onChange(e) {
-          axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://127.0.0.1:8000/api/synthparams/chebWet', {
-            chebWet: e.target.value
-          });
-        },
-        className: "form-control-range",
-        min: "0",
-        max: "1",
-        step: "0.01"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "formControlRange"
-      }, "Reverb Dry/Wet"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "range",
-        defaultValue: this.state.reverbDryWet,
-        onChange: function onChange(e) {
-          axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://127.0.0.1:8000/api/synthparams/reverbDryWet', {
-            reverbDryWet: e.target.value
-          });
-        },
-        className: "form-control-range",
-        min: "0",
-        max: "0.5",
-        step: "0.01"
-      }))));
+      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TriggerContext__WEBPACK_IMPORTED_MODULE_4__["TriggerProvider"], {
+        value: 5
+      });
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Controller__WEBPACK_IMPORTED_MODULE_3__["default"], null) //trigger={ this.state.trigger }
+      ;
     }
   }]);
 
@@ -83977,6 +83920,29 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (Synth);
+
+/***/ }),
+
+/***/ "./resources/js/components/TriggerContext.js":
+/*!***************************************************!*\
+  !*** ./resources/js/components/TriggerContext.js ***!
+  \***************************************************/
+/*! exports provided: TriggerProvider, TriggerConsumer, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TriggerProvider", function() { return TriggerProvider; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TriggerConsumer", function() { return TriggerConsumer; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var TriggerContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext({
+  trigger: 10
+});
+var TriggerProvider = TriggerContext.Provider;
+var TriggerConsumer = TriggerContext.Consumer;
+/* harmony default export */ __webpack_exports__["default"] = (TriggerContext);
 
 /***/ }),
 
