@@ -83561,7 +83561,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _TriggerContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TriggerContext */ "./resources/js/components/TriggerContext.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -83582,7 +83581,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
- // import { state } from './Synth';
 
 var Controller =
 /*#__PURE__*/
@@ -83594,44 +83592,23 @@ function (_React$Component) {
 
     _classCallCheck(this, Controller);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Controller).call(this, props)); // trigger = this.trigger;
-
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Controller).call(this, props));
     _this.state = {
       trigger: 0
     };
     return _this;
-  } //     this.getTrigger = this.getTrigger.bind(this);
-  //     this.postTrigger = this.postTrigger.bind(this);
-  // }
-  // async getTrigger() {
-  //     await axios.get(`http://127.0.0.1:8000/api/synthparams`)
-  //         .then(response => {
-  //             this.setState({
-  //                 trigger: response.data['trigger'],
-  //             });
-  //         });
-  // }
-  // async postTrigger() {
-  //     await axios.post('http://127.0.0.1:8000/api/synthparams/trigger', {
-  //         trigger: !this.state.trigger,
-  //     });
-  // }
-
+  }
 
   _createClass(Controller, [{
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TriggerContext__WEBPACK_IMPORTED_MODULE_2__["TriggerConsumer"], null, function (props) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, props.trigger); // return this.setState({ trigger: props.trigger });
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("u", null, "SYNTH CONTROLS"), ":"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/trigger', {
             trigger: _this2.state.trigger
-          }); // e.preventDefault();
-          // this.getTrigger();
-          // setTimeout(this.postTrigger(), 1000);
+          });
         }
       }, "PLAY TONE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
@@ -83657,8 +83634,8 @@ function (_React$Component) {
         type: "range",
         defaultValue: "0",
         onMouseUp: function onMouseUp(e) {
-          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/pingPongDelayFbk', {
-            pingPongDelayFbk: e.target.value
+          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/pingPongFbk', {
+            pingPongFbk: e.target.value
           });
         },
         className: "form-control-range",
@@ -83689,8 +83666,8 @@ function (_React$Component) {
         type: "range",
         defaultValue: "0",
         onChange: function onChange(e) {
-          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/reverbDryWet', {
-            reverbDryWet: e.target.value
+          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/reverbWet', {
+            reverbWet: e.target.value
           });
         },
         className: "form-control-range",
@@ -83723,6 +83700,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Visuals__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Visuals */ "./resources/js/components/Visuals.js");
 /* harmony import */ var _Synth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Synth */ "./resources/js/components/Synth.js");
+/* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Controller */ "./resources/js/components/Controller.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -83740,6 +83718,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -83779,6 +83758,10 @@ if (document.getElementById('layout')) {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Layout, null), document.getElementById('layout'));
 }
 
+if (document.getElementById('controller')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Controller__WEBPACK_IMPORTED_MODULE_4__["default"], null), document.getElementById('controller'));
+}
+
 /***/ }),
 
 /***/ "./resources/js/components/Synth.js":
@@ -83797,7 +83780,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Controller */ "./resources/js/components/Controller.js");
-/* harmony import */ var _TriggerContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TriggerContext */ "./resources/js/components/TriggerContext.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -83821,7 +83803,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
 var Synth =
 /*#__PURE__*/
 function (_React$Component) {
@@ -83837,9 +83818,9 @@ function (_React$Component) {
       // Synth/param values
       pitch: 400,
       trigger: false,
-      pingPongDelayFbk: 0,
+      pingPongFbk: 0,
       chebWet: 0,
-      reverbDryWet: 0,
+      reverbWet: 0,
       // Stores the synth and params in state
       synth: null,
       pong: null,
@@ -83861,7 +83842,7 @@ function (_React$Component) {
 
       var reverb = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.JCReverb().toMaster();
       var cheb = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.Chebyshev(30).connect(reverb);
-      var pong = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.PingPongDelay(0.25, this.state.pingPongDelayFbk).connect(cheb);
+      var pong = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.PingPongDelay(0.25, this.state.pingPongFbk).connect(cheb);
       var synth = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.DuoSynth().connect(pong); // Stores the synth and effects in state
 
       this.setState({
@@ -83884,9 +83865,9 @@ function (_React$Component) {
           _this2.setState({
             pitch: data['pitch'],
             trigger: data['trigger'],
-            pingPongDelayFbk: data['pingPongDelayFbk'],
+            pingPongFbk: data['pingPongFbk'],
             chebWet: data['chebWet'],
-            reverbDryWet: data['reverbDryWet']
+            reverbWet: data['reverbWet']
           });
         });
       }, 1000);
@@ -83901,18 +83882,14 @@ function (_React$Component) {
     key: "synthTrigger",
     value: function synthTrigger(synth, pitch, pong, cheb, reverb) {
       this.state.trigger ? synth.triggerAttack(pitch) : synth.triggerRelease();
-      pong.feedback.value = this.state.pingPongDelayFbk;
+      pong.feedback.value = this.state.pingPongFbk;
       cheb.wet.value = this.state.chebWet;
-      reverb.wet.value = this.state.reverbDryWet;
+      reverb.wet.value = this.state.reverbWet;
     }
   }, {
     key: "render",
     value: function render() {
-      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TriggerContext__WEBPACK_IMPORTED_MODULE_4__["TriggerProvider"], {
-        value: 5
-      });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Controller__WEBPACK_IMPORTED_MODULE_3__["default"], null) //trigger={ this.state.trigger }
-      ;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "~THIS IS A SYNTH~"));
     }
   }]);
 
@@ -83920,29 +83897,6 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (Synth);
-
-/***/ }),
-
-/***/ "./resources/js/components/TriggerContext.js":
-/*!***************************************************!*\
-  !*** ./resources/js/components/TriggerContext.js ***!
-  \***************************************************/
-/*! exports provided: TriggerProvider, TriggerConsumer, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TriggerProvider", function() { return TriggerProvider; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TriggerConsumer", function() { return TriggerConsumer; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-var TriggerContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext({
-  trigger: 10
-});
-var TriggerProvider = TriggerContext.Provider;
-var TriggerConsumer = TriggerContext.Consumer;
-/* harmony default export */ __webpack_exports__["default"] = (TriggerContext);
 
 /***/ }),
 

@@ -32,9 +32,9 @@ Route::get('/synthparams', function() {
 Route::post('/synthparams/reset', function() {
     SynthParam::where('param_name', 'trigger')->update(array('param_val' => 0));
     SynthParam::where('param_name', 'pitch')->update(array('param_val' => 400));
-    SynthParam::where('param_name', 'pingPongDelayFbk')->update(array('param_val' => 0));
+    SynthParam::where('param_name', 'pingPongFbk')->update(array('param_val' => 0));
     SynthParam::where('param_name', 'chebWet')->update(array('param_val' => 0));
-    SynthParam::where('param_name', 'reverbDryWet')->update(array('param_val' => 0));
+    SynthParam::where('param_name', 'reverbWet')->update(array('param_val' => 0));
 
 });
 
@@ -42,19 +42,19 @@ Route::post('/synthparams/pitch', function(Request $request) {
     SynthParam::where('param_name', 'pitch')->update(array('param_val' => $request->pitch));
 });
 
-Route::post('/synthparams/pingPongDelayFbk', function(Request $request) {
-    SynthParam::where('param_name', 'pingPongDelayFbk')->update(array('param_val' => $request->pingPongDelayFbk));
+Route::post('/synthparams/pingPongFbk', function(Request $request) {
+    SynthParam::where('param_name', 'pingPongFbk')->update(array('param_val' => $request->pingPongFbk));
 });
 
 Route::post('/synthparams/chebWet', function(Request $request) {
     SynthParam::where('param_name', 'chebWet')->update(array('param_val' => $request->chebWet));
 });
 
-Route::post('/synthparams/reverbDryWet', function(Request $request) {
-    SynthParam::where('param_name', 'reverbDryWet')->update(array('param_val' => $request->reverbDryWet));
+Route::post('/synthparams/reverbWet', function(Request $request) {
+    SynthParam::where('param_name', 'reverbWet')->update(array('param_val' => $request->reverbWet));
 });
 
 Route::post('/synthparams/trigger', function() {
     $data = SynthParam::where('param_name', 'trigger')->get('param_val');
-    SynthParam::where('param_name', 'trigger')->update(array('param_val' => $data === 0.00 ? 1.00 : 0.00));
+    SynthParam::where('param_name', 'trigger')->update(array('param_val' => $data[0]['param_val'] === 0.00 ? 1.00 : 0.00));
 });

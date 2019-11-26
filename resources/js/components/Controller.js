@@ -1,54 +1,24 @@
 import React from 'react';
 import axios from 'axios';
-import { TriggerConsumer } from './TriggerContext'
-// import { state } from './Synth';
 
 class Controller extends React.Component {
     constructor(props) {
         super(props);
-        // trigger = this.trigger;
         this.state = {
             trigger: 0,
         }
     }
-    //     this.getTrigger = this.getTrigger.bind(this);
-    //     this.postTrigger = this.postTrigger.bind(this);
-    // }
-
-    // async getTrigger() {
-    //     await axios.get(`http://127.0.0.1:8000/api/synthparams`)
-    //         .then(response => {
-    //             this.setState({
-    //                 trigger: response.data['trigger'],
-    //             });
-    //         });
-    // }
-
-    // async postTrigger() {
-    //     await axios.post('http://127.0.0.1:8000/api/synthparams/trigger', {
-    //         trigger: !this.state.trigger,
-    //     });
-    // }
 
     render() {
         return (
             <>
-                <TriggerConsumer>
-                    {props => {
-                        return <div>{ props.trigger }</div>
-                        // return this.setState({ trigger: props.trigger });
-                    }}
-                </TriggerConsumer>
-
+                <p><u>SYNTH CONTROLS</u>:</p>
                 {/* TIGGER TONE */}
                 <button
                     onClick={() => {
                         axios.post('http://127.0.0.1:8000/api/synthparams/trigger', {
                             trigger: this.state.trigger,
                         });
-                        // e.preventDefault();
-                        // this.getTrigger();
-                        // setTimeout(this.postTrigger(), 1000);
                     }}
                 >PLAY TONE</button>
 
@@ -80,8 +50,8 @@ class Controller extends React.Component {
                             type="range"
                             defaultValue='0'
                             onMouseUp={(e) => {
-                                axios.post('http://127.0.0.1:8000/api/synthparams/pingPongDelayFbk', {
-                                    pingPongDelayFbk: e.target.value,
+                                axios.post('http://127.0.0.1:8000/api/synthparams/pingPongFbk', {
+                                    pingPongFbk: e.target.value,
                                 })
                             }}
                             className="form-control-range"
@@ -120,8 +90,8 @@ class Controller extends React.Component {
                             type="range"
                             defaultValue='0'
                             onChange={(e) => {
-                                axios.post('http://127.0.0.1:8000/api/synthparams/reverbDryWet', {
-                                    reverbDryWet: e.target.value,
+                                axios.post('http://127.0.0.1:8000/api/synthparams/reverbWet', {
+                                    reverbWet: e.target.value,
                                 })
                             }}
                             className="form-control-range"
@@ -135,6 +105,5 @@ class Controller extends React.Component {
         );
     }
 }
-
 
 export default Controller;

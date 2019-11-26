@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Visuals from './Visuals';
 import Synth from './Synth';
+import Controller from './Controller';
 
 class Layout extends React.Component {
     render() {
@@ -22,4 +23,8 @@ class Layout extends React.Component {
 
 if (document.getElementById('layout')) {
     ReactDOM.render(<Layout />, document.getElementById('layout'));
+}
+
+if (document.getElementById('controller')) {
+    ReactDOM.render(<Controller />, document.getElementById('controller'));
 }
