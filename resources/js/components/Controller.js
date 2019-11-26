@@ -45,7 +45,7 @@ class Controller extends React.Component {
                 {/* PING PONG DELAY FEEDBACK */}
                 <form>
                     <div className="form-group">
-                        <label htmlFor="formControlRange">Ping Pong Delay Fbk</label>
+                        <label htmlFor="formControlRange">Ping Pong Feedback</label>
                         <input
                             type="range"
                             defaultValue='0'
@@ -65,7 +65,7 @@ class Controller extends React.Component {
                 {/* CHEBYSHEV WAVESHAPER DRY WET */}
                 <form>
                     <div className="form-group">
-                        <label htmlFor="formControlRange">Cheb Dry/Wet</label>
+                        <label htmlFor="formControlRange">Waveshaper Dry/Wet</label>
                         <input
                             type="range"
                             defaultValue='0'

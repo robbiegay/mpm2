@@ -1,7 +1,6 @@
 import React from 'react';
 import Tone from 'tone';
 import axios from 'axios';
-import Controller from './Controller';
 
 class Synth extends React.Component {
     constructor(props) {
@@ -72,7 +71,6 @@ class Synth extends React.Component {
         return (
             <>
                 <p>~THIS IS A SYNTH~</p>
-                {/* <Controller /> */}
             </>
         )
     }

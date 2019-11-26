@@ -83630,7 +83630,7 @@ function (_React$Component) {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "formControlRange"
-      }, "Ping Pong Delay Fbk"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "Ping Pong Feedback"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "range",
         defaultValue: "0",
         onMouseUp: function onMouseUp(e) {
@@ -83646,7 +83646,7 @@ function (_React$Component) {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "formControlRange"
-      }, "Cheb Dry/Wet"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "Waveshaper Dry/Wet"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "range",
         defaultValue: "0",
         onChange: function onChange(e) {
@@ -83699,8 +83699,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Visuals__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Visuals */ "./resources/js/components/Visuals.js");
-/* harmony import */ var _Synth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Synth */ "./resources/js/components/Synth.js");
-/* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Controller */ "./resources/js/components/Controller.js");
+/* harmony import */ var _Test__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Test */ "./resources/js/components/Test.js");
+/* harmony import */ var _Synth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Synth */ "./resources/js/components/Synth.js");
+/* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Controller */ "./resources/js/components/Controller.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -83718,6 +83719,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -83747,7 +83749,10 @@ function (_React$Component) {
         className: "col-md-8"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Synth__WEBPACK_IMPORTED_MODULE_3__["default"], null)))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Test__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        background: "#0cf",
+        credit: "This is a visualizer"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Synth__WEBPACK_IMPORTED_MODULE_4__["default"], null)))));
     }
   }]);
 
@@ -83759,7 +83764,7 @@ if (document.getElementById('layout')) {
 }
 
 if (document.getElementById('controller')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Controller__WEBPACK_IMPORTED_MODULE_4__["default"], null), document.getElementById('controller'));
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Controller__WEBPACK_IMPORTED_MODULE_5__["default"], null), document.getElementById('controller'));
 }
 
 /***/ }),
@@ -83779,7 +83784,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tone__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(tone__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Controller */ "./resources/js/components/Controller.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -83797,7 +83801,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -83900,6 +83903,135 @@ function (_React$Component) {
 
 /***/ }),
 
+/***/ "./resources/js/components/Test.js":
+/*!*****************************************!*\
+  !*** ./resources/js/components/Test.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var pts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pts */ "./node_modules/pts/dist/es2015/_module.js");
+/* harmony import */ var react_pts_canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-pts-canvas */ "./node_modules/react-pts-canvas/dist/index.es.js");
+/* harmony import */ var _Synth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Synth */ "./resources/js/components/Synth.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var Test =
+/*#__PURE__*/
+function (_PtsCanvas) {
+  _inherits(Test, _PtsCanvas);
+
+  // sound;
+  // bins = 256;
+  // bufferLoaded = false;
+  function Test(props) {
+    var _this;
+
+    _classCallCheck(this, Test);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Test).call(this, props));
+    _this.bins = 2048; // range of: [32, 32768] --> 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384
+    // this.sound = Sound.from( synth, synth.context ).analyze(128);
+    // Sound.from( Synth ).then(s => {
+
+    pts__WEBPACK_IMPORTED_MODULE_0__["Sound"].loadAsBuffer("https://upload.wikimedia.org/wikipedia/en/8/8f/Elvis_Presley_-_Are_You_Lonesome_Tonight.ogg").then(function (s) {
+      _this.sound = s;
+
+      _this.space.playOnce(50); // render for noce
+
+
+      _this.bufferLoaded = true;
+    })["catch"](function (e) {
+      return console.error(e);
+    });
+    return _this;
+  }
+
+  _createClass(Test, [{
+    key: "toggle",
+    value: function toggle() {
+      if (this.sound.playing || !this.bufferLoaded) {
+        this.sound.stop();
+      } else {
+        this.sound.createBuffer().analyze(this.bins); // recreate buffer again
+
+        this.sound.start();
+        this.space.replay();
+      }
+    } // Override PtsCanvas' animate function
+
+  }, {
+    key: "animate",
+    value: function animate(time, ftime) {
+      var _this2 = this;
+
+      if (this.sound && this.sound.playable) {
+        if (!this.sound.playing) this.space.stop(); // stop animation if not playing
+
+        var colors = ["#f06", "#62e", "#fff", "#fe3", "#0c9"];
+        this.sound.freqDomainTo(this.space.size).forEach(function (t, i) {
+          _this2.form.fillOnly(colors[i % 5]).point(t, 30);
+        });
+        this.form.fillOnly("rgba(0,0,0,.3").text([20, this.space.size.y - 20], this.props.credit);
+      }
+
+      this.drawButton();
+    } // Override PtsCanvas' action function
+
+  }, {
+    key: "action",
+    value: function action(type, x, y) {
+      if (type === "up" && pts__WEBPACK_IMPORTED_MODULE_0__["Geom"].withinBound([x, y], [0, 0], [50, 50])) {
+        // clicked button
+        this.toggle();
+      }
+    }
+  }, {
+    key: "drawButton",
+    value: function drawButton() {
+      if (!this.bufferLoaded) {
+        this.form.fillOnly("#9ab").text([20, 30], "Loading...");
+        return;
+      }
+
+      if (!this.sound || !this.sound.playing) {
+        this.form.fillOnly("#f06").rect([[0, 0], [50, 50]]);
+        this.form.fillOnly('#fff').polygon(pts__WEBPACK_IMPORTED_MODULE_0__["Triangle"].fromCenter([25, 25], 10).rotate2D(pts__WEBPACK_IMPORTED_MODULE_0__["Const"].half_pi, [25, 25]));
+      } else {
+        this.form.fillOnly("rgba(0,0,0,.2)").rect([[0, 0], [50, 50]]);
+        this.form.fillOnly("#fff").rect([[18, 18], [32, 32]]);
+      }
+    }
+  }]);
+
+  return Test;
+}(react_pts_canvas__WEBPACK_IMPORTED_MODULE_1__["PtsCanvas"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (Test);
+
+/***/ }),
+
 /***/ "./resources/js/components/Visuals.js":
 /*!********************************************!*\
   !*** ./resources/js/components/Visuals.js ***!
@@ -83940,38 +84072,29 @@ var Visuals =
 function (_React$Component) {
   _inherits(Visuals, _React$Component);
 
-  function Visuals(props) {
-    var _this;
-
+  function Visuals() {
     _classCallCheck(this, Visuals);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Visuals).call(this, props));
-    _this.state = {
-      location: [200, 300]
-    };
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(Visuals).apply(this, arguments));
   }
 
   _createClass(Visuals, [{
-    key: "handleClick",
-    value: function handleClick() {
-      this.setState({
-        location: [500, 100]
-      });
-    }
-  }, {
     key: "render",
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         location: [200, 300],
+    //     };
+    // }
+    // handleClick() {
+    //     this.setState({ location: [500, 100] });
+    // }
     value: function render() {
-      var _this2 = this;
-
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_pts_canvas__WEBPACK_IMPORTED_MODULE_2__["QuickStartCanvas"], {
         style: {
           height: '100vh',
           width: '100vw'
-        } // onClick={
-        //     this.handleClick()
-        // }
-        ,
+        },
         onAnimate: function onAnimate(space, form, time, ftime) {
           var rect = pts__WEBPACK_IMPORTED_MODULE_1__["Rectangle"].fromCenter(space.center, space.size.$divide(10));
           var poly = pts__WEBPACK_IMPORTED_MODULE_1__["Rectangle"].corners(rect);
@@ -83979,7 +84102,8 @@ function (_React$Component) {
           poly.shear2D(pts__WEBPACK_IMPORTED_MODULE_1__["Num"].cycle(time % 200000 / 200000) - 0.5, space.center);
           var clone = poly.clone();
           poly.rotate2D(-pts__WEBPACK_IMPORTED_MODULE_1__["Num"].cycle(time % 20000 / 20000) + 0.5, space.center);
-          poly.shear2D(-pts__WEBPACK_IMPORTED_MODULE_1__["Num"].cycle(time % 200000 / 200000) + 0.5, _this2.state.location); // drawing
+          poly.shear2D(-pts__WEBPACK_IMPORTED_MODULE_1__["Num"].cycle(time % 200000 / 200000) + 0.5, [200, 300]); // this.state.location
+          // drawing
 
           form.point("#123").polygon(poly);
           form.point("#123").polygon(clone);
