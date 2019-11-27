@@ -83606,7 +83606,7 @@ function (_React$Component) {
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("u", null, "SYNTH CONTROLS"), ":"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
-          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/trigger', {
+          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/trigger", {
             trigger: _this2.state.trigger
           });
         }
@@ -83618,7 +83618,7 @@ function (_React$Component) {
         type: "range",
         defaultValue: "400",
         onMouseUp: function onMouseUp(e) {
-          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/pitch', {
+          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/pitch", {
             pitch: e.target.value
           });
         },
@@ -83634,7 +83634,7 @@ function (_React$Component) {
         type: "range",
         defaultValue: "0",
         onMouseUp: function onMouseUp(e) {
-          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/pingPongFbk', {
+          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/pingPongFbk", {
             pingPongFbk: e.target.value
           });
         },
@@ -83650,7 +83650,7 @@ function (_React$Component) {
         type: "range",
         defaultValue: "0",
         onChange: function onChange(e) {
-          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/chebWet', {
+          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/chebWet", {
             chebWet: e.target.value
           });
         },
@@ -83666,7 +83666,7 @@ function (_React$Component) {
         type: "range",
         defaultValue: "0",
         onChange: function onChange(e) {
-          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/reverbWet', {
+          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/reverbWet", {
             reverbWet: e.target.value
           });
         },
@@ -83748,7 +83748,12 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NewSynthVisuals__WEBPACK_IMPORTED_MODULE_3__["default"], {
         name: "pts-react",
         background: "#0cf",
-        credit: ""
+        credit: "",
+        style: {
+          height: "100vh",
+          width: "100vw",
+          margin: "-10px"
+        }
       })))));
     }
   }]);
@@ -83756,12 +83761,12 @@ function (_React$Component) {
   return Layout;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-if (document.getElementById('layout')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Layout, null), document.getElementById('layout'));
+if (document.getElementById("layout")) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Layout, null), document.getElementById("layout"));
 }
 
-if (document.getElementById('controller')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Controller__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('controller'));
+if (document.getElementById("controller")) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Controller__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById("controller"));
 }
 
 /***/ }),
@@ -83800,7 +83805,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-// import React from 'react';
 
 
 
@@ -83818,7 +83822,7 @@ function (_PtsCanvas) {
 
     _this2 = _possibleConstructorReturn(this, _getPrototypeOf(NewSynthVisuals).call(this, props));
     _this2.state = {
-      // Synth/param values
+      // Synth/param values (loads default values, then used to update live input)
       pitch: 400,
       trigger: false,
       pingPongFbk: 0,
@@ -83830,7 +83834,7 @@ function (_PtsCanvas) {
       cheb: null,
       reverb: null
     };
-    _this2.synthTrigger = _this2.synthTrigger.bind(_assertThisInitialized(_this2)); // EQ params
+    _this2.synthTrigger = _this2.synthTrigger.bind(_assertThisInitialized(_this2)); // EQ (visualizer) params
 
     _this2.bins = 1024; // valid values = 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384
 
@@ -83838,11 +83842,13 @@ function (_PtsCanvas) {
 
     _this2.maxDB = 0; // default = -30
 
-    _this2.smooth = 0.9; // default = 0.8
+    _this2.smooth = 0.95; // default = 0.8
+    // Sound that inputs into the visualizer
 
     _this2.sound = null;
     return _this2;
-  }
+  } // Animation of the visualizer
+
 
   _createClass(NewSynthVisuals, [{
     key: "animate",
@@ -83853,19 +83859,19 @@ function (_PtsCanvas) {
         if (!this.sound) this.space.stop(); // stop animation if not playing
         // The colors of the EQ squares
 
-        var colors = ["#f06", "#62e", "#fff", "#fe3", "#0c9"]; // The squares of the EQ
+        var colors = ["#f06", "#62e", "#fff", "#fe3", "#0c9"]; // Generates each individual EQ square
 
         this.sound.freqDomainTo(this.space.size).forEach(function (t, i) {
           _this3.form.fillOnly(colors[i % 5]).point(t, 3);
-        });
-        this.form.fillOnly("rgba(0,0,0,.3").text([20, this.space.size.y - 20], this.props.credit);
+        }); // Places the "credit" on the screen
+        // this.form.fillOnly("rgba(0,0,0,.3").text([20, this.space.size.y - 20], this.props.credit);
       }
     }
   }, {
     key: "start",
     value: function start() {
       // Resets the synth on load
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/reset'); // Polling from DB
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/reset"); // Polling from DB (occurs every 1 second)
 
       var _this = this;
 
@@ -83874,11 +83880,11 @@ function (_PtsCanvas) {
           var data = response.data;
 
           _this.setState({
-            pitch: data['pitch'],
-            trigger: data['trigger'],
-            pingPongFbk: data['pingPongFbk'],
-            chebWet: data['chebWet'],
-            reverbWet: data['reverbWet']
+            pitch: data["pitch"],
+            trigger: data["trigger"],
+            pingPongFbk: data["pingPongFbk"],
+            chebWet: data["chebWet"],
+            reverbWet: data["reverbWet"]
           });
         });
       }, 1000); // Create the Synth and Effects
@@ -83894,13 +83900,15 @@ function (_PtsCanvas) {
         cheb: cheb,
         reverb: reverb
       });
-    }
+    } // Updates the synth and params on each change of the controller
+
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
       this.synthTrigger(this.state.synth, this.state.pitch, this.state.pong, this.state.cheb, this.state.reverb);
       this.sound = pts__WEBPACK_IMPORTED_MODULE_2__["Sound"].from(this.state.synth, this.state.synth.context).analyze(this.bins, this.minDB, this.maxDB, this.smooth);
-    }
+    } // Trigger the synth sound
+
   }, {
     key: "synthTrigger",
     value: function synthTrigger(synth, pitch, pong, cheb, reverb) {

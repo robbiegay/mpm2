@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Controller from './Controller';
-import NewSynthVisuals from './NewSynthVisuals';
+import React from "react";
+import ReactDOM from "react-dom";
+import Controller from "./Controller";
+import NewSynthVisuals from "./NewSynthVisuals";
 
 class Layout extends React.Component {
     render() {
@@ -10,7 +10,7 @@ class Layout extends React.Component {
                 <div className="row justify-content-center">
                     <div className="col-md-8">
                         <div className="card">
-                            <NewSynthVisuals name="pts-react" background="#0cf" credit="" />
+                            <NewSynthVisuals name="pts-react" background="#0cf" credit="" style={{height: "100vh", width: "100vw", margin: "-10px" }} />
                         </div>
                     </div>
                 </div>
@@ -19,10 +19,10 @@ class Layout extends React.Component {
     }
 }
 
-if (document.getElementById('layout')) {
-    ReactDOM.render(<Layout />, document.getElementById('layout'));
+if (document.getElementById("layout")) {
+    ReactDOM.render(<Layout />, document.getElementById("layout"));
 }
 
-if (document.getElementById('controller')) {
-    ReactDOM.render(<Controller />, document.getElementById('controller'));
+if (document.getElementById("controller")) {
+    ReactDOM.render(<Controller />, document.getElementById("controller"));
 }

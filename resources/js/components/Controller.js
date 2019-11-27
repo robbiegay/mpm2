@@ -1,5 +1,5 @@
-import React from 'react';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
 
 class Controller extends React.Component {
     constructor(props) {
@@ -16,7 +16,7 @@ class Controller extends React.Component {
                 {/* TIGGER TONE */}
                 <button
                     onClick={() => {
-                        axios.post('http://127.0.0.1:8000/api/synthparams/trigger', {
+                        axios.post("http://127.0.0.1:8000/api/synthparams/trigger", {
                             trigger: this.state.trigger,
                         });
                     }}
@@ -28,9 +28,9 @@ class Controller extends React.Component {
                         <label htmlFor="formControlRange">Pitch</label>
                         <input
                             type="range"
-                            defaultValue='400'
+                            defaultValue="400"
                             onMouseUp={(e) => {
-                                axios.post('http://127.0.0.1:8000/api/synthparams/pitch', {
+                                axios.post("http://127.0.0.1:8000/api/synthparams/pitch", {
                                     pitch: e.target.value,
                                 })
                             }}
@@ -48,9 +48,9 @@ class Controller extends React.Component {
                         <label htmlFor="formControlRange">Ping Pong Feedback</label>
                         <input
                             type="range"
-                            defaultValue='0'
+                            defaultValue="0"
                             onMouseUp={(e) => {
-                                axios.post('http://127.0.0.1:8000/api/synthparams/pingPongFbk', {
+                                axios.post("http://127.0.0.1:8000/api/synthparams/pingPongFbk", {
                                     pingPongFbk: e.target.value,
                                 })
                             }}
@@ -68,9 +68,9 @@ class Controller extends React.Component {
                         <label htmlFor="formControlRange">Waveshaper Dry/Wet</label>
                         <input
                             type="range"
-                            defaultValue='0'
+                            defaultValue="0"
                             onChange={(e) => {
-                                axios.post('http://127.0.0.1:8000/api/synthparams/chebWet', {
+                                axios.post("http://127.0.0.1:8000/api/synthparams/chebWet", {
                                     chebWet: e.target.value,
                                 })
                             }}
@@ -88,9 +88,9 @@ class Controller extends React.Component {
                         <label htmlFor="formControlRange">Reverb Dry/Wet</label>
                         <input
                             type="range"
-                            defaultValue='0'
+                            defaultValue="0"
                             onChange={(e) => {
-                                axios.post('http://127.0.0.1:8000/api/synthparams/reverbWet', {
+                                axios.post("http://127.0.0.1:8000/api/synthparams/reverbWet", {
                                     reverbWet: e.target.value,
                                 })
                             }}
