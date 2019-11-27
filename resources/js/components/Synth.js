@@ -1,7 +1,7 @@
 import React from 'react';
 import Tone from 'tone';
 import axios from 'axios';
-import TestFromGen from './TestFromGen';
+// import TestFromGen from './TestFromGen';
 
 
 class Synth extends React.Component {
@@ -38,6 +38,7 @@ class Synth extends React.Component {
         var synth = new Tone.DuoSynth().connect(pong);
         // Stores the synth and effects in state
         this.setState({ synth: synth, pong: pong, cheb: cheb, reverb: reverb });
+
     }
 
     // Polling — updates every 1 second
@@ -60,6 +61,8 @@ class Synth extends React.Component {
     // When state is set, update the synth parameters
     componentDidUpdate() {
         this.synthTrigger(this.state.synth, this.state.pitch, this.state.pong, this.state.cheb, this.state.reverb);
+        // this.props.setSynth(this.state.synth);
+
     }
 
     synthTrigger(synth, pitch, pong, cheb, reverb) {
@@ -72,7 +75,7 @@ class Synth extends React.Component {
     render() {
         return (
             <>
-                <TestFromGen name="pts-react" background="#0cf" credit="This is a visualizer" synthSound={ this.state.synth } />
+                {/* <TestFromGen name="pts-react" background="#0cf" credit="This is a visualizer" synthSound={ this.state.synth } /> */}
                 <p>~THIS IS A SYNTH~</p>
             </>
         )

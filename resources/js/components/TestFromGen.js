@@ -1,5 +1,6 @@
 import { Pt, Group, Line, Create, Sound, Triangle, Const, Geom } from 'pts';
 import { PtsCanvas } from "react-pts-canvas";
+import React from 'react';
 
 
 class TestFromGen extends PtsCanvas {
@@ -10,12 +11,19 @@ class TestFromGen extends PtsCanvas {
     // Input place of sound
     // this.sound = Sound.generate( "sine", 2000 );
     // this.sound.start();
+    // this.sound = Sound.from(this.props.synth)
+    // this.state = {
+    //   sound: null
+    // }
 
-    this.sound = Sound.from( this.props.synthSound );
-    console.log(this.props.synthSound);
-    
-    // console.log(this.sound);
+    console.log(this.sound);
+    // this.setSound = this.setSound.bind(this);
   }
+  // setSound() {
+  //   this.setState({ sound: Sound.from(this.props.synth) });
+  //   console.log(this.props.synthSound);
+
+  // }
 
   // // Toggle play/pause, can remove
   // toggle() {
@@ -27,9 +35,14 @@ class TestFromGen extends PtsCanvas {
   //     this.space.replay();
   //   }
   // }
+  // componentDidMount() {
+
+
+  // }
 
   // Anomates the EQ
   animate(time, ftime) {
+    // this.setSound();
 
     // console.log(this.sound);
     if (this.sound) {
@@ -59,6 +72,15 @@ class TestFromGen extends PtsCanvas {
       this.toggle();
     }
   }
+  // render() {
+
+  //   console.log(this.sound)
+  //   return (
+  //     <>
+  //       {/* testing */}
+  //     </>
+  //   )
+  // }
 }
 
 export default TestFromGen;

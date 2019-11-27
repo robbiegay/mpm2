@@ -3,7 +3,7 @@ import { PtsCanvas } from "react-pts-canvas";
 import React from 'react';
 import Tone from 'tone';
 import axios from 'axios';
-import TestFromGen from './TestFromGen';
+// import TestFromGen from './TestFromGen';
 
 
 class SynthVisuals extends PtsCanvas {
@@ -33,21 +33,21 @@ class SynthVisuals extends PtsCanvas {
         // this.sound = null;
     }
 
-    componentDidMount() {
-        // Resets the synth on load
-        axios.post('http://127.0.0.1:8000/api/synthparams/reset');
+    // componentDidMount() {
+    //     // Resets the synth on load
+    //     axios.post('http://127.0.0.1:8000/api/synthparams/reset');
 
-        // Polling from DB
-        this.useInterval();
+    //     // Polling from DB
+    //     this.useInterval();
 
-        // Create the Synth and Effects
-        var reverb = new Tone.JCReverb().toMaster();
-        var cheb = new Tone.Chebyshev(30).connect(reverb);
-        var pong = new Tone.PingPongDelay(0.25, this.state.pingPongFbk).connect(cheb);
-        var synth = new Tone.DuoSynth().connect(pong);
-        // Stores the synth and effects in state
-        this.setState({ synth: synth, pong: pong, cheb: cheb, reverb: reverb });
-    }
+    //     // Create the Synth and Effects
+    //     var reverb = new Tone.JCReverb().toMaster();
+    //     var cheb = new Tone.Chebyshev(30).connect(reverb);
+    //     var pong = new Tone.PingPongDelay(0.25, this.state.pingPongFbk).connect(cheb);
+    //     var synth = new Tone.DuoSynth().connect(pong);
+    //     // Stores the synth and effects in state
+    //     this.setState({ synth: synth, pong: pong, cheb: cheb, reverb: reverb });
+    // }
 
     // Polling — updates every 1 second
     useInterval() {
