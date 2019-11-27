@@ -36,7 +36,7 @@ class Controller extends React.Component {
                             }}
                             className="form-control-range"
                             min="100"
-                            max="1000"
+                            max="20000"
                             step="1"
                         />
                     </div>

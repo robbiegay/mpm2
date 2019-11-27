@@ -83624,7 +83624,7 @@ function (_React$Component) {
         },
         className: "form-control-range",
         min: "100",
-        max: "1000",
+        max: "20000",
         step: "1"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
@@ -83698,15 +83698,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Visuals__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Visuals */ "./resources/js/components/Visuals.js");
-/* harmony import */ var _TestFromAudio__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./TestFromAudio */ "./resources/js/components/TestFromAudio.js");
-/* harmony import */ var _TestFromGen__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TestFromGen */ "./resources/js/components/TestFromGen.js");
-/* harmony import */ var _Synth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Synth */ "./resources/js/components/Synth.js");
-/* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Controller */ "./resources/js/components/Controller.js");
-/* harmony import */ var _SynthVisuals__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./SynthVisuals */ "./resources/js/components/SynthVisuals.js");
-/* harmony import */ var _ToneGenPts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ToneGenPts */ "./resources/js/components/ToneGenPts.js");
-/* harmony import */ var _NewSynthVisuals__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./NewSynthVisuals */ "./resources/js/components/NewSynthVisuals.js");
-/* harmony import */ var _NewSynthVisuals2__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./NewSynthVisuals2 */ "./resources/js/components/NewSynthVisuals2.js");
+/* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Controller */ "./resources/js/components/Controller.js");
+/* harmony import */ var _NewSynthVisuals__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./NewSynthVisuals */ "./resources/js/components/NewSynthVisuals.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -83730,29 +83723,16 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
-
-
-
-
-
-
 var Layout =
 /*#__PURE__*/
 function (_React$Component) {
   _inherits(Layout, _React$Component);
 
-  function Layout(props) {
+  function Layout() {
     _classCallCheck(this, Layout);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Layout).call(this, props)); // this.state = {
-    //     synth: null
-    // }
-    // this.setSynth = this.setSynth.bind(this);
-  } // setSynth(synth) {
-  //     this.setState({ synth: synth });
-  // }
-
+    return _possibleConstructorReturn(this, _getPrototypeOf(Layout).apply(this, arguments));
+  }
 
   _createClass(Layout, [{
     key: "render",
@@ -83765,10 +83745,10 @@ function (_React$Component) {
         className: "col-md-8"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NewSynthVisuals__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NewSynthVisuals__WEBPACK_IMPORTED_MODULE_3__["default"], {
         name: "pts-react",
         background: "#0cf",
-        credit: "This is a visualizer"
+        credit: ""
       })))));
     }
   }]);
@@ -83781,7 +83761,7 @@ if (document.getElementById('layout')) {
 }
 
 if (document.getElementById('controller')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Controller__WEBPACK_IMPORTED_MODULE_6__["default"], null), document.getElementById('controller'));
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Controller__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('controller'));
 }
 
 /***/ }),
@@ -83850,16 +83830,15 @@ function (_PtsCanvas) {
       cheb: null,
       reverb: null
     };
-    _this2.synthTrigger = _this2.synthTrigger.bind(_assertThisInitialized(_this2));
-    _this2.bins = 256; // range of: [32, 32768] --> 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384
+    _this2.synthTrigger = _this2.synthTrigger.bind(_assertThisInitialized(_this2)); // EQ params
+
+    _this2.bins = 1024; // valid values = 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384
 
     _this2.minDB = -100; // default = -100
 
-    _this2.maxDB = -80; // d = -30
+    _this2.maxDB = 0; // default = -30
 
-    _this2.smooth = 0.8; // d = 0.8
-    // this.sound = Sound.generate("sine", 300);
-    // this.sound.start();
+    _this2.smooth = 0.9; // default = 0.8
 
     _this2.sound = null;
     return _this2;
@@ -83870,13 +83849,7 @@ function (_PtsCanvas) {
     value: function animate(time, ftime) {
       var _this3 = this;
 
-      // console.log(this.sound);
       if (this.sound) {
-        // if (this.sound) {
-        //     console.log(this.sound);
-        //     this.sound.analyze(this.bins, this.minDB, this.maxDB, this.smooth);
-        //     this.space.replay();
-        // }
         if (!this.sound) this.space.stop(); // stop animation if not playing
         // The colors of the EQ squares
 
@@ -83897,7 +83870,6 @@ function (_PtsCanvas) {
       var _this = this;
 
       setInterval(function () {
-        // console.log(this.sound.playing);
         axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("http://127.0.0.1:8000/api/synthparams").then(function (response) {
           var data = response.data;
 
@@ -83914,9 +83886,7 @@ function (_PtsCanvas) {
       var reverb = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.JCReverb().toMaster();
       var cheb = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.Chebyshev(30).connect(reverb);
       var pong = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.PingPongDelay(0.25, this.state.pingPongFbk).connect(cheb);
-      var synth = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.DuoSynth().connect(pong); // synth.triggerAttack(300);
-      // this.setSynth(synth);
-      // Stores the synth and effects in state
+      var synth = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.DuoSynth().connect(pong); // Stores the synth and effects in state
 
       this.setState({
         synth: synth,
@@ -83930,942 +83900,21 @@ function (_PtsCanvas) {
     value: function componentDidUpdate() {
       this.synthTrigger(this.state.synth, this.state.pitch, this.state.pong, this.state.cheb, this.state.reverb);
       this.sound = pts__WEBPACK_IMPORTED_MODULE_2__["Sound"].from(this.state.synth, this.state.synth.context).analyze(this.bins, this.minDB, this.maxDB, this.smooth);
-    } // setSynth(synth) {
-    //     this.sound = Sound.from(synth, synth.context).analyze(128);
-    //     console.log(this.sound);
-    // }
-
+    }
   }, {
     key: "synthTrigger",
     value: function synthTrigger(synth, pitch, pong, cheb, reverb) {
       this.state.trigger ? synth.triggerAttack(pitch) : synth.triggerRelease();
       pong.feedback.value = this.state.pingPongFbk;
       cheb.wet.value = this.state.chebWet;
-      reverb.wet.value = this.state.reverbWet; // this.sound = this.state.synth;
-    } // // Override PtsCanvas' action function
-    // action(type, x, y) {
-    //     if (type === "up" && Geom.withinBound([x, y], [0, 0], [50, 50])) { // clicked button
-    //         this.toggle();
-    //     }
-    // }
-
+      reverb.wet.value = this.state.reverbWet;
+    }
   }]);
 
   return NewSynthVisuals;
 }(react_pts_canvas__WEBPACK_IMPORTED_MODULE_3__["PtsCanvas"]);
 
 
-
-/***/ }),
-
-/***/ "./resources/js/components/NewSynthVisuals2.js":
-/*!*****************************************************!*\
-  !*** ./resources/js/components/NewSynthVisuals2.js ***!
-  \*****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var tone__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tone */ "./node_modules/tone/build/Tone.js");
-/* harmony import */ var tone__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(tone__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var pts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pts */ "./node_modules/pts/dist/es2015/_module.js");
-/* harmony import */ var react_pts_canvas__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-pts-canvas */ "./node_modules/react-pts-canvas/dist/index.es.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-// import React from 'react';
-
-
-
-
-
-var NewSynthVisuals =
-/*#__PURE__*/
-function (_PtsCanvas) {
-  _inherits(NewSynthVisuals, _PtsCanvas);
-
-  function NewSynthVisuals(props) {
-    var _this2;
-
-    _classCallCheck(this, NewSynthVisuals);
-
-    _this2 = _possibleConstructorReturn(this, _getPrototypeOf(NewSynthVisuals).call(this, props));
-    _this2.state = {
-      // Synth/param values
-      pitch: 400,
-      trigger: false,
-      pingPongFbk: 0,
-      chebWet: 0,
-      reverbWet: 0,
-      // Stores the synth and params in state
-      synth: null,
-      pong: null,
-      cheb: null,
-      reverb: null
-    };
-    _this2.bins = 128; // range of: [32, 32768] --> 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384
-
-    _this2.minDB = -100; // default = -100
-
-    _this2.maxDB = -30; // d = -30
-
-    _this2.smooth = 0.8; // d = 0.8
-
-    _this2.synthTrigger = _this2.synthTrigger.bind(_assertThisInitialized(_this2)); // Sound.loadAsBuffer("https://upload.wikimedia.org/wikipedia/en/8/8f/Elvis_Presley_-_Are_You_Lonesome_Tonight.ogg").then(s => {
-    //     this.sound = s;
-    //     this.space.playOnce(50);
-    //     this.bufferLoaded = true;
-    // }).catch(e => console.error(e));
-
-    _this2.sound = null;
-    return _this2;
-  }
-
-  _createClass(NewSynthVisuals, [{
-    key: "animate",
-    value: function animate(time, ftime) {
-      var _this3 = this;
-
-      if (this.sound) {
-        console.log(this.sound);
-        if (!this.sound.playing) this.space.stop(); // stop animation if not playing
-        // The colors of the EQ squares
-
-        var colors = ["#f06", "#62e", "#fff", "#fe3", "#0c9"]; // The squares of the EQ
-
-        this.sound.freqDomainTo(this.space.size).forEach(function (t, i) {
-          _this3.form.fillOnly(colors[i % 5]).point(t, 3);
-        });
-        this.form.fillOnly("rgba(0,0,0,.3").text([20, this.space.size.y - 20], this.props.credit);
-      }
-    }
-  }, {
-    key: "start",
-    value: function start() {
-      // Resets the synth on load
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('http://127.0.0.1:8000/api/synthparams/reset'); // Polling from DB
-
-      var _this = this;
-
-      setInterval(function () {
-        axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("http://127.0.0.1:8000/api/synthparams").then(function (response) {
-          var data = response.data;
-
-          _this.setState({
-            pitch: data['pitch'],
-            trigger: data['trigger'],
-            pingPongFbk: data['pingPongFbk'],
-            chebWet: data['chebWet'],
-            reverbWet: data['reverbWet']
-          });
-        });
-      }, 1000); // Create the Synth and Effects
-
-      var reverb = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.JCReverb().toMaster();
-      var cheb = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.Chebyshev(30).connect(reverb);
-      var pong = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.PingPongDelay(0.25, this.state.pingPongFbk).connect(cheb);
-      var synth = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.DuoSynth().connect(pong); // this.sound = Sound.from( synth, synth.context ).analyze(128);
-      // Stores the synth and effects in state
-
-      this.setState({
-        synth: synth,
-        pong: pong,
-        cheb: cheb,
-        reverb: reverb
-      }); // this.sound.start();
-
-      this.sound.analyze(this.bins);
-      this.space.replay();
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      this.synthTrigger(this.state.synth, this.state.pitch, this.state.pong, this.state.cheb, this.state.reverb);
-      this.sound = pts__WEBPACK_IMPORTED_MODULE_1__["Sound"].from(this.state.synth, this.state.synth.context).analyze(this.bins, this.minDB, this.maxDB, this.smooth);
-    }
-  }, {
-    key: "synthTrigger",
-    value: function synthTrigger(synth, pitch, pong, cheb, reverb) {
-      this.state.trigger ? synth.triggerAttack(pitch) : synth.triggerRelease();
-      pong.feedback.value = this.state.pingPongFbk;
-      cheb.wet.value = this.state.chebWet;
-      reverb.wet.value = this.state.reverbWet; // this.sound = this.state.synth;
-    }
-  }]);
-
-  return NewSynthVisuals;
-}(react_pts_canvas__WEBPACK_IMPORTED_MODULE_2__["PtsCanvas"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (NewSynthVisuals);
-
-/***/ }),
-
-/***/ "./resources/js/components/Synth.js":
-/*!******************************************!*\
-  !*** ./resources/js/components/Synth.js ***!
-  \******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var tone__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tone */ "./node_modules/tone/build/Tone.js");
-/* harmony import */ var tone__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(tone__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
- // import TestFromGen from './TestFromGen';
-
-var Synth =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(Synth, _React$Component);
-
-  function Synth(props) {
-    var _this;
-
-    _classCallCheck(this, Synth);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Synth).call(this, props));
-    _this.state = {
-      // Synth/param values
-      pitch: 400,
-      trigger: false,
-      pingPongFbk: 0,
-      chebWet: 0,
-      reverbWet: 0,
-      // Stores the synth and params in state
-      synth: null,
-      pong: null,
-      cheb: null,
-      reverb: null
-    };
-    _this.synthTrigger = _this.synthTrigger.bind(_assertThisInitialized(_this));
-    _this.useInterval = _this.useInterval.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(Synth, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      // Resets the synth on load
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('http://127.0.0.1:8000/api/synthparams/reset'); // Polling from DB
-
-      this.useInterval(); // Create the Synth and Effects
-
-      var reverb = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.JCReverb().toMaster();
-      var cheb = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.Chebyshev(30).connect(reverb);
-      var pong = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.PingPongDelay(0.25, this.state.pingPongFbk).connect(cheb);
-      var synth = new tone__WEBPACK_IMPORTED_MODULE_1___default.a.DuoSynth().connect(pong); // Stores the synth and effects in state
-
-      this.setState({
-        synth: synth,
-        pong: pong,
-        cheb: cheb,
-        reverb: reverb
-      });
-    } // Polling — updates every 1 second
-
-  }, {
-    key: "useInterval",
-    value: function useInterval() {
-      var _this2 = this;
-
-      setInterval(function () {
-        axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("http://127.0.0.1:8000/api/synthparams").then(function (response) {
-          var data = response.data;
-
-          _this2.setState({
-            pitch: data['pitch'],
-            trigger: data['trigger'],
-            pingPongFbk: data['pingPongFbk'],
-            chebWet: data['chebWet'],
-            reverbWet: data['reverbWet']
-          });
-        });
-      }, 1000);
-    } // When state is set, update the synth parameters
-
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      this.synthTrigger(this.state.synth, this.state.pitch, this.state.pong, this.state.cheb, this.state.reverb); // this.props.setSynth(this.state.synth);
-    }
-  }, {
-    key: "synthTrigger",
-    value: function synthTrigger(synth, pitch, pong, cheb, reverb) {
-      this.state.trigger ? synth.triggerAttack(pitch) : synth.triggerRelease();
-      pong.feedback.value = this.state.pingPongFbk;
-      cheb.wet.value = this.state.chebWet;
-      reverb.wet.value = this.state.reverbWet;
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "~THIS IS A SYNTH~"));
-    }
-  }]);
-
-  return Synth;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = (Synth);
-
-/***/ }),
-
-/***/ "./resources/js/components/SynthVisuals.js":
-/*!*************************************************!*\
-  !*** ./resources/js/components/SynthVisuals.js ***!
-  \*************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var pts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pts */ "./node_modules/pts/dist/es2015/_module.js");
-/* harmony import */ var react_pts_canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-pts-canvas */ "./node_modules/react-pts-canvas/dist/index.es.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var tone__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tone */ "./node_modules/tone/build/Tone.js");
-/* harmony import */ var tone__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(tone__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
- // import TestFromGen from './TestFromGen';
-
-var SynthVisuals =
-/*#__PURE__*/
-function (_PtsCanvas) {
-  _inherits(SynthVisuals, _PtsCanvas);
-
-  function SynthVisuals(props) {
-    var _this;
-
-    _classCallCheck(this, SynthVisuals);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(SynthVisuals).call(this, props));
-    _this.state = {
-      // Synth/param values
-      pitch: 400,
-      trigger: false,
-      pingPongFbk: 0,
-      chebWet: 0,
-      reverbWet: 0,
-      // Stores the synth and params in state
-      synth: null,
-      pong: null,
-      cheb: null,
-      reverb: null
-    };
-    _this.synthTrigger = _this.synthTrigger.bind(_assertThisInitialized(_this));
-    _this.useInterval = _this.useInterval.bind(_assertThisInitialized(_this)); // VISUAL STUFF
-
-    _this.bins = 128; // range of: [32, 32768] --> 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384
-    // Input place of sound
-    // this.sound = Sound.generate("sine", 220);
-    // this.sound.start();
-    // this.sound = null;
-
-    return _this;
-  } // componentDidMount() {
-  //     // Resets the synth on load
-  //     axios.post('http://127.0.0.1:8000/api/synthparams/reset');
-  //     // Polling from DB
-  //     this.useInterval();
-  //     // Create the Synth and Effects
-  //     var reverb = new Tone.JCReverb().toMaster();
-  //     var cheb = new Tone.Chebyshev(30).connect(reverb);
-  //     var pong = new Tone.PingPongDelay(0.25, this.state.pingPongFbk).connect(cheb);
-  //     var synth = new Tone.DuoSynth().connect(pong);
-  //     // Stores the synth and effects in state
-  //     this.setState({ synth: synth, pong: pong, cheb: cheb, reverb: reverb });
-  // }
-  // Polling — updates every 1 second
-
-
-  _createClass(SynthVisuals, [{
-    key: "useInterval",
-    value: function useInterval() {
-      var _this2 = this;
-
-      setInterval(function () {
-        axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("http://127.0.0.1:8000/api/synthparams").then(function (response) {
-          var data = response.data;
-
-          _this2.setState({
-            pitch: data['pitch'],
-            trigger: data['trigger'],
-            pingPongFbk: data['pingPongFbk'],
-            chebWet: data['chebWet'],
-            reverbWet: data['reverbWet']
-          });
-        });
-      }, 1000);
-    } // When state is set, update the synth parameters
-
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      this.synthTrigger(this.state.synth, this.state.pitch, this.state.pong, this.state.cheb, this.state.reverb);
-    }
-  }, {
-    key: "synthTrigger",
-    value: function synthTrigger(synth, pitch, pong, cheb, reverb) {
-      this.state.trigger ? synth.triggerAttack(pitch) : synth.triggerRelease();
-      pong.feedback.value = this.state.pingPongFbk;
-      cheb.wet.value = this.state.chebWet;
-      reverb.wet.value = this.state.reverbWet;
-    } // Anomates the EQ
-
-  }, {
-    key: "animate",
-    value: function animate(time, ftime) {
-      var _this3 = this;
-
-      console.log('sound is playing'); // console.log(this.props.sound);
-
-      if (this.props.sound) {
-        if (this.props.sound.playing) {
-          this.props.sound.analyze(this.bins);
-          this.space.replay();
-        }
-
-        if (!this.props.sound.playing) this.space.stop(); // stop animation if not playing
-        // console.log(this.props.sound);
-        // The colors of the EQ squares
-
-        var colors = ["#f06", "#62e", "#fff", "#fe3", "#0c9"]; // The squares of the EQ
-
-        this.props.sound.freqDomainTo(this.space.size).forEach(function (t, i) {
-          _this3.form.fillOnly(colors[i % 5]).point(t, 3);
-        });
-        this.form.fillOnly("rgba(0,0,0,.3").text([20, this.space.size.y - 20], this.props.credit);
-      }
-    } // Override PtsCanvas' action function
-
-  }, {
-    key: "action",
-    value: function action(type, x, y) {
-      if (type === "up" && pts__WEBPACK_IMPORTED_MODULE_0__["Geom"].withinBound([x, y], [0, 0], [50, 50])) {
-        // clicked button
-        this.toggle();
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", null, "~THIS IS A SYNTH~"));
-    }
-  }]);
-
-  return SynthVisuals;
-}(react_pts_canvas__WEBPACK_IMPORTED_MODULE_1__["PtsCanvas"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (SynthVisuals);
-
-/***/ }),
-
-/***/ "./resources/js/components/TestFromAudio.js":
-/*!**************************************************!*\
-  !*** ./resources/js/components/TestFromAudio.js ***!
-  \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var pts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pts */ "./node_modules/pts/dist/es2015/_module.js");
-/* harmony import */ var react_pts_canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-pts-canvas */ "./node_modules/react-pts-canvas/dist/index.es.js");
-/* harmony import */ var _Synth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Synth */ "./resources/js/components/Synth.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-// import Tone from 'tone';
-
-
-
-
-var TestFromAudio =
-/*#__PURE__*/
-function (_PtsCanvas) {
-  _inherits(TestFromAudio, _PtsCanvas);
-
-  function TestFromAudio(props) {
-    var _this;
-
-    _classCallCheck(this, TestFromAudio);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(TestFromAudio).call(this, props));
-    _this.state = {
-      nothing: null
-    };
-    _this.bins = 128; // range of: [32, 32768] --> 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384
-
-    _this.minDB = -100; // default = -100
-
-    _this.maxDB = -30; // d = -30
-
-    _this.smooth = 0.8; // d = 0.8
-
-    pts__WEBPACK_IMPORTED_MODULE_0__["Sound"].load("https://upload.wikimedia.org/wikipedia/en/8/8f/Elvis_Presley_-_Are_You_Lonesome_Tonight.ogg").then(function (s) {
-      _this.sound = s;
-
-      _this.space.playOnce(50); // render for noce
-
-
-      _this.bufferLoaded = true;
-    })["catch"](function (e) {
-      return console.error(e);
-    }); // Sound.generate( "sine", 150 );
-    // this.sound.start();
-
-    return _this;
-  } // Anomates the EQ
-
-
-  _createClass(TestFromAudio, [{
-    key: "animate",
-    value: function animate(time, ftime) {
-      var _this2 = this;
-
-      if (this.sound && this.sound.playable) {
-        if (!this.sound.playing) this.space.stop(); // stop animation if not playing
-        // The colors of the EQ squares
-
-        var colors = ["#f06", "#62e", "#fff", "#fe3", "#0c9"]; // The squares of the EQ
-
-        this.sound.freqDomainTo(this.space.size).forEach(function (t, i) {
-          _this2.form.fillOnly(colors[i % 5]).point(t, 3);
-        });
-        this.form.fillOnly("rgba(0,0,0,.3").text([20, this.space.size.y - 20], this.props.credit);
-      }
-    }
-  }, {
-    key: "start",
-    value: function start() {
-      this.sound.start();
-      this.sound.analyze(this.bins); // recreate buffer again
-
-      this.space.replay();
-    }
-  }]);
-
-  return TestFromAudio;
-}(react_pts_canvas__WEBPACK_IMPORTED_MODULE_1__["PtsCanvas"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (TestFromAudio);
-
-/***/ }),
-
-/***/ "./resources/js/components/TestFromGen.js":
-/*!************************************************!*\
-  !*** ./resources/js/components/TestFromGen.js ***!
-  \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var pts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pts */ "./node_modules/pts/dist/es2015/_module.js");
-/* harmony import */ var react_pts_canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-pts-canvas */ "./node_modules/react-pts-canvas/dist/index.es.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-var TestFromGen =
-/*#__PURE__*/
-function (_PtsCanvas) {
-  _inherits(TestFromGen, _PtsCanvas);
-
-  function TestFromGen(props) {
-    var _this;
-
-    _classCallCheck(this, TestFromGen);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(TestFromGen).call(this, props));
-    _this.bins = 128; // range of: [32, 32768] --> 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384
-    // Input place of sound
-    // this.sound = Sound.generate( "sine", 2000 );
-    // this.sound.start();
-    // this.sound = Sound.from(this.props.synth)
-    // this.state = {
-    //   sound: null
-    // }
-
-    console.log(_this.sound); // this.setSound = this.setSound.bind(this);
-
-    return _this;
-  } // setSound() {
-  //   this.setState({ sound: Sound.from(this.props.synth) });
-  //   console.log(this.props.synthSound);
-  // }
-  // // Toggle play/pause, can remove
-  // toggle() {
-  //   if (this.sound.playing) {
-  //     this.sound.stop();
-  //   } else {
-  //     this.sound.analyze(this.bins); // recreate buffer again
-  //     this.sound.start();
-  //     this.space.replay();
-  //   }
-  // }
-  // componentDidMount() {
-  // }
-  // Anomates the EQ
-
-
-  _createClass(TestFromGen, [{
-    key: "animate",
-    value: function animate(time, ftime) {
-      var _this2 = this;
-
-      // this.setSound();
-      // console.log(this.sound);
-      if (this.sound) {
-        if (this.sound.playing) {
-          console.log(this.sound);
-          this.sound.analyze(this.bins);
-          this.space.replay();
-        }
-
-        if (!this.sound.playing) this.space.stop(); // stop animation if not playing
-        // console.log(this.sound);
-        // The colors of the EQ squares
-
-        var colors = ["#f06", "#62e", "#fff", "#fe3", "#0c9"]; // The squares of the EQ
-
-        this.sound.freqDomainTo(this.space.size).forEach(function (t, i) {
-          _this2.form.fillOnly(colors[i % 5]).point(t, 3);
-        });
-        this.form.fillOnly("rgba(0,0,0,.3").text([20, this.space.size.y - 20], this.props.credit);
-      }
-    } // Override PtsCanvas' action function
-
-  }, {
-    key: "action",
-    value: function action(type, x, y) {
-      if (type === "up" && pts__WEBPACK_IMPORTED_MODULE_0__["Geom"].withinBound([x, y], [0, 0], [50, 50])) {
-        // clicked button
-        this.toggle();
-      }
-    } // render() {
-    //   console.log(this.sound)
-    //   return (
-    //     <>
-    //       {/* testing */}
-    //     </>
-    //   )
-    // }
-
-  }]);
-
-  return TestFromGen;
-}(react_pts_canvas__WEBPACK_IMPORTED_MODULE_1__["PtsCanvas"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (TestFromGen);
-
-/***/ }),
-
-/***/ "./resources/js/components/ToneGenPts.js":
-/*!***********************************************!*\
-  !*** ./resources/js/components/ToneGenPts.js ***!
-  \***********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ToneGenPts; });
-/* harmony import */ var tone__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tone */ "./node_modules/tone/build/Tone.js");
-/* harmony import */ var tone__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(tone__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var pts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pts */ "./node_modules/pts/dist/es2015/_module.js");
-/* harmony import */ var react_pts_canvas__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-pts-canvas */ "./node_modules/react-pts-canvas/dist/index.es.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-// import React from 'react';
-
-
-
-
-var ToneGenPts =
-/*#__PURE__*/
-function (_PtsCanvas) {
-  _inherits(ToneGenPts, _PtsCanvas);
-
-  function ToneGenPts(props) {
-    var _this2;
-
-    _classCallCheck(this, ToneGenPts);
-
-    _this2 = _possibleConstructorReturn(this, _getPrototypeOf(ToneGenPts).call(this, props));
-    _this2.index = new pts__WEBPACK_IMPORTED_MODULE_1__["Pt"](-1, -1);
-    _this2.synth = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.Synth().toMaster();
-    _this2.sound = pts__WEBPACK_IMPORTED_MODULE_1__["Sound"].from(_this2.synth, _this2.synth.context).analyze(128); // this.getFromDB = this.getFromDB.bind(this);
-
-    _this2.color = "ffffff";
-    return _this2;
-  }
-
-  _createClass(ToneGenPts, [{
-    key: "animate",
-    value: function animate(time) {
-      if (this.synth.context.state === 'suspended') {
-        // mostly for safari
-        form.fillOnly("#fff").text([20, 30], "Click anywhere to start");
-      }
-
-      var area = this.space.size.$divide(3);
-      var idx = this.space.pointer.$divide(area).floor();
-      var rect = [idx.$multiply(area), idx.$multiply(area).add(area)];
-      var t1 = this.sound.timeDomainTo(area, rect[0].$subtract(0, area.y / 2));
-      var t2 = t1.map(function (t) {
-        return t.$add(0, area.y);
-      }).reverse();
-      var freqs = this.sound.freqDomainTo([area.x, area.y / 2], [rect[0].x, 0]).map(function (f) {
-        return [[f.x, rect[0].y + area.y / 2 - f.y], [f.x, rect[0].y + area.y / 2 + f.y]];
-      });
-      this.form.fillOnly(this.color).polygon(t1.concat(t2));
-      this.form.strokeOnly("#62e", Math.ceil(area.x / 128)).lines(freqs);
-      var key = ["C2", "E2", "G2", "C3", "E3", "G3", "C4", "E4", "G4"][idx.y * 3 + idx.x];
-      this.form.font(120, 'bold').fillOnly("#fff").text(rect[0].$add(10, 110), key);
-
-      if (!this.index.equals(idx)) {
-        // play if on different area
-        this.synth.triggerAttackRelease(key, '4n');
-        this.index = idx;
-      }
-    }
-  }, {
-    key: "start",
-    value: function start() {
-      console.log("hello startin"); // this.getFromDB()
-
-      var _this = this;
-
-      setInterval(function () {
-        console.log("running");
-        _this.color = "#000000".replace(/0/g, function () {
-          return (~~(Math.random() * 16)).toString(16);
-        });
-      }, 1000);
-    }
-  }, {
-    key: "action",
-    value: function action(type, x, y) {
-      if (type === "up") {
-        // for safari
-        if (this.synth.context.state === 'suspended') {
-          this.synth.context.resume();
-        }
-      }
-    } // getFromDB() {
-    //     console.log('updated');
-    // }
-
-  }]);
-
-  return ToneGenPts;
-}(react_pts_canvas__WEBPACK_IMPORTED_MODULE_2__["PtsCanvas"]);
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/Visuals.js":
-/*!********************************************!*\
-  !*** ./resources/js/components/Visuals.js ***!
-  \********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var pts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pts */ "./node_modules/pts/dist/es2015/_module.js");
-/* harmony import */ var react_pts_canvas__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-pts-canvas */ "./node_modules/react-pts-canvas/dist/index.es.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-var Visuals =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(Visuals, _React$Component);
-
-  function Visuals() {
-    _classCallCheck(this, Visuals);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(Visuals).apply(this, arguments));
-  }
-
-  _createClass(Visuals, [{
-    key: "render",
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         location: [200, 300],
-    //     };
-    // }
-    // handleClick() {
-    //     this.setState({ location: [500, 100] });
-    // }
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_pts_canvas__WEBPACK_IMPORTED_MODULE_2__["QuickStartCanvas"], {
-        style: {
-          height: '100vh',
-          width: '100vw'
-        },
-        onAnimate: function onAnimate(space, form, time, ftime) {
-          var rect = pts__WEBPACK_IMPORTED_MODULE_1__["Rectangle"].fromCenter(space.center, space.size.$divide(10));
-          var poly = pts__WEBPACK_IMPORTED_MODULE_1__["Rectangle"].corners(rect);
-          poly.rotate2D(pts__WEBPACK_IMPORTED_MODULE_1__["Num"].cycle(time % 20000 / 20000) - 0.5, space.center);
-          poly.shear2D(pts__WEBPACK_IMPORTED_MODULE_1__["Num"].cycle(time % 200000 / 200000) - 0.5, space.center);
-          var clone = poly.clone();
-          poly.rotate2D(-pts__WEBPACK_IMPORTED_MODULE_1__["Num"].cycle(time % 20000 / 20000) + 0.5, space.center);
-          poly.shear2D(-pts__WEBPACK_IMPORTED_MODULE_1__["Num"].cycle(time % 200000 / 200000) + 0.5, [200, 300]); // this.state.location
-          // drawing
-
-          form.point("#123").polygon(poly);
-          form.point("#123").polygon(clone);
-        }
-      });
-    }
-  }]);
-
-  return Visuals;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = (Visuals);
 
 /***/ }),
 
