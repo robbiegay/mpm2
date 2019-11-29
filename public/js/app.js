@@ -83736,6 +83736,26 @@ function (_React$Component) {
 
   _createClass(Layout, [{
     key: "render",
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         bgColor: "rgb(255, 99, 71)", // #0cf
+    //     }
+    // }
+    // colorShifter() {
+    //     var x = 0;
+    //     var y = 10;
+    //     var z = 100;
+    //     const _this = this;
+    //     setInterval(() => {
+    //         _this.setState({bgColor: `rgb(${x}, ${y}, ${z})`});
+    //         x += 1;
+    //         console.log(this.state.bgColor);
+    //     }, 100);
+    // }
+    // componentDidMount() {
+    //     this.colorShifter();
+    // }
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
@@ -83870,6 +83890,8 @@ function (_PtsCanvas) {
   }, {
     key: "start",
     value: function start() {
+      var _this4 = this;
+
       // Resets the synth on load
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/reset"); // Polling from DB (occurs every 1 second)
 
@@ -83877,22 +83899,32 @@ function (_PtsCanvas) {
 
       setInterval(function () {
         axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("http://127.0.0.1:8000/api/synthparams").then(function (response) {
-          var data = response.data;
+          var data = response.data; // If statement option
 
-          _this.setState({
-            pitch: data["pitch"],
-            trigger: data["trigger"],
-            pingPongFbk: data["pingPongFbk"],
-            chebWet: data["chebWet"],
-            reverbWet: data["reverbWet"]
-          });
+          if (_this4.state.pitch !== data["pitch"] || _this4.state.trigger !== data["trigger"] || _this4.state.pingPongFbk !== data["pingPongFbk"] || _this4.state.chebWet !== data["chebWet"] || _this4.state.reverbWet !== data["reverbWet"]) {
+            _this.setState({
+              pitch: data["pitch"],
+              trigger: data["trigger"],
+              pingPongFbk: data["pingPongFbk"],
+              chebWet: data["chebWet"],
+              reverbWet: data["reverbWet"]
+            });
+          } // Turnary option
+          // this.state.pitch !== data["pitch"] ? _this.setState({ pitch: data["pitch"] }) : null;
+          // this.state.trigger !== data["trigger"] ? _this.setState({ trigger: data["trigger"] }) : null;
+          // this.state.pingPongFbk !== data["pingPongFbk"] ? _this.setState({ pingPongFbk: data["pingPongFbk"] }) : null;
+          // this.state.chebWet !== data["chebWet"] ? _this.setState({ chebWet: data["chebWet"] }) : null;
+          // this.state.reverbWet !== data["reverbWet"] ? _this.setState({ reverbWet: data["reverbWet"] }) : null;
+
         });
-      }, 1000); // Create the Synth and Effects
+      }, 1500); // Create the Synth and Effects
 
-      var reverb = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.JCReverb().toMaster();
+      var reverb = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.JCReverb().toMaster(); // var dist = new Tone.Distortion(1.0).connect(reverb);
+
       var cheb = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.Chebyshev(30).connect(reverb);
       var pong = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.PingPongDelay(0.25, this.state.pingPongFbk).connect(cheb);
-      var synth = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.DuoSynth().connect(pong); // Stores the synth and effects in state
+      var synth = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.DuoSynth().connect(pong); // synth.harmonicity.value = 12.0; // --> this could be cool to change, changes the harmonics of the 2 voices. 2 = 1 octave up
+      // Stores the synth and effects in state
 
       this.setState({
         synth: synth,

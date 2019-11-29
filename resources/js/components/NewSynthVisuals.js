@@ -20,17 +20,17 @@ export default class NewSynthVisuals extends PtsCanvas {
             reverb: null,
         };
         this.synthTrigger = this.synthTrigger.bind(this);
-
+        
         // EQ (visualizer) params
         this.bins = 1024; // valid values = 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384
         this.minDB = -100; // default = -100
         this.maxDB = 0; // default = -30
         this.smooth = 0.95; // default = 0.8
-
+        
         // Sound that inputs into the visualizer
         this.sound = null;
     }
-
+    
     // Animation of the visualizer
     animate(time, ftime) {
         if (this.sound) {
@@ -59,21 +59,38 @@ export default class NewSynthVisuals extends PtsCanvas {
             axios.get("http://127.0.0.1:8000/api/synthparams")
                 .then(response => {
                     const data = response.data;
-                    _this.setState({
-                        pitch: data["pitch"],
-                        trigger: data["trigger"],
-                        pingPongFbk: data["pingPongFbk"],
-                        chebWet: data["chebWet"],
-                        reverbWet: data["reverbWet"],
-                    });
+                    // If statement option
+                    if (
+                        this.state.pitch !== data["pitch"] ||
+                        this.state.trigger !== data["trigger"] ||
+                        this.state.pingPongFbk !== data["pingPongFbk"] ||
+                        this.state.chebWet !== data["chebWet"] ||
+                        this.state.reverbWet !== data["reverbWet"]
+                    ) {
+                        _this.setState({
+                            pitch: data["pitch"],
+                            trigger: data["trigger"],
+                            pingPongFbk: data["pingPongFbk"],
+                            chebWet: data["chebWet"],
+                            reverbWet: data["reverbWet"],
+                        });
+                    }
+                    // Turnary option
+                    // this.state.pitch !== data["pitch"] ? _this.setState({ pitch: data["pitch"] }) : null;
+                    // this.state.trigger !== data["trigger"] ? _this.setState({ trigger: data["trigger"] }) : null;
+                    // this.state.pingPongFbk !== data["pingPongFbk"] ? _this.setState({ pingPongFbk: data["pingPongFbk"] }) : null;
+                    // this.state.chebWet !== data["chebWet"] ? _this.setState({ chebWet: data["chebWet"] }) : null;
+                    // this.state.reverbWet !== data["reverbWet"] ? _this.setState({ reverbWet: data["reverbWet"] }) : null;
                 });
-        }, 1000);
+        }, 1500);
 
         // Create the Synth and Effects
         var reverb = new Tone.JCReverb().toMaster();
+        // var dist = new Tone.Distortion(1.0).connect(reverb);
         var cheb = new Tone.Chebyshev(30).connect(reverb);
         var pong = new Tone.PingPongDelay(0.25, this.state.pingPongFbk).connect(cheb);
         var synth = new Tone.DuoSynth().connect(pong);
+        // synth.harmonicity.value = 12.0; // --> this could be cool to change, changes the harmonics of the 2 voices. 2 = 1 octave up
 
         // Stores the synth and effects in state
         this.setState({ synth: synth, pong: pong, cheb: cheb, reverb: reverb });

@@ -4,6 +4,29 @@ import Controller from "./Controller";
 import NewSynthVisuals from "./NewSynthVisuals";
 
 class Layout extends React.Component {
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         bgColor: "rgb(255, 99, 71)", // #0cf
+    //     }
+    // }
+
+    // colorShifter() {
+    //     var x = 0;
+    //     var y = 10;
+    //     var z = 100;
+    //     const _this = this;
+    //     setInterval(() => {
+    //         _this.setState({bgColor: `rgb(${x}, ${y}, ${z})`});
+    //         x += 1;
+    //         console.log(this.state.bgColor);
+    //     }, 100);
+    // }
+
+    // componentDidMount() {
+    //     this.colorShifter();
+    // }
+
     render() {
         return (
             <div className="container">
