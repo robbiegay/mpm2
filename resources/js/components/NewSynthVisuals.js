@@ -13,6 +13,8 @@ export default class NewSynthVisuals extends PtsCanvas {
             pingPongFbk: 0,
             chebWet: 0,
             reverbWet: 0,
+            stroke: 0,
+            sqSize: 3,
             // Stores the synth and params in state
             synth: null,
             pong: null,
@@ -20,17 +22,17 @@ export default class NewSynthVisuals extends PtsCanvas {
             reverb: null,
         };
         this.synthTrigger = this.synthTrigger.bind(this);
-        
+
         // EQ (visualizer) params
         this.bins = 1024; // valid values = 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384
         this.minDB = -100; // default = -100
         this.maxDB = 0; // default = -30
         this.smooth = 0.95; // default = 0.8
-        
+
         // Sound that inputs into the visualizer
         this.sound = null;
     }
-    
+
     // Animation of the visualizer
     animate(time, ftime) {
         if (this.sound) {
@@ -40,8 +42,12 @@ export default class NewSynthVisuals extends PtsCanvas {
             let colors = ["#f06", "#62e", "#fff", "#fe3", "#0c9"];
 
             // Generates each individual EQ square
-            this.sound.freqDomainTo(this.space.size).forEach((t, i) => {
-                this.form.fillOnly(colors[i % 5]).point(t, 3);
+            // (Size, Position, Trim) --> trim = related to number of bins defined above
+            this.sound.freqDomainTo(this.space.size, [0, 0], [0, 500]).forEach((t, i) => {
+                // Toggles between filled and stroke EQ squares
+                this.state.stroke ?
+                this.form.strokeOnly(colors[i % 5]).point(t, this.state.sqSize) :
+                    this.form.fillOnly(colors[i % 5]).point(t, this.state.sqSize);
             });
 
             // Places the "credit" on the screen
@@ -65,7 +71,9 @@ export default class NewSynthVisuals extends PtsCanvas {
                         this.state.trigger !== data["trigger"] ||
                         this.state.pingPongFbk !== data["pingPongFbk"] ||
                         this.state.chebWet !== data["chebWet"] ||
-                        this.state.reverbWet !== data["reverbWet"]
+                        this.state.reverbWet !== data["reverbWet"] ||
+                        this.state.stroke !== data["stroke"] ||
+                        this.state.sqSize !== data["sqSize"]
                     ) {
                         _this.setState({
                             pitch: data["pitch"],
@@ -73,6 +81,8 @@ export default class NewSynthVisuals extends PtsCanvas {
                             pingPongFbk: data["pingPongFbk"],
                             chebWet: data["chebWet"],
                             reverbWet: data["reverbWet"],
+                            stroke: data["stroke"],
+                            sqSize: data["sqSize"],
                         });
                     }
                     // Turnary option
@@ -99,7 +109,7 @@ export default class NewSynthVisuals extends PtsCanvas {
     // Updates the synth and params on each change of the controller
     componentDidUpdate() {
         this.synthTrigger(this.state.synth, this.state.pitch, this.state.pong, this.state.cheb, this.state.reverb);
-        this.sound = Sound.from(this.state.synth, this.state.synth.context).analyze(this.bins, this.minDB, this.maxDB, this.smooth);
+        this.sound = Sound.from(this.state.reverb, this.state.reverb.context).analyze(this.bins, this.minDB, this.maxDB, this.smooth);
     }
 
     // Trigger the synth sound

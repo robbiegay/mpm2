@@ -30,12 +30,13 @@ Route::get('/synthparams', function() {
 });
 
 Route::post('/synthparams/reset', function() {
-    SynthParam::where('param_name', 'trigger')->update(array('param_val' => 0));
-    SynthParam::where('param_name', 'pitch')->update(array('param_val' => 400));
-    SynthParam::where('param_name', 'pingPongFbk')->update(array('param_val' => 0));
-    SynthParam::where('param_name', 'chebWet')->update(array('param_val' => 0));
-    SynthParam::where('param_name', 'reverbWet')->update(array('param_val' => 0));
-
+    SynthParam::where('param_name', 'trigger')->update(array('param_val' => 0.00));
+    SynthParam::where('param_name', 'pitch')->update(array('param_val' => 400.00));
+    SynthParam::where('param_name', 'pingPongFbk')->update(array('param_val' => 0.00));
+    SynthParam::where('param_name', 'chebWet')->update(array('param_val' => 0.00));
+    SynthParam::where('param_name', 'reverbWet')->update(array('param_val' => 0.00));
+    SynthParam::where('param_name', 'stroke')->update(array('param_val' => 0.00));
+    SynthParam::where('param_name', 'sqSize')->update(array('param_val' => 3.00));
 });
 
 Route::post('/synthparams/pitch', function(Request $request) {
@@ -57,4 +58,13 @@ Route::post('/synthparams/reverbWet', function(Request $request) {
 Route::post('/synthparams/trigger', function() {
     $data = SynthParam::where('param_name', 'trigger')->get('param_val');
     SynthParam::where('param_name', 'trigger')->update(array('param_val' => $data[0]['param_val'] === 0.00 ? 1.00 : 0.00));
+});
+
+Route::post('/synthparams/stroke', function() {
+    $data = SynthParam::where('param_name', 'stroke')->get('param_val');
+    SynthParam::where('param_name', 'stroke')->update(array('param_val' => $data[0]['param_val'] === 0.00 ? 1.00 : 0.00));
+});
+
+Route::post('/synthparams/sqSize', function(Request $request) {
+    SynthParam::where('param_name', 'sqSize')->update(array('param_val' => $request->sqSize));
 });

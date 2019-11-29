@@ -36,7 +36,7 @@ class Controller extends React.Component {
                             }}
                             className="form-control-range"
                             min="100"
-                            max="20000"
+                            max="1000"
                             step="1"
                         />
                     </div>
@@ -98,6 +98,35 @@ class Controller extends React.Component {
                             min="0"
                             max="0.5"
                             step="0.01"
+                        />
+                    </div>
+                </form>
+
+                {/* STROKE VS FILL EQ */}
+                <button
+                    onClick={() => {
+                        axios.post("http://127.0.0.1:8000/api/synthparams/stroke", {
+                            stroke: this.state.stroke,
+                        });
+                    }}
+                >STROKE TOGGLE</button>
+
+                {/* EQ SQUARE SIZE */}
+                <form>
+                    <div className="form-group">
+                        <label htmlFor="formControlRange">Square Size</label>
+                        <input
+                            type="range"
+                            defaultValue="0"
+                            onChange={(e) => {
+                                axios.post("http://127.0.0.1:8000/api/synthparams/sqSize", {
+                                    sqSize: e.target.value,
+                                })
+                            }}
+                            className="form-control-range"
+                            min="1"
+                            max="50"
+                            step="1"
                         />
                     </div>
                 </form>

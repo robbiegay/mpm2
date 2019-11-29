@@ -83624,7 +83624,7 @@ function (_React$Component) {
         },
         className: "form-control-range",
         min: "100",
-        max: "20000",
+        max: "1000",
         step: "1"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
@@ -83674,6 +83674,28 @@ function (_React$Component) {
         min: "0",
         max: "0.5",
         step: "0.01"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/stroke", {
+            stroke: _this2.state.stroke
+          });
+        }
+      }, "STROKE TOGGLE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "formControlRange"
+      }, "Square Size"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "range",
+        defaultValue: "0",
+        onChange: function onChange(e) {
+          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/sqSize", {
+            sqSize: e.target.value
+          });
+        },
+        className: "form-control-range",
+        min: "1",
+        max: "50",
+        step: "1"
       }))));
     }
   }]);
@@ -83848,6 +83870,8 @@ function (_PtsCanvas) {
       pingPongFbk: 0,
       chebWet: 0,
       reverbWet: 0,
+      stroke: 0,
+      sqSize: 3,
       // Stores the synth and params in state
       synth: null,
       pong: null,
@@ -83880,9 +83904,11 @@ function (_PtsCanvas) {
         // The colors of the EQ squares
 
         var colors = ["#f06", "#62e", "#fff", "#fe3", "#0c9"]; // Generates each individual EQ square
+        // (Size, Position, Trim) --> trim = related to number of bins defined above
 
-        this.sound.freqDomainTo(this.space.size).forEach(function (t, i) {
-          _this3.form.fillOnly(colors[i % 5]).point(t, 3);
+        this.sound.freqDomainTo(this.space.size, [0, 0], [0, 500]).forEach(function (t, i) {
+          // Toggles between filled and stroke EQ squares
+          _this3.state.stroke ? _this3.form.strokeOnly(colors[i % 5]).point(t, _this3.state.sqSize) : _this3.form.fillOnly(colors[i % 5]).point(t, _this3.state.sqSize);
         }); // Places the "credit" on the screen
         // this.form.fillOnly("rgba(0,0,0,.3").text([20, this.space.size.y - 20], this.props.credit);
       }
@@ -83901,13 +83927,15 @@ function (_PtsCanvas) {
         axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("http://127.0.0.1:8000/api/synthparams").then(function (response) {
           var data = response.data; // If statement option
 
-          if (_this4.state.pitch !== data["pitch"] || _this4.state.trigger !== data["trigger"] || _this4.state.pingPongFbk !== data["pingPongFbk"] || _this4.state.chebWet !== data["chebWet"] || _this4.state.reverbWet !== data["reverbWet"]) {
+          if (_this4.state.pitch !== data["pitch"] || _this4.state.trigger !== data["trigger"] || _this4.state.pingPongFbk !== data["pingPongFbk"] || _this4.state.chebWet !== data["chebWet"] || _this4.state.reverbWet !== data["reverbWet"] || _this4.state.stroke !== data["stroke"] || _this4.state.sqSize !== data["sqSize"]) {
             _this.setState({
               pitch: data["pitch"],
               trigger: data["trigger"],
               pingPongFbk: data["pingPongFbk"],
               chebWet: data["chebWet"],
-              reverbWet: data["reverbWet"]
+              reverbWet: data["reverbWet"],
+              stroke: data["stroke"],
+              sqSize: data["sqSize"]
             });
           } // Turnary option
           // this.state.pitch !== data["pitch"] ? _this.setState({ pitch: data["pitch"] }) : null;
@@ -83938,7 +83966,7 @@ function (_PtsCanvas) {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
       this.synthTrigger(this.state.synth, this.state.pitch, this.state.pong, this.state.cheb, this.state.reverb);
-      this.sound = pts__WEBPACK_IMPORTED_MODULE_2__["Sound"].from(this.state.synth, this.state.synth.context).analyze(this.bins, this.minDB, this.maxDB, this.smooth);
+      this.sound = pts__WEBPACK_IMPORTED_MODULE_2__["Sound"].from(this.state.reverb, this.state.reverb.context).analyze(this.bins, this.minDB, this.maxDB, this.smooth);
     } // Trigger the synth sound
 
   }, {
