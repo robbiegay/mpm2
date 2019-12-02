@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Resources\SynthUserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

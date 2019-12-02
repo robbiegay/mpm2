@@ -3,7 +3,7 @@ import axios from "axios";
 import { Sound } from "pts";
 import { PtsCanvas } from "react-pts-canvas";
 
-export default class NewSynthVisuals extends PtsCanvas {
+export default class SynthVisuals extends PtsCanvas {
     constructor(props) {
         super(props);
         this.state = {
@@ -58,6 +58,9 @@ export default class NewSynthVisuals extends PtsCanvas {
     start() {
         // Resets the synth on load
         axios.post("http://127.0.0.1:8000/api/synthparams/reset");
+
+        // Clears the synth users/queue on load
+        axios.post("http://127.0.0.1:8000/api/synthparams/clear");
 
         // Polling from DB (occurs every 1 second)
         const _this = this;

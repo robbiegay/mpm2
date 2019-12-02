@@ -83600,6 +83600,11 @@ function (_React$Component) {
   }
 
   _createClass(Controller, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/newuser");
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -83625,7 +83630,10 @@ function (_React$Component) {
         className: "form-control-range",
         min: "100",
         max: "1000",
-        step: "1"
+        step: "1" // orient="vertical"
+        // width="8px"
+        // height="175px"
+
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -83721,7 +83729,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Controller */ "./resources/js/components/Controller.js");
-/* harmony import */ var _NewSynthVisuals__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./NewSynthVisuals */ "./resources/js/components/NewSynthVisuals.js");
+/* harmony import */ var _SynthVisuals__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SynthVisuals */ "./resources/js/components/SynthVisuals.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -83787,7 +83795,7 @@ function (_React$Component) {
         className: "col-md-8"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NewSynthVisuals__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SynthVisuals__WEBPACK_IMPORTED_MODULE_3__["default"], {
         name: "pts-react",
         background: "#0cf",
         credit: "",
@@ -83813,16 +83821,16 @@ if (document.getElementById("controller")) {
 
 /***/ }),
 
-/***/ "./resources/js/components/NewSynthVisuals.js":
-/*!****************************************************!*\
-  !*** ./resources/js/components/NewSynthVisuals.js ***!
-  \****************************************************/
+/***/ "./resources/js/components/SynthVisuals.js":
+/*!*************************************************!*\
+  !*** ./resources/js/components/SynthVisuals.js ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return NewSynthVisuals; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SynthVisuals; });
 /* harmony import */ var tone__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tone */ "./node_modules/tone/build/Tone.js");
 /* harmony import */ var tone__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(tone__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -83852,17 +83860,17 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var NewSynthVisuals =
+var SynthVisuals =
 /*#__PURE__*/
 function (_PtsCanvas) {
-  _inherits(NewSynthVisuals, _PtsCanvas);
+  _inherits(SynthVisuals, _PtsCanvas);
 
-  function NewSynthVisuals(props) {
+  function SynthVisuals(props) {
     var _this2;
 
-    _classCallCheck(this, NewSynthVisuals);
+    _classCallCheck(this, SynthVisuals);
 
-    _this2 = _possibleConstructorReturn(this, _getPrototypeOf(NewSynthVisuals).call(this, props));
+    _this2 = _possibleConstructorReturn(this, _getPrototypeOf(SynthVisuals).call(this, props));
     _this2.state = {
       // Synth/param values (loads default values, then used to update live input)
       pitch: 400,
@@ -83894,7 +83902,7 @@ function (_PtsCanvas) {
   } // Animation of the visualizer
 
 
-  _createClass(NewSynthVisuals, [{
+  _createClass(SynthVisuals, [{
     key: "animate",
     value: function animate(time, ftime) {
       var _this3 = this;
@@ -83919,7 +83927,9 @@ function (_PtsCanvas) {
       var _this4 = this;
 
       // Resets the synth on load
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/reset"); // Polling from DB (occurs every 1 second)
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/reset"); // Clears the synth users/queue on load
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/clear"); // Polling from DB (occurs every 1 second)
 
       var _this = this;
 
@@ -83979,7 +83989,7 @@ function (_PtsCanvas) {
     }
   }]);
 
-  return NewSynthVisuals;
+  return SynthVisuals;
 }(react_pts_canvas__WEBPACK_IMPORTED_MODULE_3__["PtsCanvas"]);
 
 

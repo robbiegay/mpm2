@@ -4,6 +4,7 @@
 use App\SynthParam;
 use Illuminate\Support\Str;
 
+
 // NOT CURRENTLY USING
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,5 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(SynthParam::class, function() {
-    return [
-        // 'name' => $faker->name,
-    ];
+    //
 });

@@ -13,14 +13,14 @@ class CreateSynthUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('synthusers', function (Blueprint $table) {
+        Schema::create('synth_users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('param_id');
+            $table->unsignedBigInteger('param_id')->nullable();
             $table->unsignedBigInteger('queue_id');
             $table->timestamps();
 
-            $table->foreign('queue_id')->references('id')->on('queues');
-            $table->foreign('param_id')->references('id')->on('synthparams');
+            $table->foreign('queue_id')->references('id')->on('queues')->onDelete('cascade');
+            $table->foreign('param_id')->references('id')->on('synthparams')->onDelete('cascade');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateSynthUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('synthusers');
+        Schema::dropIfExists('synth_users');
     }
 }

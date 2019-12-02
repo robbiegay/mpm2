@@ -6,7 +6,7 @@ import axios from 'axios';
 // import TestFromGen from './TestFromGen';
 
 
-class SynthVisuals extends PtsCanvas {
+class OldSynthVisuals extends PtsCanvas {
     constructor(props) {
         super(props);
         this.state = {
@@ -119,4 +119,4 @@ class SynthVisuals extends PtsCanvas {
     }
 }
 
-export default SynthVisuals;
+export default OldSynthVisuals;

@@ -9,6 +9,10 @@ class Controller extends React.Component {
         }
     }
 
+    componentDidMount() {
+        axios.post("http://127.0.0.1:8000/api/newuser");
+    }
+
     render() {
         return (
             <>
@@ -38,6 +42,9 @@ class Controller extends React.Component {
                             min="100"
                             max="1000"
                             step="1"
+                            // orient="vertical"
+                            // width="8px"
+                            // height="175px"
                         />
                     </div>
                 </form>

@@ -13,7 +13,7 @@ import pts, {
 import { PtsCanvas } from "react-pts-canvas";
 import axios from 'axios';
 
-class NewSynthVisuals extends PtsCanvas {
+class OldSynthVisuals2 extends PtsCanvas {
     constructor(props) {
         super(props);
         this.state = {
@@ -108,4 +108,4 @@ class NewSynthVisuals extends PtsCanvas {
     }
 }
 
-export default NewSynthVisuals;
+export default OldSynthVisuals2;
