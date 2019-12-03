@@ -83595,7 +83595,9 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Controller).call(this, props));
     _this.state = {
       trigger: 0,
-      user: null
+      user: null,
+      timeRemaining: 10,
+      timer: null
     };
     return _this;
   }
@@ -83612,11 +83614,18 @@ function (_React$Component) {
           user: response.data
         });
       });
-    }
+      this.setState({
+        timer: setTimeout(this.countdown, 5000)
+      });
+    } // componentWillUnmount() {
+    //     axios.post(`http://127.0.0.1:8000/api/synthparams/clear/${this.state.user}`);
+    // }
+
   }, {
-    key: "userTimeout",
-    value: function userTimeout(param) {
-      alert('timeout');
+    key: "countdown",
+    value: function countdown() {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/clear/".concat(this.state.user));
+      alert('Timeout!');
     }
   }, {
     key: "render",
@@ -83626,8 +83635,15 @@ function (_React$Component) {
       if (this.state.user) {
         switch (this.state.user['param_id']) {
           case 1:
+            // this.timer();
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
               onClick: function onClick() {
+                clearInterval(_this3.state.timer);
+
+                _this3.setState({
+                  timer: setTimeout(_this3.countdown, 5000)
+                });
+
                 axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/trigger", {
                   trigger: _this3.state.trigger
                 });
@@ -84000,14 +84016,13 @@ function (_PtsCanvas) {
             sqSize: data["sqSize"]
           }) : null;
         });
-      }, 100); // Create the Synth and Effects
+      }, 250); // Create the Synth and Effects
 
       var reverb = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.JCReverb().toMaster(); // var dist = new Tone.Distortion(1.0).connect(reverb);
 
       var cheb = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.Chebyshev(30).connect(reverb);
       var pong = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.PingPongDelay(0.25, this.state.pingPongFbk).connect(cheb);
-      var synth = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.DuoSynth().connect(pong);
-      synth.harmonicity.value = 0.1; // --> this could be cool to change, changes the harmonics of the 2 voices. 2 = 1 octave up
+      var synth = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.DuoSynth().connect(pong); // synth.harmonicity.value = 0.1; // --> this could be cool to change, changes the harmonics of the 2 voices. 2 = 1 octave up
       // Stores the synth and effects in state
 
       this.setState({

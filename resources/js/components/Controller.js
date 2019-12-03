@@ -7,6 +7,8 @@ class Controller extends React.Component {
         this.state = {
             trigger: 0,
             user: null,
+            timeRemaining: 10,
+            timer: null,
         }
     }
 
@@ -16,20 +18,36 @@ class Controller extends React.Component {
             // Put all of the user info in state, can then access the id, param_id, and queue_id
             this.setState({ user: response.data });
         });
+
+        this.setState({
+            timer: setTimeout(this.countdown, 5000),
+        });
     }
 
-    userTimeout(param) {
-        alert('timeout');
+    // componentWillUnmount() {
+    //     axios.post(`http://127.0.0.1:8000/api/synthparams/clear/${this.state.user}`);
+    // }
+
+    countdown() {
+        axios.post(`http://127.0.0.1:8000/api/synthparams/clear/${this.state.user}`);
+        alert('Timeout!');
     }
+
+
 
     render() {
         if (this.state.user) {
             switch (this.state.user['param_id']) {
                 case 1:
+                    // this.timer();
                     return (
                         <>
                             <button
                                 onClick={() => {
+                                    clearInterval(this.state.timer);
+                                    this.setState({
+                                        timer: setTimeout(this.countdown, 5000),
+                                    });
                                     axios.post("http://127.0.0.1:8000/api/synthparams/trigger", {
                                         trigger: this.state.trigger,
                                     });

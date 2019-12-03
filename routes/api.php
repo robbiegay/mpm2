@@ -89,6 +89,12 @@ Route::post('/synthparams/clear', function () {
     DB::statement("ALTER TABLE queues AUTO_INCREMENT = 1;");
 });
 
-Route::get('/userid', function() {
+// Resets an individual component and removes it from the queue
+Route::post('/synthparams/clear/{id}', function () {
+    SynthUser::where('id', $id)->delete();
+    Queue::where('id', $id)->delete();
+});
+
+Route::get('/userid', function () {
     return SynthUser::latest()->first();
 });

@@ -76,7 +76,7 @@ export default class SynthVisuals extends PtsCanvas {
                     this.state.stroke !== data["stroke"] ? _this.setState({ stroke: data["stroke"] }) : null;
                     this.state.sqSize !== data["sqSize"] ? _this.setState({ sqSize: data["sqSize"] }) : null;
                 });
-        }, 100);
+        }, 250);
 
         // Create the Synth and Effects
         var reverb = new Tone.JCReverb().toMaster();
@@ -84,7 +84,7 @@ export default class SynthVisuals extends PtsCanvas {
         var cheb = new Tone.Chebyshev(30).connect(reverb);
         var pong = new Tone.PingPongDelay(0.25, this.state.pingPongFbk).connect(cheb);
         var synth = new Tone.DuoSynth().connect(pong);
-        synth.harmonicity.value = 0.1; // --> this could be cool to change, changes the harmonics of the 2 voices. 2 = 1 octave up
+        // synth.harmonicity.value = 0.1; // --> this could be cool to change, changes the harmonics of the 2 voices. 2 = 1 octave up
 
         // Stores the synth and effects in state
         this.setState({ synth: synth, pong: pong, cheb: cheb, reverb: reverb });
