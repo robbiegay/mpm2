@@ -7,7 +7,6 @@ class Controller extends React.Component {
         this.state = {
             trigger: 0,
             user: null,
-            timeRemaining: 10,
             timer: null,
         }
     }
@@ -17,37 +16,39 @@ class Controller extends React.Component {
         axios.get("http://127.0.0.1:8000/api/userid").then(response => {
             // Put all of the user info in state, can then access the id, param_id, and queue_id
             this.setState({ user: response.data });
+            this.setState({
+                timer: setTimeout(() => {
+                    axios.post('http://127.0.0.1:8000/api/synthparams/clear/' + this.state.user['id']);
+                }, 5000),
+            });
         });
 
-        this.setState({
-            timer: setTimeout(this.countdown, 5000),
-        });
     }
 
-    // componentWillUnmount() {
-    //     axios.post(`http://127.0.0.1:8000/api/synthparams/clear/${this.state.user}`);
-    // }
-
-    countdown() {
-        axios.post(`http://127.0.0.1:8000/api/synthparams/clear/${this.state.user}`);
-        alert('Timeout!');
+    componentWillUnmount() {
+        clearInterval(this.state.timer);
+        // axios.get("http://127.0.0.1:8000/api/userid").then(response => {
+        //     axios.post('http://127.0.0.1:8000/api/synthparams/clear/' + response.data["id"]);
+        // });
+        axios.post('http://127.0.0.1:8000/api/synthparams/clear/1'); //+ this.state.user["id"]);
     }
-
-
 
     render() {
         if (this.state.user) {
-            switch (this.state.user['param_id']) {
+            switch (this.state.user['queue_id']) {
                 case 1:
-                    // this.timer();
                     return (
                         <>
                             <button
                                 onClick={() => {
+                                    // On click, clears the interval, and sets a new 30 second timer
                                     clearInterval(this.state.timer);
                                     this.setState({
-                                        timer: setTimeout(this.countdown, 5000),
+                                        timer: setTimeout(() => {
+                                            axios.post('http://127.0.0.1:8000/api/synthparams/clear/1');
+                                        }, 5000),
                                     });
+                                    // Toggles the synth trigger
                                     axios.post("http://127.0.0.1:8000/api/synthparams/trigger", {
                                         trigger: this.state.trigger,
                                     });
@@ -64,6 +65,12 @@ class Controller extends React.Component {
                                     type="range"
                                     defaultValue="400"
                                     onMouseUp={(e) => {
+                                        // clearInterval(this.state.timer);
+                                        // this.setState({
+                                        //     timer: setTimeout(() => {
+                                        //         axios.post('http://127.0.0.1:8000/api/synthparams/clear/2');
+                                        //     }, 5000),
+                                        // });
                                         axios.post("http://127.0.0.1:8000/api/synthparams/pitch", {
                                             pitch: e.target.value,
                                         })
@@ -88,6 +95,12 @@ class Controller extends React.Component {
                                     type="range"
                                     defaultValue="0"
                                     onMouseUp={(e) => {
+                                        clearInterval(this.state.timer);
+                                        this.setState({
+                                            timer: setTimeout(() => {
+                                                axios.post('http://127.0.0.1:8000/api/synthparams/clear/3');
+                                            }, 5000),
+                                        });
                                         axios.post("http://127.0.0.1:8000/api/synthparams/pingPongFbk", {
                                             pingPongFbk: e.target.value,
                                         })
@@ -109,6 +122,12 @@ class Controller extends React.Component {
                                     type="range"
                                     defaultValue="0"
                                     onChange={(e) => {
+                                        clearInterval(this.state.timer);
+                                        this.setState({
+                                            timer: setTimeout(() => {
+                                                axios.post('http://127.0.0.1:8000/api/synthparams/clear/4');
+                                            }, 5000),
+                                        });
                                         axios.post("http://127.0.0.1:8000/api/synthparams/chebWet", {
                                             chebWet: e.target.value,
                                         })
@@ -130,6 +149,12 @@ class Controller extends React.Component {
                                     type="range"
                                     defaultValue="0"
                                     onChange={(e) => {
+                                        clearInterval(this.state.timer);
+                                        this.setState({
+                                            timer: setTimeout(() => {
+                                                axios.post('http://127.0.0.1:8000/api/synthparams/clear/5');
+                                            }, 5000),
+                                        });
                                         axios.post("http://127.0.0.1:8000/api/synthparams/reverbWet", {
                                             reverbWet: e.target.value,
                                         })
@@ -146,6 +171,12 @@ class Controller extends React.Component {
                     return (
                         <button
                             onClick={() => {
+                                clearInterval(this.state.timer);
+                                this.setState({
+                                    timer: setTimeout(() => {
+                                        axios.post('http://127.0.0.1:8000/api/synthparams/clear/6');
+                                    }, 5000),
+                                });
                                 axios.post("http://127.0.0.1:8000/api/synthparams/stroke", {
                                     stroke: this.state.stroke,
                                 });
@@ -161,6 +192,12 @@ class Controller extends React.Component {
                                     type="range"
                                     defaultValue="0"
                                     onChange={(e) => {
+                                        clearInterval(this.state.timer);
+                                        this.setState({
+                                            timer: setTimeout(() => {
+                                                axios.post('http://127.0.0.1:8000/api/synthparams/clear/7');
+                                            }, 5000),
+                                        });
                                         axios.post("http://127.0.0.1:8000/api/synthparams/sqSize", {
                                             sqSize: e.target.value,
                                         })

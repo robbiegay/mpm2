@@ -83596,7 +83596,6 @@ function (_React$Component) {
     _this.state = {
       trigger: 0,
       user: null,
-      timeRemaining: 10,
       timer: null
     };
     return _this;
@@ -83613,19 +83612,22 @@ function (_React$Component) {
         _this2.setState({
           user: response.data
         });
-      });
-      this.setState({
-        timer: setTimeout(this.countdown, 5000)
-      });
-    } // componentWillUnmount() {
-    //     axios.post(`http://127.0.0.1:8000/api/synthparams/clear/${this.state.user}`);
-    // }
 
+        _this2.setState({
+          timer: setTimeout(function () {
+            axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/clear/' + _this2.state.user['id']);
+          }, 5000)
+        });
+      });
+    }
   }, {
-    key: "countdown",
-    value: function countdown() {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/clear/".concat(this.state.user));
-      alert('Timeout!');
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      clearInterval(this.state.timer); // axios.get("http://127.0.0.1:8000/api/userid").then(response => {
+      //     axios.post('http://127.0.0.1:8000/api/synthparams/clear/' + response.data["id"]);
+      // });
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/clear/1'); //+ this.state.user["id"]);
     }
   }, {
     key: "render",
@@ -83633,16 +83635,19 @@ function (_React$Component) {
       var _this3 = this;
 
       if (this.state.user) {
-        switch (this.state.user['param_id']) {
+        switch (this.state.user['queue_id']) {
           case 1:
-            // this.timer();
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
               onClick: function onClick() {
+                // On click, clears the interval, and sets a new 30 second timer
                 clearInterval(_this3.state.timer);
 
                 _this3.setState({
-                  timer: setTimeout(_this3.countdown, 5000)
-                });
+                  timer: setTimeout(function () {
+                    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/clear/1');
+                  }, 5000)
+                }); // Toggles the synth trigger
+
 
                 axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/trigger", {
                   trigger: _this3.state.trigger
@@ -83659,6 +83664,12 @@ function (_React$Component) {
               type: "range",
               defaultValue: "400",
               onMouseUp: function onMouseUp(e) {
+                // clearInterval(this.state.timer);
+                // this.setState({
+                //     timer: setTimeout(() => {
+                //         axios.post('http://127.0.0.1:8000/api/synthparams/clear/2');
+                //     }, 5000),
+                // });
                 axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/pitch", {
                   pitch: e.target.value
                 });
@@ -83681,6 +83692,14 @@ function (_React$Component) {
               type: "range",
               defaultValue: "0",
               onMouseUp: function onMouseUp(e) {
+                clearInterval(_this3.state.timer);
+
+                _this3.setState({
+                  timer: setTimeout(function () {
+                    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/clear/3');
+                  }, 5000)
+                });
+
                 axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/pingPongFbk", {
                   pingPongFbk: e.target.value
                 });
@@ -83700,6 +83719,14 @@ function (_React$Component) {
               type: "range",
               defaultValue: "0",
               onChange: function onChange(e) {
+                clearInterval(_this3.state.timer);
+
+                _this3.setState({
+                  timer: setTimeout(function () {
+                    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/clear/4');
+                  }, 5000)
+                });
+
                 axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/chebWet", {
                   chebWet: e.target.value
                 });
@@ -83719,6 +83746,14 @@ function (_React$Component) {
               type: "range",
               defaultValue: "0",
               onChange: function onChange(e) {
+                clearInterval(_this3.state.timer);
+
+                _this3.setState({
+                  timer: setTimeout(function () {
+                    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/clear/5');
+                  }, 5000)
+                });
+
                 axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/reverbWet", {
                   reverbWet: e.target.value
                 });
@@ -83732,6 +83767,14 @@ function (_React$Component) {
           case 6:
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
               onClick: function onClick() {
+                clearInterval(_this3.state.timer);
+
+                _this3.setState({
+                  timer: setTimeout(function () {
+                    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/clear/6');
+                  }, 5000)
+                });
+
                 axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/stroke", {
                   stroke: _this3.state.stroke
                 });
@@ -83747,6 +83790,14 @@ function (_React$Component) {
               type: "range",
               defaultValue: "0",
               onChange: function onChange(e) {
+                clearInterval(_this3.state.timer);
+
+                _this3.setState({
+                  timer: setTimeout(function () {
+                    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/clear/7');
+                  }, 5000)
+                });
+
                 axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/sqSize", {
                   sqSize: e.target.value
                 });

@@ -20,7 +20,7 @@ class CreateSynthUsersTable extends Migration
             $table->timestamps();
 
             $table->foreign('queue_id')->references('id')->on('queues')->onDelete('cascade');
-            $table->foreign('param_id')->references('id')->on('synthparams')->onDelete('cascade');
+            $table->foreign('param_id')->references('id')->on('synthparams');
         });
     }
 

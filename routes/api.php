@@ -90,7 +90,7 @@ Route::post('/synthparams/clear', function () {
 });
 
 // Resets an individual component and removes it from the queue
-Route::post('/synthparams/clear/{id}', function () {
+Route::post('/synthparams/clear/{id}', function ($id) {
     SynthUser::where('id', $id)->delete();
     Queue::where('id', $id)->delete();
 });
