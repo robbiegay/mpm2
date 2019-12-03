@@ -5,7 +5,6 @@ use Illuminate\Http\Request;
 use App\SynthParam;
 use App\SynthUser;
 use App\Queue;
-// use DB;
 use SebastianBergmann\Environment\Console;
 use App\Http\Resources\SynthUserController;
 
@@ -88,4 +87,8 @@ Route::post('/synthparams/clear', function () {
 
     Queue::where('id', '>', 0)->delete();
     DB::statement("ALTER TABLE queues AUTO_INCREMENT = 1;");
+});
+
+Route::get('/userid', function() {
+    return SynthUser::latest()->first();
 });

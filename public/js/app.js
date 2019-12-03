@@ -83594,7 +83594,8 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Controller).call(this, props));
     _this.state = {
-      trigger: 0
+      trigger: 0,
+      user: null
     };
     return _this;
   }
@@ -83602,109 +83603,150 @@ function (_React$Component) {
   _createClass(Controller, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      var _this2 = this;
+
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/newuser");
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("http://127.0.0.1:8000/api/userid").then(function (response) {
+        // Put all of the user info in state, can then access the id, param_id, and queue_id
+        _this2.setState({
+          user: response.data
+        });
+      });
+    }
+  }, {
+    key: "userTimeout",
+    value: function userTimeout(param) {
+      alert('timeout');
     }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("u", null, "SYNTH CONTROLS"), ":"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/trigger", {
-            trigger: _this2.state.trigger
-          });
-        }
-      }, "PLAY TONE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "formControlRange"
-      }, "Pitch"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "range",
-        defaultValue: "400",
-        onMouseUp: function onMouseUp(e) {
-          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/pitch", {
-            pitch: e.target.value
-          });
-        },
-        className: "form-control-range",
-        min: "100",
-        max: "1000",
-        step: "1" // orient="vertical"
-        // width="8px"
-        // height="175px"
+      if (this.state.user) {
+        switch (this.state.user['param_id']) {
+          case 1:
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+              onClick: function onClick() {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/trigger", {
+                  trigger: _this3.state.trigger
+                });
+              }
+            }, "PLAY TONE"));
 
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "formControlRange"
-      }, "Ping Pong Feedback"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "range",
-        defaultValue: "0",
-        onMouseUp: function onMouseUp(e) {
-          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/pingPongFbk", {
-            pingPongFbk: e.target.value
-          });
-        },
-        className: "form-control-range",
-        min: "0",
-        max: "1.5",
-        step: "0.01"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "formControlRange"
-      }, "Waveshaper Dry/Wet"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "range",
-        defaultValue: "0",
-        onChange: function onChange(e) {
-          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/chebWet", {
-            chebWet: e.target.value
-          });
-        },
-        className: "form-control-range",
-        min: "0",
-        max: "1",
-        step: "0.01"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "formControlRange"
-      }, "Reverb Dry/Wet"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "range",
-        defaultValue: "0",
-        onChange: function onChange(e) {
-          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/reverbWet", {
-            reverbWet: e.target.value
-          });
-        },
-        className: "form-control-range",
-        min: "0",
-        max: "0.5",
-        step: "0.01"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/stroke", {
-            stroke: _this2.state.stroke
-          });
+          case 2:
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "form-group"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+              htmlFor: "formControlRange"
+            }, "Pitch"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+              type: "range",
+              defaultValue: "400",
+              onMouseUp: function onMouseUp(e) {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/pitch", {
+                  pitch: e.target.value
+                });
+              },
+              className: "form-control-range",
+              min: "100",
+              max: "1000",
+              step: "1" // orient="vertical"
+              // width="8px"
+              // height="175px"
+
+            })));
+
+          case 3:
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "form-group"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+              htmlFor: "formControlRange"
+            }, "Ping Pong Feedback"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+              type: "range",
+              defaultValue: "0",
+              onMouseUp: function onMouseUp(e) {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/pingPongFbk", {
+                  pingPongFbk: e.target.value
+                });
+              },
+              className: "form-control-range",
+              min: "0",
+              max: "1.5",
+              step: "0.01"
+            })));
+
+          case 4:
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "form-group"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+              htmlFor: "formControlRange"
+            }, "Waveshaper Dry/Wet"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+              type: "range",
+              defaultValue: "0",
+              onChange: function onChange(e) {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/chebWet", {
+                  chebWet: e.target.value
+                });
+              },
+              className: "form-control-range",
+              min: "0",
+              max: "1",
+              step: "0.01"
+            })));
+
+          case 5:
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "form-group"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+              htmlFor: "formControlRange"
+            }, "Reverb Dry/Wet"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+              type: "range",
+              defaultValue: "0",
+              onChange: function onChange(e) {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/reverbWet", {
+                  reverbWet: e.target.value
+                });
+              },
+              className: "form-control-range",
+              min: "0",
+              max: "0.5",
+              step: "0.01"
+            })));
+
+          case 6:
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+              onClick: function onClick() {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/stroke", {
+                  stroke: _this3.state.stroke
+                });
+              }
+            }, "STROKE TOGGLE");
+
+          case 7:
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "form-group"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+              htmlFor: "formControlRange"
+            }, "Square Size"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+              type: "range",
+              defaultValue: "0",
+              onChange: function onChange(e) {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/sqSize", {
+                  sqSize: e.target.value
+                });
+              },
+              className: "form-control-range",
+              min: "1",
+              max: "50",
+              step: "1"
+            })));
+
+          default:
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "\u23F3");
         }
-      }, "STROKE TOGGLE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "formControlRange"
-      }, "Square Size"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "range",
-        defaultValue: "0",
-        onChange: function onChange(e) {
-          axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/sqSize", {
-            sqSize: e.target.value
-          });
-        },
-        className: "form-control-range",
-        min: "1",
-        max: "50",
-        step: "1"
-      }))));
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Loading...");
+      }
     }
   }]);
 
@@ -83935,33 +83977,37 @@ function (_PtsCanvas) {
 
       setInterval(function () {
         axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("http://127.0.0.1:8000/api/synthparams").then(function (response) {
-          var data = response.data; // If statement option
-
-          if (_this4.state.pitch !== data["pitch"] || _this4.state.trigger !== data["trigger"] || _this4.state.pingPongFbk !== data["pingPongFbk"] || _this4.state.chebWet !== data["chebWet"] || _this4.state.reverbWet !== data["reverbWet"] || _this4.state.stroke !== data["stroke"] || _this4.state.sqSize !== data["sqSize"]) {
-            _this.setState({
-              pitch: data["pitch"],
-              trigger: data["trigger"],
-              pingPongFbk: data["pingPongFbk"],
-              chebWet: data["chebWet"],
-              reverbWet: data["reverbWet"],
-              stroke: data["stroke"],
-              sqSize: data["sqSize"]
-            });
-          } // Turnary option
-          // this.state.pitch !== data["pitch"] ? _this.setState({ pitch: data["pitch"] }) : null;
-          // this.state.trigger !== data["trigger"] ? _this.setState({ trigger: data["trigger"] }) : null;
-          // this.state.pingPongFbk !== data["pingPongFbk"] ? _this.setState({ pingPongFbk: data["pingPongFbk"] }) : null;
-          // this.state.chebWet !== data["chebWet"] ? _this.setState({ chebWet: data["chebWet"] }) : null;
-          // this.state.reverbWet !== data["reverbWet"] ? _this.setState({ reverbWet: data["reverbWet"] }) : null;
-
+          var data = response.data;
+          _this4.state.pitch !== data["pitch"] ? _this.setState({
+            pitch: data["pitch"]
+          }) : null;
+          _this4.state.trigger !== data["trigger"] ? _this.setState({
+            trigger: data["trigger"]
+          }) : null;
+          _this4.state.pingPongFbk !== data["pingPongFbk"] ? _this.setState({
+            pingPongFbk: data["pingPongFbk"]
+          }) : null;
+          _this4.state.chebWet !== data["chebWet"] ? _this.setState({
+            chebWet: data["chebWet"]
+          }) : null;
+          _this4.state.reverbWet !== data["reverbWet"] ? _this.setState({
+            reverbWet: data["reverbWet"]
+          }) : null;
+          _this4.state.stroke !== data["stroke"] ? _this.setState({
+            stroke: data["stroke"]
+          }) : null;
+          _this4.state.sqSize !== data["sqSize"] ? _this.setState({
+            sqSize: data["sqSize"]
+          }) : null;
         });
-      }, 1500); // Create the Synth and Effects
+      }, 100); // Create the Synth and Effects
 
       var reverb = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.JCReverb().toMaster(); // var dist = new Tone.Distortion(1.0).connect(reverb);
 
       var cheb = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.Chebyshev(30).connect(reverb);
       var pong = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.PingPongDelay(0.25, this.state.pingPongFbk).connect(cheb);
-      var synth = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.DuoSynth().connect(pong); // synth.harmonicity.value = 12.0; // --> this could be cool to change, changes the harmonics of the 2 voices. 2 = 1 octave up
+      var synth = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.DuoSynth().connect(pong);
+      synth.harmonicity.value = 0.1; // --> this could be cool to change, changes the harmonics of the 2 voices. 2 = 1 octave up
       // Stores the synth and effects in state
 
       this.setState({

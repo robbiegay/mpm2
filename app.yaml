@@ -1,0 +1,15 @@
+runtime: php72
+
+env_variables:
+  ## Put production environment variables here.
+  LOG_CHANNEL: stackdriver
+  APP_KEY: base64:ljgu9IC8u5vtdrc50Mlovpf2tcA93iUudOx/EVdwGig=
+  APP_STORAGE: /tmp
+  VIEW_COMPILED_PATH: /tmp
+  CACHE_DRIVER: file
+  SESSION_DRIVER: cookie
+  ## Set these environment variables according to your CloudSQL configuration.
+  DB_DATABASE: mpm2
+  DB_USERNAME: root
+  DB_PASSWORD: root
+  DB_SOCKET: /cloudsql/mpm2-259520:us-east1:mpm2
