@@ -1,15 +1,18 @@
 runtime: php73
 
+runtime_config:
+ document_root: public   #folder where index.php is
+
 env_variables:
   ## Put production environment variables here.
   LOG_CHANNEL: stackdriver
-  APP_KEY: base64:zpUi2huWXf14o8CLzGrFbyhU7gPC6UglX1oZss2M76g=
+  APP_KEY: base64:tiStEcWEs5cSuEP+jjeIdLIFcMbHhO137mmHO7Qcmac=
   APP_STORAGE: /tmp
   VIEW_COMPILED_PATH: /tmp
   CACHE_DRIVER: file
   SESSION_DRIVER: cookie
   ## Set these environment variables according to your CloudSQL configuration.
-  DB_DATABASE: laravel
+  DB_DATABASE: mpm2db
   DB_USERNAME: root
   DB_PASSWORD: root
   DB_SOCKET: /cloudsql/mpm2-259520:us-east1:mpm2-sql

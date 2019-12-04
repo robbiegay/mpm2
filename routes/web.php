@@ -14,11 +14,13 @@ use App\Http\Resources\SynthUserController;
 */
 
 // Visuals and Sound
-Route::get('/', function () {
+Route::get('/view', function () {
     return view('display');
 });
 
 // User controllers
-Route::get('/user', function () {
+Route::get('/', function () {
     return view('controller');
 });
+
+// Route::get('/','Controller@main');
