@@ -6,15 +6,7 @@ import SynthVisuals from './SynthVisuals';
 class Layout extends React.Component {
     render() {
         return (
-            <div className='container'>
-                <div className='row justify-content-center'>
-                    <div className='col-md-8'>
-                        <div className='card'>
-                            <SynthVisuals name='pts-react' background='#0cf' credit='' style={{height: '100vh', width: '100vw', margin: '-10px' }} />
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <SynthVisuals name='pts-react' background='#0cf' credit='' style={{ height: '100vh', width: '100vw', margin: '-10px' }} />
         );
     }
 }

@@ -83805,15 +83805,7 @@ function (_React$Component) {
   _createClass(Layout, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row justify-content-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-8"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SynthVisuals__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SynthVisuals__WEBPACK_IMPORTED_MODULE_3__["default"], {
         name: "pts-react",
         background: "#0cf",
         credit: "",
@@ -83822,7 +83814,7 @@ function (_React$Component) {
           width: '100vw',
           margin: '-10px'
         }
-      })))));
+      });
     }
   }]);
 
