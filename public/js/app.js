@@ -83605,9 +83605,8 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8001/api/newuser'); //http://127.0.0.1:8000
-
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('http://127.0.0.1:8001/api/userid').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/newuser');
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('http://127.0.0.1:8000/api/userid').then(function (response) {
         // Put all of the user info in state, can then access the id, param_id, and queue_id
         _this2.setState({
           user: response.data
@@ -83624,7 +83623,7 @@ function (_React$Component) {
           case 1:
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
               onClick: function onClick() {
-                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8001/api/synthparams/trigger', {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/trigger', {
                   trigger: _this3.state.trigger
                 });
               }
@@ -83639,17 +83638,14 @@ function (_React$Component) {
               type: "range",
               defaultValue: "400",
               onMouseUp: function onMouseUp(e) {
-                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8001/api/synthparams/pitch', {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/pitch', {
                   pitch: e.target.value
                 });
               },
               className: "form-control-range",
               min: "100",
               max: "1000",
-              step: "1" // orient='vertical'
-              // width='8px'
-              // height='175px'
-
+              step: "1"
             })));
 
           case 3:
@@ -83661,7 +83657,7 @@ function (_React$Component) {
               type: "range",
               defaultValue: "0",
               onMouseUp: function onMouseUp(e) {
-                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8001/api/synthparams/pingPongFbk', {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/pingPongFbk', {
                   pingPongFbk: e.target.value
                 });
               },
@@ -83679,8 +83675,8 @@ function (_React$Component) {
             }, "Waveshaper Dry/Wet"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
               type: "range",
               defaultValue: "0",
-              onChange: function onChange(e) {
-                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8001/api/synthparams/chebWet', {
+              onMouseUp: function onMouseUp(e) {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/chebWet', {
                   chebWet: e.target.value
                 });
               },
@@ -83698,8 +83694,8 @@ function (_React$Component) {
             }, "Reverb Dry/Wet"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
               type: "range",
               defaultValue: "0",
-              onChange: function onChange(e) {
-                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8001/api/synthparams/reverbWet', {
+              onMouseUp: function onMouseUp(e) {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/reverbWet', {
                   reverbWet: e.target.value
                 });
               },
@@ -83712,7 +83708,7 @@ function (_React$Component) {
           case 6:
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
               onClick: function onClick() {
-                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8001/api/synthparams/stroke', {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/stroke', {
                   stroke: _this3.state.stroke
                 });
               }
@@ -83726,8 +83722,8 @@ function (_React$Component) {
             }, "Square Size"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
               type: "range",
               defaultValue: "0",
-              onChange: function onChange(e) {
-                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8001/api/synthparams/sqSize', {
+              onMouseUp: function onMouseUp(e) {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/sqSize', {
                   sqSize: e.target.value
                 });
               },
@@ -83936,14 +83932,14 @@ function (_PtsCanvas) {
       var _this4 = this;
 
       // Resets the synth on page load
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8001/api/synthparams/reset'); // Clears the synth users/queue on page load
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/reset'); // Clears the synth users/queue on page load
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8001/api/synthparams/clear'); // Polling from DB (occurs every 1/4th second)
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/clear'); // Polling from DB (occurs every 1/4th second)
 
       var _this = this;
 
       setInterval(function () {
-        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('http://127.0.0.1:8001/api/synthparams').then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('http://127.0.0.1:8000/api/synthparams').then(function (response) {
           var data = response.data;
           _this4.state.pitch !== data['pitch'] ? _this.setState({
             pitch: data['pitch']
