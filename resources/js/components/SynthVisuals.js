@@ -54,15 +54,15 @@ export default class SynthVisuals extends PtsCanvas {
 
     start() {
         // Resets the synth on page load
-        axios.post('http://127.0.0.1:8000/api/synthparams/reset');
+        axios.post('https://test.localtunnel.me/api/synthparams/reset');
 
         // Clears the synth users/queue on page load
-        axios.post('http://127.0.0.1:8000/api/synthparams/clear');
+        axios.post('https://test.localtunnel.me/api/synthparams/clear');
 
         // Polling from DB (occurs every 1/4th second)
         const _this = this;
         setInterval(() => {
-            axios.get('http://127.0.0.1:8000/api/synthparams')
+            axios.get('https://test.localtunnel.me/api/synthparams')
                 .then(response => {
                     const data = response.data;
                     this.state.pitch !== data['pitch'] ? _this.setState({ pitch: data['pitch'] }) : null;
