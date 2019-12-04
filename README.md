@@ -29,7 +29,7 @@ To host locally you will need to install the following software and packages:
 - [MySQL](https://www.mysql.com/downloads/)
 
 1. Download the code from the [MPM2 GitHub Repo](https://github.com/robbiegay/mpm2)
-2. In command line, navigate to the downloaded code directory. Run: `php artisan:serve` to start the database server. Keep this running.
+2. In command line, navigate to the downloaded code directory. Run: `php artisan serve` to start the database server. Keep this running.
 3. In a new terminal instance (same directory), run: `npm run watch`. This packages up you code, and watches for any updates. Keep this running as well.
 4. Start MAMP. Under MAMP>Preference, make sure that POSTS->MySQL Port is set to "8889"
 5. Create your database. In terminal (again, still in project directory) run: `php artisan migrate:fresh --seed`
@@ -43,7 +43,8 @@ To host locally you will need to install the following software and packages:
     - Note: you will need to keep keep the domain information after the "/" the same. Ex. https://test.localtunnel.me/api/newuser --> https://myurl.localtunnel.me/api/newuser
   - resources/js/components/SynthVisuals.js --> change all 3 instances
   - .env --> line 10, set `DB_HOST=` to your custom domain (ex. `DB_HOST=https://myurl.localtunnel.me/view`)
-8. You can now load the "view" page on your device --> https://myurl.localtunnel.me/view Direct users to visit https://myurl.localtunnel.me to control the synth/visualizer.
+8. Start MySQL. Login using "localhost" and the username and password found in lines 13 and 14 of the .env file.
+9. You can now load the "view" page on your device --> https://myurl.localtunnel.me/view Direct users to visit https://myurl.localtunnel.me to control the synth/visualizer.
   - Note: your device and all users must be on the same WIFI network
 
 ## Next Build
@@ -76,4 +77,4 @@ If you've found a bug in my code, please feel free to send me an Issue!
 
 ## Acknowledgments
 
-* [Justin](https://www.justinhall.com/) and [Ian](http://ianrios.me/) for helping me work through some major (11th hour) blockers!
+* Thanks to [Justin](https://www.justinhall.com/) and [Ian](http://ianrios.me/) for helping me work through some major (11th hour) blockers!

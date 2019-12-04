@@ -11,8 +11,8 @@ class Controller extends React.Component {
     }
 
     componentDidMount() {
-        axios.post('https://test.localtunnel.me/api/newuser');
-        axios.get('https://test.localtunnel.me/api/userid').then(response => {
+        axios.post('https://classdemo.localtunnel.me/api/newuser');
+        axios.get('https://classdemo.localtunnel.me/api/userid').then(response => {
             // Put all of the user info in state, can then access the id, param_id, and queue_id
             this.setState({ user: response.data });
         });
@@ -27,7 +27,7 @@ class Controller extends React.Component {
                         <>
                             <button
                                 onClick={() => {
-                                    axios.post('https://test.localtunnel.me/api/synthparams/trigger', {
+                                    axios.post('https://classdemo.localtunnel.me/api/synthparams/trigger', {
                                         trigger: this.state.trigger,
                                     });
                                 }}
@@ -43,7 +43,7 @@ class Controller extends React.Component {
                                     type='range'
                                     defaultValue='400'
                                     onMouseUp={(e) => {
-                                        axios.post('https://test.localtunnel.me/api/synthparams/pitch', {
+                                        axios.post('https://classdemo.localtunnel.me/api/synthparams/pitch', {
                                             pitch: e.target.value,
                                         })
                                     }}
@@ -64,7 +64,7 @@ class Controller extends React.Component {
                                     type='range'
                                     defaultValue='0'
                                     onMouseUp={(e) => {
-                                        axios.post('https://test.localtunnel.me/api/synthparams/pingPongFbk', {
+                                        axios.post('https://classdemo.localtunnel.me/api/synthparams/pingPongFbk', {
                                             pingPongFbk: e.target.value,
                                         })
                                     }}
@@ -85,7 +85,7 @@ class Controller extends React.Component {
                                     type='range'
                                     defaultValue='0'
                                     onMouseUp={(e) => {
-                                        axios.post('https://test.localtunnel.me/api/synthparams/chebWet', {
+                                        axios.post('https://classdemo.localtunnel.me/api/synthparams/chebWet', {
                                             chebWet: e.target.value,
                                         })
                                     }}
@@ -106,7 +106,7 @@ class Controller extends React.Component {
                                     type='range'
                                     defaultValue='0'
                                     onMouseUp={(e) => {
-                                        axios.post('https://test.localtunnel.me/api/synthparams/reverbWet', {
+                                        axios.post('https://classdemo.localtunnel.me/api/synthparams/reverbWet', {
                                             reverbWet: e.target.value,
                                         })
                                     }}
@@ -122,7 +122,7 @@ class Controller extends React.Component {
                     return (
                         <button
                             onClick={() => {
-                                axios.post('https://test.localtunnel.me/api/synthparams/stroke', {
+                                axios.post('https://classdemo.localtunnel.me/api/synthparams/stroke', {
                                     stroke: this.state.stroke,
                                 });
                             }}
@@ -137,7 +137,7 @@ class Controller extends React.Component {
                                     type='range'
                                     defaultValue='0'
                                     onMouseUp={(e) => {
-                                        axios.post('https://test.localtunnel.me/api/synthparams/sqSize', {
+                                        axios.post('https://classdemo.localtunnel.me/api/synthparams/sqSize', {
                                             sqSize: e.target.value,
                                         })
                                     }}
