@@ -38,7 +38,9 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            'throttle:60,1',
+            // [param 1] sets the number of API calls that can be made per [param 2] number of minutes
+            // 30 calls every 0.025 of a minute = 1.5 seconds
+            'throttle:30,0.025',
             'bindings',
         ],
     ];
