@@ -11,8 +11,8 @@ class Controller extends React.Component {
     }
 
     componentDidMount() {
-        axios.post('http://127.0.0.1:8000/api/newuser');
-        axios.get('http://127.0.0.1:8000/api/userid').then(response => {
+        axios.post('http://127.0.0.1:8001/api/newuser'); //http://127.0.0.1:8000
+        axios.get('http://127.0.0.1:8001/api/userid').then(response => {
             // Put all of the user info in state, can then access the id, param_id, and queue_id
             this.setState({ user: response.data });
         });
@@ -27,7 +27,7 @@ class Controller extends React.Component {
                         <>
                             <button
                                 onClick={() => {
-                                    axios.post('http://127.0.0.1:8000/api/synthparams/trigger', {
+                                    axios.post('http://127.0.0.1:8001/api/synthparams/trigger', {
                                         trigger: this.state.trigger,
                                     });
                                 }}
@@ -43,7 +43,7 @@ class Controller extends React.Component {
                                     type='range'
                                     defaultValue='400'
                                     onMouseUp={(e) => {
-                                        axios.post('http://127.0.0.1:8000/api/synthparams/pitch', {
+                                        axios.post('http://127.0.0.1:8001/api/synthparams/pitch', {
                                             pitch: e.target.value,
                                         })
                                     }}
@@ -67,7 +67,7 @@ class Controller extends React.Component {
                                     type='range'
                                     defaultValue='0'
                                     onMouseUp={(e) => {
-                                        axios.post('http://127.0.0.1:8000/api/synthparams/pingPongFbk', {
+                                        axios.post('http://127.0.0.1:8001/api/synthparams/pingPongFbk', {
                                             pingPongFbk: e.target.value,
                                         })
                                     }}
@@ -88,7 +88,7 @@ class Controller extends React.Component {
                                     type='range'
                                     defaultValue='0'
                                     onChange={(e) => {
-                                        axios.post('http://127.0.0.1:8000/api/synthparams/chebWet', {
+                                        axios.post('http://127.0.0.1:8001/api/synthparams/chebWet', {
                                             chebWet: e.target.value,
                                         })
                                     }}
@@ -109,7 +109,7 @@ class Controller extends React.Component {
                                     type='range'
                                     defaultValue='0'
                                     onChange={(e) => {
-                                        axios.post('http://127.0.0.1:8000/api/synthparams/reverbWet', {
+                                        axios.post('http://127.0.0.1:8001/api/synthparams/reverbWet', {
                                             reverbWet: e.target.value,
                                         })
                                     }}
@@ -125,7 +125,7 @@ class Controller extends React.Component {
                     return (
                         <button
                             onClick={() => {
-                                axios.post('http://127.0.0.1:8000/api/synthparams/stroke', {
+                                axios.post('http://127.0.0.1:8001/api/synthparams/stroke', {
                                     stroke: this.state.stroke,
                                 });
                             }}
@@ -140,7 +140,7 @@ class Controller extends React.Component {
                                     type='range'
                                     defaultValue='0'
                                     onChange={(e) => {
-                                        axios.post('http://127.0.0.1:8000/api/synthparams/sqSize', {
+                                        axios.post('http://127.0.0.1:8001/api/synthparams/sqSize', {
                                             sqSize: e.target.value,
                                         })
                                     }}

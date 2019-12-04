@@ -2,6 +2,7 @@ runtime: php73
 
 env_variables:
   ## Put production environment variables here.
+  LOG_CHANNEL: stackdriver
   APP_KEY: base64:zpUi2huWXf14o8CLzGrFbyhU7gPC6UglX1oZss2M76g=
   APP_STORAGE: /tmp
   VIEW_COMPILED_PATH: /tmp
