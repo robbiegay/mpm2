@@ -1,78 +1,79 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# MPM2
+## Multiple People Making Music
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Multiple users collaborate on an interactive audio/visual art exhibit.
 
-## About Laravel
+## Getting Started
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The site is currently being hosted locally. Users navigate to the provided web address to receive one of the following 7 parameters:
+- Toggle synth (on - off)
+- Pitch (100 - 1000Hz)
+- Ping Pong Delay Feedback (0 - 150% --> any value over 100% will create a feedback loop)
+- Chebyshev Waveshaper Dry/Wet (0 - 100%)
+- Reverb Dry/Wet (0 - 50%)
+- Toggle visualizer squares (fill - stroke only)
+- Change visualizer square sizes (1 - 50)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Any user who joins in position 8 or later is added to the queue and sees an hourglass emoji. To clear out the user queue, simply refresh the "view" page. Users will once again be assigned new parameters when they refresh their page.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Installing
 
-## Learning Laravel
+Currently, the code only runs locally. If you want to run the program yourself, you may have to download the code and host locally.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**How to host locally**:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+To host locally you will need to install the following software and packages:
+- [PHP](https://www.php.net/downloads.php)
+- [NPM](https://www.npmjs.com/get-npm)
+- [MAMP](https://www.mamp.info/en/mamp/)
+- [MySQL](https://www.mysql.com/downloads/)
 
-## Laravel Sponsors
+1. Download the code from the [MPM2 GitHub Repo](https://github.com/robbiegay/mpm2)
+2. In command line, navigate to the downloaded code directory. Run: `php artisan:serve` to start the database server. Keep this running.
+3. In a new terminal instance (same directory), run: `npm run watch`. This packages up you code, and watches for any updates. Keep this running as well.
+4. Start MAMP. Under MAMP>Preference, make sure that POSTS->MySQL Port is set to "8889"
+5. Create your database. In terminal (again, still in project directory) run: `php artisan migrate:fresh --seed`
+6. (optional) To use a custom domain name:
+  - Install Local Tunnel. In terminal: `npm install -g localtunnel`
+  - Terminal: `lt --port 8000 --subdomain mpm2`
+      - Port should be equal to the 4 digit number given to you when you ran php artisan serve (ex. 127.0.0.1:8000 --> set port to `--port 8000`). Change mpm2 to whatever custom subdomain you want to use (ex. `--subdomain myurl`).
+      - If you get a permissions error, you may have to run `sudo npm install -g localtunnel`. Please only use Sudo after reading about the risks: [Don't use sudo with npm... still](https://medium.com/@ExplosionPills/dont-use-sudo-with-npm-still-66e609f5f92)
+7. Using either the URL given to you with `artisan:serve` (ex. 127.0.0.1:8000) or from Local Tunnel (ex. https://test.localtunnel.me/), replace code in 3 files:
+  - resources/js/components/Controller.js --> change all 9 instances. 
+    - Note: you will need to keep keep the domain information after the "/" the same. Ex. https://test.localtunnel.me/api/newuser --> https://myurl.localtunnel.me/api/newuser
+  - resources/js/components/SynthVisuals.js --> change all 3 instances
+  - .env --> line 10, set `DB_HOST=` to your custom domain (ex. `DB_HOST=https://myurl.localtunnel.me/view`)
+8. You can now load the "view" page on your device --> https://myurl.localtunnel.me/view Direct users to visit https://myurl.localtunnel.me to control the synth/visualizer.
+  - Note: your device and all users must be on the same WIFI network
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Next Build
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+Known bugs:
+- Until the user queue is implemented, a user will be able to press refresh 7 times and lock out any other users from controlling the device.
+
+Features that I would like to add on the next build:
+- Hosting on Google Cloud: Up until the code freeze deadline, I was attempting to get Google Cloud hosting to work. It appeared to be an issue with my choice of combining both React and Laravel in one project directory.
+- User Queue: In the current implementation, the only way to clear the user queue is to refresh the "view" page — this clears users from the database. I began working on a timer function that would kick users out in certain scenarios, and would love to implement this in my next build. When users are kicked out:
+  - [x] After 30 seconds of inactivity the user times out
+  - [ ] If the user leave the page, their parameter is opened up for a different user to control
+- Styling of the user controllers: The original plan was to create unique control interfaces for each user. I think that this really enhances the artistic experience for each user.
+
+## Built With
+
+* [Laravel 6](https://laravel.com/) - The PHP framework used
+* [React.js](https://reactjs.org/) - The JS library used
+* [Bootstrap](https://getbootstrap.com/) - The CSS framework used
+* [Tone.js](https://tonejs.github.io/) - The framework used to create the interactive synthesizer
+* [Pts.js](https://ptsjs.org/) - The javascript library used to create the sound visualizer
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+If you've found a bug in my code, please feel free to send me an Issue!
 
-## Code of Conduct
+## Authors
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+* **Robbie Gay** - [Robbie's Blog](https://robbiegay.github.io)
 
-## Security Vulnerabilities
+## Acknowledgments
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+* [Justin](https://www.justinhall.com/) and [Ian](http://ianrios.me/) for helping me work through some major (11th hour) blockers!
