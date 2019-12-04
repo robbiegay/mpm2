@@ -1,13 +1,13 @@
-import Tone from "tone";
-import axios from "axios";
-import { Sound } from "pts";
-import { PtsCanvas } from "react-pts-canvas";
+import Tone from 'tone';
+import axios from 'axios';
+import { Sound } from 'pts';
+import { PtsCanvas } from 'react-pts-canvas';
 
 export default class SynthVisuals extends PtsCanvas {
     constructor(props) {
         super(props);
         this.state = {
-            // Synth/param values (loads default values, then used to update live input)
+            // Synth/param values (loads default values, then these are used to update live input)
             pitch: 400,
             trigger: false,
             pingPongFbk: 0,
@@ -15,7 +15,7 @@ export default class SynthVisuals extends PtsCanvas {
             reverbWet: 0,
             stroke: 0,
             sqSize: 3,
-            // Stores the synth and params in state
+            // Stores the full synth and params in state
             synth: null,
             pong: null,
             cheb: null,
@@ -39,52 +39,47 @@ export default class SynthVisuals extends PtsCanvas {
             if (!this.sound) this.space.stop(); // stop animation if not playing
 
             // The colors of the EQ squares
-            let colors = ["#f06", "#62e", "#fff", "#fe3", "#0c9"];
+            let colors = ['#f06', '#62e', '#fff', '#fe3', '#0c9'];
 
             // Generates each individual EQ square
-            // (Size, Position, Trim) --> trim = related to number of bins defined above
+            // (Size, Position, Trim) --> trim = related to number of bins defined above, controls the upper EQ range
             this.sound.freqDomainTo(this.space.size, [0, 0], [0, 500]).forEach((t, i) => {
-                // Toggles between filled and stroke EQ squares
+                // Toggles between filled and stroke only (outline) EQ squares
                 this.state.stroke ?
                     this.form.strokeOnly(colors[i % 5]).point(t, this.state.sqSize) :
                     this.form.fillOnly(colors[i % 5]).point(t, this.state.sqSize);
             });
-
-            // Places the "credit" on the screen
-            // this.form.fillOnly("rgba(0,0,0,.3").text([20, this.space.size.y - 20], this.props.credit);
         }
     }
 
     start() {
-        // Resets the synth on load
-        axios.post("http://127.0.0.1:8000/api/synthparams/reset");
+        // Resets the synth on page load
+        axios.post('http://127.0.0.1:8000/api/synthparams/reset');
 
-        // Clears the synth users/queue on load
-        axios.post("http://127.0.0.1:8000/api/synthparams/clear");
+        // Clears the synth users/queue on page load
+        axios.post('http://127.0.0.1:8000/api/synthparams/clear');
 
-        // Polling from DB (occurs every 1 second)
+        // Polling from DB (occurs every 1/4th second)
         const _this = this;
         setInterval(() => {
-            axios.get("http://127.0.0.1:8000/api/synthparams")
+            axios.get('http://127.0.0.1:8000/api/synthparams')
                 .then(response => {
                     const data = response.data;
-                    this.state.pitch !== data["pitch"] ? _this.setState({ pitch: data["pitch"] }) : null;
-                    this.state.trigger !== data["trigger"] ? _this.setState({ trigger: data["trigger"] }) : null;
-                    this.state.pingPongFbk !== data["pingPongFbk"] ? _this.setState({ pingPongFbk: data["pingPongFbk"] }) : null;
-                    this.state.chebWet !== data["chebWet"] ? _this.setState({ chebWet: data["chebWet"] }) : null;
-                    this.state.reverbWet !== data["reverbWet"] ? _this.setState({ reverbWet: data["reverbWet"] }) : null;
-                    this.state.stroke !== data["stroke"] ? _this.setState({ stroke: data["stroke"] }) : null;
-                    this.state.sqSize !== data["sqSize"] ? _this.setState({ sqSize: data["sqSize"] }) : null;
+                    this.state.pitch !== data['pitch'] ? _this.setState({ pitch: data['pitch'] }) : null;
+                    this.state.trigger !== data['trigger'] ? _this.setState({ trigger: data['trigger'] }) : null;
+                    this.state.pingPongFbk !== data['pingPongFbk'] ? _this.setState({ pingPongFbk: data['pingPongFbk'] }) : null;
+                    this.state.chebWet !== data['chebWet'] ? _this.setState({ chebWet: data['chebWet'] }) : null;
+                    this.state.reverbWet !== data['reverbWet'] ? _this.setState({ reverbWet: data['reverbWet'] }) : null;
+                    this.state.stroke !== data['stroke'] ? _this.setState({ stroke: data['stroke'] }) : null;
+                    this.state.sqSize !== data['sqSize'] ? _this.setState({ sqSize: data['sqSize'] }) : null;
                 });
         }, 250);
 
-        // Create the Synth and Effects
+        // Creates the Synth and Effects
         var reverb = new Tone.JCReverb().toMaster();
-        // var dist = new Tone.Distortion(1.0).connect(reverb);
         var cheb = new Tone.Chebyshev(30).connect(reverb);
         var pong = new Tone.PingPongDelay(0.25, this.state.pingPongFbk).connect(cheb);
         var synth = new Tone.DuoSynth().connect(pong);
-        // synth.harmonicity.value = 0.1; // --> this could be cool to change, changes the harmonics of the 2 voices. 2 = 1 octave up
 
         // Stores the synth and effects in state
         this.setState({ synth: synth, pong: pong, cheb: cheb, reverb: reverb });

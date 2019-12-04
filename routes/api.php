@@ -15,7 +15,7 @@ use App\Http\Resources\SynthUserController;
 |
 | Here is where you can register API routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
+| is assigned the 'api' middleware group. Enjoy building your API!
 |
 */
 
@@ -75,24 +75,18 @@ Route::post('/synthparams/sqSize', function (Request $request) {
     SynthParam::where('param_name', 'sqSize')->update(array('param_val' => $request->sqSize));
 });
 
-// Create new anon user on page load
+// Creates new anon user on page load
 Route::post('/newuser', 'SynthUserController@store');
 
 // Clears the synth users and queue on SynthVisuals page load
 Route::post('/synthparams/clear', function () {
-    // Make my app insecure, remove if hosting on local device
+    // Makes my app insecure, remove if hosting on local device
     Eloquent::unguard();
 
     SynthUser::truncate();
 
     Queue::where('id', '>', 0)->delete();
-    DB::statement("ALTER TABLE queues AUTO_INCREMENT = 1;");
-});
-
-// Resets an individual component and removes it from the queue
-Route::post('/synthparams/clear/{id}', function ($id) {
-    SynthUser::where('id', $id)->delete();
-    Queue::where('id', $id)->delete();
+    DB::statement('ALTER TABLE queues AUTO_INCREMENT = 1;');
 });
 
 Route::get('/userid', function () {

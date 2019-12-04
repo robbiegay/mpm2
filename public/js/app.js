@@ -83595,8 +83595,7 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Controller).call(this, props));
     _this.state = {
       trigger: 0,
-      user: null,
-      timer: null
+      user: null
     };
     return _this;
   }
@@ -83606,28 +83605,13 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/newuser");
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("http://127.0.0.1:8000/api/userid").then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/newuser');
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('http://127.0.0.1:8000/api/userid').then(function (response) {
         // Put all of the user info in state, can then access the id, param_id, and queue_id
         _this2.setState({
           user: response.data
         });
-
-        _this2.setState({
-          timer: setTimeout(function () {
-            axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/clear/' + _this2.state.user['id']);
-          }, 5000)
-        });
       });
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      clearInterval(this.state.timer); // axios.get("http://127.0.0.1:8000/api/userid").then(response => {
-      //     axios.post('http://127.0.0.1:8000/api/synthparams/clear/' + response.data["id"]);
-      // });
-
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/clear/1'); //+ this.state.user["id"]);
     }
   }, {
     key: "render",
@@ -83639,17 +83623,7 @@ function (_React$Component) {
           case 1:
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
               onClick: function onClick() {
-                // On click, clears the interval, and sets a new 30 second timer
-                clearInterval(_this3.state.timer);
-
-                _this3.setState({
-                  timer: setTimeout(function () {
-                    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/clear/1');
-                  }, 5000)
-                }); // Toggles the synth trigger
-
-
-                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/trigger", {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/trigger', {
                   trigger: _this3.state.trigger
                 });
               }
@@ -83664,22 +83638,16 @@ function (_React$Component) {
               type: "range",
               defaultValue: "400",
               onMouseUp: function onMouseUp(e) {
-                // clearInterval(this.state.timer);
-                // this.setState({
-                //     timer: setTimeout(() => {
-                //         axios.post('http://127.0.0.1:8000/api/synthparams/clear/2');
-                //     }, 5000),
-                // });
-                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/pitch", {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/pitch', {
                   pitch: e.target.value
                 });
               },
               className: "form-control-range",
               min: "100",
               max: "1000",
-              step: "1" // orient="vertical"
-              // width="8px"
-              // height="175px"
+              step: "1" // orient='vertical'
+              // width='8px'
+              // height='175px'
 
             })));
 
@@ -83692,15 +83660,7 @@ function (_React$Component) {
               type: "range",
               defaultValue: "0",
               onMouseUp: function onMouseUp(e) {
-                clearInterval(_this3.state.timer);
-
-                _this3.setState({
-                  timer: setTimeout(function () {
-                    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/clear/3');
-                  }, 5000)
-                });
-
-                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/pingPongFbk", {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/pingPongFbk', {
                   pingPongFbk: e.target.value
                 });
               },
@@ -83719,15 +83679,7 @@ function (_React$Component) {
               type: "range",
               defaultValue: "0",
               onChange: function onChange(e) {
-                clearInterval(_this3.state.timer);
-
-                _this3.setState({
-                  timer: setTimeout(function () {
-                    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/clear/4');
-                  }, 5000)
-                });
-
-                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/chebWet", {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/chebWet', {
                   chebWet: e.target.value
                 });
               },
@@ -83746,15 +83698,7 @@ function (_React$Component) {
               type: "range",
               defaultValue: "0",
               onChange: function onChange(e) {
-                clearInterval(_this3.state.timer);
-
-                _this3.setState({
-                  timer: setTimeout(function () {
-                    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/clear/5');
-                  }, 5000)
-                });
-
-                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/reverbWet", {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/reverbWet', {
                   reverbWet: e.target.value
                 });
               },
@@ -83767,15 +83711,7 @@ function (_React$Component) {
           case 6:
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
               onClick: function onClick() {
-                clearInterval(_this3.state.timer);
-
-                _this3.setState({
-                  timer: setTimeout(function () {
-                    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/clear/6');
-                  }, 5000)
-                });
-
-                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/stroke", {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/stroke', {
                   stroke: _this3.state.stroke
                 });
               }
@@ -83790,15 +83726,7 @@ function (_React$Component) {
               type: "range",
               defaultValue: "0",
               onChange: function onChange(e) {
-                clearInterval(_this3.state.timer);
-
-                _this3.setState({
-                  timer: setTimeout(function () {
-                    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/clear/7');
-                  }, 5000)
-                });
-
-                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/sqSize", {
+                axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/sqSize', {
                   sqSize: e.target.value
                 });
               },
@@ -83875,26 +83803,6 @@ function (_React$Component) {
 
   _createClass(Layout, [{
     key: "render",
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         bgColor: "rgb(255, 99, 71)", // #0cf
-    //     }
-    // }
-    // colorShifter() {
-    //     var x = 0;
-    //     var y = 10;
-    //     var z = 100;
-    //     const _this = this;
-    //     setInterval(() => {
-    //         _this.setState({bgColor: `rgb(${x}, ${y}, ${z})`});
-    //         x += 1;
-    //         console.log(this.state.bgColor);
-    //     }, 100);
-    // }
-    // componentDidMount() {
-    //     this.colorShifter();
-    // }
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
@@ -83909,9 +83817,9 @@ function (_React$Component) {
         background: "#0cf",
         credit: "",
         style: {
-          height: "100vh",
-          width: "100vw",
-          margin: "-10px"
+          height: '100vh',
+          width: '100vw',
+          margin: '-10px'
         }
       })))));
     }
@@ -83920,12 +83828,12 @@ function (_React$Component) {
   return Layout;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-if (document.getElementById("layout")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Layout, null), document.getElementById("layout"));
+if (document.getElementById('layout')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Layout, null), document.getElementById('layout'));
 }
 
-if (document.getElementById("controller")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Controller__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById("controller"));
+if (document.getElementById('controller')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Controller__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('controller'));
 }
 
 /***/ }),
@@ -83981,7 +83889,7 @@ function (_PtsCanvas) {
 
     _this2 = _possibleConstructorReturn(this, _getPrototypeOf(SynthVisuals).call(this, props));
     _this2.state = {
-      // Synth/param values (loads default values, then used to update live input)
+      // Synth/param values (loads default values, then these are used to update live input)
       pitch: 400,
       trigger: false,
       pingPongFbk: 0,
@@ -83989,7 +83897,7 @@ function (_PtsCanvas) {
       reverbWet: 0,
       stroke: 0,
       sqSize: 3,
-      // Stores the synth and params in state
+      // Stores the full synth and params in state
       synth: null,
       pong: null,
       cheb: null,
@@ -84020,14 +83928,13 @@ function (_PtsCanvas) {
         if (!this.sound) this.space.stop(); // stop animation if not playing
         // The colors of the EQ squares
 
-        var colors = ["#f06", "#62e", "#fff", "#fe3", "#0c9"]; // Generates each individual EQ square
-        // (Size, Position, Trim) --> trim = related to number of bins defined above
+        var colors = ['#f06', '#62e', '#fff', '#fe3', '#0c9']; // Generates each individual EQ square
+        // (Size, Position, Trim) --> trim = related to number of bins defined above, controls the upper EQ range
 
         this.sound.freqDomainTo(this.space.size, [0, 0], [0, 500]).forEach(function (t, i) {
-          // Toggles between filled and stroke EQ squares
+          // Toggles between filled and stroke only (outline) EQ squares
           _this3.state.stroke ? _this3.form.strokeOnly(colors[i % 5]).point(t, _this3.state.sqSize) : _this3.form.fillOnly(colors[i % 5]).point(t, _this3.state.sqSize);
-        }); // Places the "credit" on the screen
-        // this.form.fillOnly("rgba(0,0,0,.3").text([20, this.space.size.y - 20], this.props.credit);
+        });
       }
     }
   }, {
@@ -84035,46 +83942,44 @@ function (_PtsCanvas) {
     value: function start() {
       var _this4 = this;
 
-      // Resets the synth on load
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/reset"); // Clears the synth users/queue on load
+      // Resets the synth on page load
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/reset'); // Clears the synth users/queue on page load
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("http://127.0.0.1:8000/api/synthparams/clear"); // Polling from DB (occurs every 1 second)
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/synthparams/clear'); // Polling from DB (occurs every 1/4th second)
 
       var _this = this;
 
       setInterval(function () {
-        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("http://127.0.0.1:8000/api/synthparams").then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('http://127.0.0.1:8000/api/synthparams').then(function (response) {
           var data = response.data;
-          _this4.state.pitch !== data["pitch"] ? _this.setState({
-            pitch: data["pitch"]
+          _this4.state.pitch !== data['pitch'] ? _this.setState({
+            pitch: data['pitch']
           }) : null;
-          _this4.state.trigger !== data["trigger"] ? _this.setState({
-            trigger: data["trigger"]
+          _this4.state.trigger !== data['trigger'] ? _this.setState({
+            trigger: data['trigger']
           }) : null;
-          _this4.state.pingPongFbk !== data["pingPongFbk"] ? _this.setState({
-            pingPongFbk: data["pingPongFbk"]
+          _this4.state.pingPongFbk !== data['pingPongFbk'] ? _this.setState({
+            pingPongFbk: data['pingPongFbk']
           }) : null;
-          _this4.state.chebWet !== data["chebWet"] ? _this.setState({
-            chebWet: data["chebWet"]
+          _this4.state.chebWet !== data['chebWet'] ? _this.setState({
+            chebWet: data['chebWet']
           }) : null;
-          _this4.state.reverbWet !== data["reverbWet"] ? _this.setState({
-            reverbWet: data["reverbWet"]
+          _this4.state.reverbWet !== data['reverbWet'] ? _this.setState({
+            reverbWet: data['reverbWet']
           }) : null;
-          _this4.state.stroke !== data["stroke"] ? _this.setState({
-            stroke: data["stroke"]
+          _this4.state.stroke !== data['stroke'] ? _this.setState({
+            stroke: data['stroke']
           }) : null;
-          _this4.state.sqSize !== data["sqSize"] ? _this.setState({
-            sqSize: data["sqSize"]
+          _this4.state.sqSize !== data['sqSize'] ? _this.setState({
+            sqSize: data['sqSize']
           }) : null;
         });
-      }, 250); // Create the Synth and Effects
+      }, 250); // Creates the Synth and Effects
 
-      var reverb = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.JCReverb().toMaster(); // var dist = new Tone.Distortion(1.0).connect(reverb);
-
+      var reverb = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.JCReverb().toMaster();
       var cheb = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.Chebyshev(30).connect(reverb);
       var pong = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.PingPongDelay(0.25, this.state.pingPongFbk).connect(cheb);
-      var synth = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.DuoSynth().connect(pong); // synth.harmonicity.value = 0.1; // --> this could be cool to change, changes the harmonics of the 2 voices. 2 = 1 octave up
-      // Stores the synth and effects in state
+      var synth = new tone__WEBPACK_IMPORTED_MODULE_0___default.a.DuoSynth().connect(pong); // Stores the synth and effects in state
 
       this.setState({
         synth: synth,
