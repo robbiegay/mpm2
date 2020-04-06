@@ -3,6 +3,11 @@
 
 Multiple users collaborate on an interactive audio/visual art exhibit.
 
+Here are some demos and documents related to the project:
+* Project Demo Video: [MPM2 Demo Video – YouTube](https://www.youtube.com/watch?v=lDrPAQl78dc)
+* MPM2 MVP Document: [MPM2 MVP – Google Docs](https://docs.google.com/document/d/1JbRhZaKWOODtXd37rOMaf0eFnQ-lcVgyZ77g5flP2Tc/)
+* Video of my Demo Day presentation: [Awesome Inc Demo Day – YouTube](https://www.youtube.com/watch?v=qnKe355iV3o)
+
 ## Getting Started
 
 The site is currently being hosted locally. Users navigate to the provided web address to receive one of the following 7 parameters:
@@ -38,7 +43,7 @@ To host locally you will need to install the following software and packages:
   - Terminal: `lt --port 8000 --subdomain mpm2`
       - Port should be equal to the 4 digit number given to you when you ran php artisan serve (ex. 127.0.0.1:8000 --> set port to `--port 8000`). Change mpm2 to whatever custom subdomain you want to use (ex. `--subdomain myurl`).
       - If you get a permissions error, you may have to run `sudo npm install -g localtunnel`. Please only use Sudo after reading about the risks: [Don't use sudo with npm... still](https://medium.com/@ExplosionPills/dont-use-sudo-with-npm-still-66e609f5f92)
-7. Using either the URL given to you with `artisan:serve` (ex. 127.0.0.1:8000) or from Local Tunnel (ex. https://test.localtunnel.me/), replace code in 3 files:
+7. Using either the URL given to you with `artisan serve` (ex. 127.0.0.1:8000) or from Local Tunnel (ex. https://test.localtunnel.me/), replace code in 3 files:
   - resources/js/components/Controller.js --> change all 9 instances. 
     - Note: you will need to keep keep the domain information after the "/" the same. Ex. https://test.localtunnel.me/api/newuser --> https://myurl.localtunnel.me/api/newuser
   - resources/js/components/SynthVisuals.js --> change all 3 instances
@@ -56,7 +61,7 @@ Features that I would like to add on the next build:
 - Hosting on Google Cloud: Up until the code freeze deadline, I was attempting to get Google Cloud hosting to work. It appeared to be an issue with my choice of combining both React and Laravel in one project directory.
 - User Queue: In the current implementation, the only way to clear the user queue is to refresh the "view" page — this clears users from the database. I began working on a timer function that would kick users out in certain scenarios, and would love to implement this in my next build. When users are kicked out:
   - [x] After 30 seconds of inactivity the user times out
-  - [ ] If the user leave the page, their parameter is opened up for a different user to control
+  - [ ] If the user leaves the page, their parameter is opened up for a different user to control
 - Styling of the user controllers: The original plan was to create unique control interfaces for each user. I think that this really enhances the artistic experience for each user.
 
 ## Built With
