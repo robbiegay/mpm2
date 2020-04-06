@@ -1,11 +1,11 @@
-# MPM2
+# MPM²
 ## Multiple People Making Music
 
 Multiple users collaborate on an interactive audio/visual art exhibit.
 
 Here are some demos and documents related to the project:
-* Project Demo Video: [MPM2 Demo Video – YouTube](https://www.youtube.com/watch?v=lDrPAQl78dc)
-* MPM2 MVP Document: [MPM2 MVP – Google Docs](https://docs.google.com/document/d/1JbRhZaKWOODtXd37rOMaf0eFnQ-lcVgyZ77g5flP2Tc/)
+* Project Demo Video: [MPM² Demo Video – YouTube](https://www.youtube.com/watch?v=lDrPAQl78dc)
+* MPM² MVP Document: [MPM² MVP – Google Docs](https://docs.google.com/document/d/1JbRhZaKWOODtXd37rOMaf0eFnQ-lcVgyZ77g5flP2Tc/)
 * Video of my Demo Day presentation: [Awesome Inc Demo Day – YouTube](https://www.youtube.com/watch?v=qnKe355iV3o)
 
 ## Getting Started
@@ -33,7 +33,7 @@ To host locally you will need to install the following software and packages:
 - [MAMP](https://www.mamp.info/en/mamp/)
 - [MySQL](https://www.mysql.com/downloads/)
 
-1. Download the code from the [MPM2 GitHub Repo](https://github.com/robbiegay/mpm2)
+1. Download the code from the [MPM² GitHub Repo](https://github.com/robbiegay/mpm2)
 2. In command line, navigate to the downloaded code directory. Run: `php artisan serve` to start the database server. Keep this running.
 3. In a new terminal instance (same directory), run: `npm run watch`. This packages up you code, and watches for any updates. Keep this running as well.
 4. Start MAMP. Under MAMP>Preference, make sure that POSTS->MySQL Port is set to "8889"
