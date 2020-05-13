@@ -35,7 +35,7 @@ To host locally you will need to install the following software and packages:
 
 1. Download the code from the [MPM² GitHub Repo](https://github.com/robbiegay/mpm2)
 2. In command line, navigate to the downloaded code directory. Run: `php artisan serve` to start the database server. Keep this running.
-3. In a new terminal instance (same directory), run: `npm run watch`. This packages up you code, and watches for any updates. Keep this running as well.
+3. In a new terminal instance (same directory), run: `npm run watch`. This packages up your code, and watches for any updates. Keep this running as well.
 4. Start MAMP. Under MAMP>Preference, make sure that POSTS->MySQL Port is set to "8889"
 5. Create your database. In terminal (again, still in project directory) run: `php artisan migrate:fresh --seed`
 6. (optional) To use a custom domain name:
